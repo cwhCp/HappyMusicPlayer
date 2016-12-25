@@ -37,8 +37,7 @@ public class AniUtil {
 	 * @param what
 	 * @param ani
 	 */
-	private static void postAnimationMessage(final AnimationDrawable ani,
-			final int what) {
+	private static void postAnimationMessage(final AnimationDrawable ani, final int what) {
 		aniHandler.postDelayed(new Runnable() {
 
 			public void run() {

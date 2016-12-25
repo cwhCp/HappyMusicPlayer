@@ -68,14 +68,12 @@ public class GuideFragment extends Fragment {
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		mMainView = inflater.inflate(R.layout.fragement_guide, null, false);
 
-		mainTitleImageView = (ImageView) mMainView
-				.findViewById(R.id.main_title);
+		mainTitleImageView = (ImageView) mMainView.findViewById(R.id.main_title);
 
 		mainTitleImageView.setBackgroundResource(mainTitleImage);
 		mainTitleImageView.setVisibility(View.INVISIBLE);
 
-		secondTitleImageView = (ImageView) mMainView
-				.findViewById(R.id.second_title);
+		secondTitleImageView = (ImageView) mMainView.findViewById(R.id.second_title);
 		secondTitleImageView.setBackgroundResource(secondTitleImage);
 		secondTitleImageView.setVisibility(View.INVISIBLE);
 
@@ -91,8 +89,7 @@ public class GuideFragment extends Fragment {
 
 		bottonImageView.setOnClickListener(new ItemOnClick());
 
-		parentRelativeLayout = (RelativeLayout) mMainView
-				.findViewById(R.id.parent);
+		parentRelativeLayout = (RelativeLayout) mMainView.findViewById(R.id.parent);
 		parentRelativeLayout.setBackgroundColor(color);
 
 		if (isInitAni) {
@@ -111,8 +108,7 @@ public class GuideFragment extends Fragment {
 	// }
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ViewGroup viewGroup = (ViewGroup) mMainView.getParent();
 		if (viewGroup != null) {
 			viewGroup.removeAllViewsInLayout();
@@ -148,21 +144,16 @@ public class GuideFragment extends Fragment {
 			switch (msg.what) {
 			case 0:
 				if (isRightToLeft) {
-					imageViewTranslateAnimation = new TranslateAnimation(
-							Animation.RELATIVE_TO_PARENT, +1.0f,
-							Animation.RELATIVE_TO_PARENT, 0.0f,
-							Animation.RELATIVE_TO_PARENT, 0.0f,
+					imageViewTranslateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, +1.0f,
+							Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f,
 							Animation.RELATIVE_TO_PARENT, 0.0f);
 				} else {
-					imageViewTranslateAnimation = new TranslateAnimation(
-							Animation.RELATIVE_TO_PARENT, -1.0f,
-							Animation.RELATIVE_TO_PARENT, 0.0f,
-							Animation.RELATIVE_TO_PARENT, 0.0f,
+					imageViewTranslateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, -1.0f,
+							Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f,
 							Animation.RELATIVE_TO_PARENT, 0.0f);
 				}
 
-				imageViewTranslateAnimation
-						.setInterpolator(new LinearInterpolator());
+				imageViewTranslateAnimation.setInterpolator(new LinearInterpolator());
 				imageViewTranslateAnimation.setFillAfter(true);
 				imageViewTranslateAnimation.setDuration(1000);
 
@@ -171,26 +162,20 @@ public class GuideFragment extends Fragment {
 				break;
 			case 1:
 				if (isRightToLeft) {
-					imageViewTranslateAnimation = new TranslateAnimation(
-							Animation.RELATIVE_TO_PARENT, +1.0f,
-							Animation.RELATIVE_TO_PARENT, 0.0f,
-							Animation.RELATIVE_TO_PARENT, 0.0f,
+					imageViewTranslateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, +1.0f,
+							Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f,
 							Animation.RELATIVE_TO_PARENT, 0.0f);
 				} else {
-					imageViewTranslateAnimation = new TranslateAnimation(
-							Animation.RELATIVE_TO_PARENT, -1.0f,
-							Animation.RELATIVE_TO_PARENT, 0.0f,
-							Animation.RELATIVE_TO_PARENT, 0.0f,
+					imageViewTranslateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, -1.0f,
+							Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f,
 							Animation.RELATIVE_TO_PARENT, 0.0f);
 				}
 
-				imageViewTranslateAnimation
-						.setInterpolator(new LinearInterpolator());
+				imageViewTranslateAnimation.setInterpolator(new LinearInterpolator());
 				imageViewTranslateAnimation.setFillAfter(true);
 				imageViewTranslateAnimation.setDuration(1000);
 				secondTitleImageView.clearAnimation();
-				secondTitleImageView
-						.startAnimation(imageViewTranslateAnimation);
+				secondTitleImageView.startAnimation(imageViewTranslateAnimation);
 				break;
 			case 2:
 				if (mainTitleImageView != null && secondTitleImageView != null) {

@@ -37,7 +37,7 @@ public class LocalMusicActivity extends Activity {
 	}
 
 	private void init() {
-		//playlistView = (ExpandableListView) findViewById(R.id.playlistView);
+		// playlistView = (ExpandableListView) findViewById(R.id.playlistView);
 	}
 
 	private void loadData() {
@@ -46,18 +46,14 @@ public class LocalMusicActivity extends Activity {
 
 			@Override
 			protected void onPostExecute(Object result) {
-				
+
 				// 给ListView添加footView
-				View footView = getLayoutInflater().inflate(
-						R.layout.playlist_list_foot, null);
-				int count = MediaManage.getMediaManage(LocalMusicActivity.this)
-						.getCount();
-				((TextView) footView.findViewById(R.id.list_size_text))
-						.setText("共有" + count + "首歌曲");
+				View footView = getLayoutInflater().inflate(R.layout.playlist_list_foot, null);
+				int count = MediaManage.getMediaManage(LocalMusicActivity.this).getCount();
+				((TextView) footView.findViewById(R.id.list_size_text)).setText("共有" + count + "首歌曲");
 				playlistView.addFooterView(footView);
 
-				PlayListAdapter adapter = new PlayListAdapter(
-						LocalMusicActivity.this, categorys,playlistView);
+				PlayListAdapter adapter = new PlayListAdapter(LocalMusicActivity.this, categorys, playlistView);
 
 				playlistView.setAdapter(adapter);
 			}
@@ -81,8 +77,7 @@ public class LocalMusicActivity extends Activity {
 		for (int i = 0; i < categoryList.size(); i++) {
 			String categoryName = categoryList.get(i);
 			Category category = new Category(categoryName);
-			List<SongInfo> songInfos = SongDB.getSongInfoDB(this)
-					.getAllCategorySong(categoryName);
+			List<SongInfo> songInfos = SongDB.getSongInfoDB(this).getAllCategorySong(categoryName);
 			category.setmCategoryItem(songInfos);
 			categorys.add(category);
 		}

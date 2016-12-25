@@ -89,8 +89,7 @@ public class KscTwoLineMLyricsView extends View {
 	/** 高亮歌词当前的其实x轴绘制坐标 **/
 	private float highLightLrcMoveX;
 
-	public KscTwoLineMLyricsView(Context context, AttributeSet attrs,
-			int defStyle) {
+	public KscTwoLineMLyricsView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context);
 	}
@@ -149,8 +148,7 @@ public class KscTwoLineMLyricsView extends View {
 		int status = MediaManage.getMediaManage(context).getPlayStatus();
 		switch (status) {
 		case MediaManage.STOP:
-			SongInfo tempSongInfo = MediaManage.getMediaManage(context)
-					.getPlaySongInfo();
+			SongInfo tempSongInfo = MediaManage.getMediaManage(context).getPlaySongInfo();
 			if (blLrc && tempSongInfo != null) {
 				showLrc((int) tempSongInfo.getPlayProgress());
 			}
@@ -165,95 +163,73 @@ public class KscTwoLineMLyricsView extends View {
 			FontMetrics fm = paintHL.getFontMetrics();
 			int height = (int) Math.ceil(fm.descent - fm.top) + 2;
 
-			drawBackground(canvas, tip, (getWidth() - tipTextWidth) / 2,
-					(getHeight() + height) / 2);
+			drawBackground(canvas, tip, (getWidth() - tipTextWidth) / 2, (getHeight() + height) / 2);
 
-			canvas.drawText(tip, (getWidth() - tipTextWidth) / 2,
-					(getHeight() + height) / 2, paint);
+			canvas.drawText(tip, (getWidth() - tipTextWidth) / 2, (getHeight() + height) / 2, paint);
 
-			canvas.clipRect((getWidth() - tipTextWidth) / 2,
-					(getHeight() + height) / 2 - height,
-					(getWidth() - tipTextWidth) / 2 + tipTextWidth / 2 + 5,
-					(getHeight() + height) / 2 + height);
+			canvas.clipRect((getWidth() - tipTextWidth) / 2, (getHeight() + height) / 2 - height,
+					(getWidth() - tipTextWidth) / 2 + tipTextWidth / 2 + 5, (getHeight() + height) / 2 + height);
 
-			drawBackground(canvas, tip, (getWidth() - tipTextWidth) / 2,
-					(getHeight() + height) / 2);
+			drawBackground(canvas, tip, (getWidth() - tipTextWidth) / 2, (getHeight() + height) / 2);
 
-			canvas.drawText(tip, (getWidth() - tipTextWidth) / 2,
-					(getHeight() + height) / 2, paintHL);
+			canvas.drawText(tip, (getWidth() - tipTextWidth) / 2, (getHeight() + height) / 2, paintHL);
 		} else {
 
 			// 画之前的歌词
 			if (lyricsLineNum == -1) {
 				String lyricsLeft = lyricsLineTreeMap.get(0).getLineLyrics();
 
-				drawBackground(canvas, lyricsLeft, 10, SCALEIZEWORDDEF
-						+ INTERVAL);
-				canvas.drawText(lyricsLeft, 10, SCALEIZEWORDDEF + INTERVAL,
-						paint);
+				drawBackground(canvas, lyricsLeft, 10, SCALEIZEWORDDEF + INTERVAL);
+				canvas.drawText(lyricsLeft, 10, SCALEIZEWORDDEF + INTERVAL, paint);
 
 				if (lyricsLineNum + 2 < lyricsLineTreeMap.size()) {
-					String lyricsRight = lyricsLineTreeMap.get(
-							lyricsLineNum + 2).getLineLyrics();
+					String lyricsRight = lyricsLineTreeMap.get(lyricsLineNum + 2).getLineLyrics();
 
 					float lyricsRightWidth = paint.measureText(lyricsRight);
 					float textRightX = getWidth() - lyricsRightWidth - 10;
 					// 如果计算出的textX为负数，将textX置为0(实现：如果歌词宽大于view宽，则居左显示，否则居中显示)
 					textRightX = Math.max(textRightX, 10);
-					drawBackground(canvas, lyricsRight, textRightX,
-							(SCALEIZEWORDDEF + INTERVAL) * 2);
+					drawBackground(canvas, lyricsRight, textRightX, (SCALEIZEWORDDEF + INTERVAL) * 2);
 
-					canvas.drawText(lyricsRight, textRightX,
-							(SCALEIZEWORDDEF + INTERVAL) * 2, paint);
+					canvas.drawText(lyricsRight, textRightX, (SCALEIZEWORDDEF + INTERVAL) * 2, paint);
 				}
 			} else {
 				if (lyricsLineNum % 2 == 0) {
 					if (lyricsLineNum + 1 < lyricsLineTreeMap.size()) {
-						String lyricsRight = lyricsLineTreeMap.get(
-								lyricsLineNum + 1).getLineLyrics();
+						String lyricsRight = lyricsLineTreeMap.get(lyricsLineNum + 1).getLineLyrics();
 
 						float lyricsRightWidth = paint.measureText(lyricsRight);
 						float textRightX = getWidth() - lyricsRightWidth - 10;
 						// 如果计算出的textX为负数，将textX置为0(实现：如果歌词宽大于view宽，则居左显示，否则居中显示)
 						textRightX = Math.max(textRightX, 10);
-						drawBackground(canvas, lyricsRight, textRightX,
-								(SCALEIZEWORDDEF + INTERVAL) * 2);
+						drawBackground(canvas, lyricsRight, textRightX, (SCALEIZEWORDDEF + INTERVAL) * 2);
 
-						canvas.drawText(lyricsRight, textRightX,
-								(SCALEIZEWORDDEF + INTERVAL) * 2, paint);
+						canvas.drawText(lyricsRight, textRightX, (SCALEIZEWORDDEF + INTERVAL) * 2, paint);
 					}
 
-					KscLyricsLineInfo kscLyricsLineInfo = lyricsLineTreeMap
-							.get(lyricsLineNum);
+					KscLyricsLineInfo kscLyricsLineInfo = lyricsLineTreeMap.get(lyricsLineNum);
 
 					// 整行歌词
 					String lineLyrics = kscLyricsLineInfo.getLineLyrics();
 					float textWidth = paint.measureText(lineLyrics);// 用画笔测量歌词的宽度
 					if (lyricsWordIndex != -1) {
 
-						String lyricsWords[] = kscLyricsLineInfo
-								.getLyricsWords();
-						int wordsDisInterval[] = kscLyricsLineInfo
-								.getWordsDisInterval();
+						String lyricsWords[] = kscLyricsLineInfo.getLyricsWords();
+						int wordsDisInterval[] = kscLyricsLineInfo.getWordsDisInterval();
 						// 当前歌词之前的歌词
 						String lyricsBeforeWord = "";
 						for (int i = 0; i < lyricsWordIndex; i++) {
 							lyricsBeforeWord += lyricsWords[i];
 						}
 						// 当前歌词
-						String lyricsNowWord = lyricsWords[lyricsWordIndex]
-								.trim();// 去掉空格
+						String lyricsNowWord = lyricsWords[lyricsWordIndex].trim();// 去掉空格
 						// 当前歌词之前的歌词长度
-						float lyricsBeforeWordWidth = paint
-								.measureText(lyricsBeforeWord);
+						float lyricsBeforeWordWidth = paint.measureText(lyricsBeforeWord);
 
 						// 当前歌词长度
-						float lyricsNowWordWidth = paint
-								.measureText(lyricsNowWord);
+						float lyricsNowWordWidth = paint.measureText(lyricsNowWord);
 
-						float len = lyricsNowWordWidth
-								/ wordsDisInterval[lyricsWordIndex]
-								* lyricsWordHLEDTime;
+						float len = lyricsNowWordWidth / wordsDisInterval[lyricsWordIndex] * lyricsWordHLEDTime;
 						lineLyricsHLWidth = lyricsBeforeWordWidth + len;
 					} else {
 						// 整行歌词
@@ -281,23 +257,18 @@ public class KscTwoLineMLyricsView extends View {
 						textX = 10;
 					}
 
-					drawBackground(canvas, lineLyrics, textX, SCALEIZEWORDDEF
-							+ INTERVAL);
+					drawBackground(canvas, lineLyrics, textX, SCALEIZEWORDDEF + INTERVAL);
 
 					// 画当前歌词
-					canvas.drawText(lineLyrics, textX, SCALEIZEWORDDEF
-							+ INTERVAL, paint);
+					canvas.drawText(lineLyrics, textX, SCALEIZEWORDDEF + INTERVAL, paint);
 
 					FontMetrics fm = paint.getFontMetrics();
 					int height = (int) Math.ceil(fm.descent - fm.top) + 2;
-					canvas.clipRect(textX, INTERVAL, textX + lineLyricsHLWidth,
-							SCALEIZEWORDDEF + INTERVAL + height);
+					canvas.clipRect(textX, INTERVAL, textX + lineLyricsHLWidth, SCALEIZEWORDDEF + INTERVAL + height);
 					// /////////////////////////////////////////////////////////////////////////////////////////
 
-					drawBackground(canvas, lineLyrics, textX, SCALEIZEWORDDEF
-							+ INTERVAL);
-					canvas.drawText(lineLyrics, textX, SCALEIZEWORDDEF
-							+ INTERVAL, paintHL);
+					drawBackground(canvas, lineLyrics, textX, SCALEIZEWORDDEF + INTERVAL);
+					canvas.drawText(lineLyrics, textX, SCALEIZEWORDDEF + INTERVAL, paintHL);
 
 					canvas.restore();
 
@@ -305,46 +276,35 @@ public class KscTwoLineMLyricsView extends View {
 
 					// 画之前的歌词
 					if (lyricsLineNum + 1 != lyricsLineTreeMap.size()) {
-						String lyricsLeft = lyricsLineTreeMap.get(
-								lyricsLineNum + 1).getLineLyrics();
+						String lyricsLeft = lyricsLineTreeMap.get(lyricsLineNum + 1).getLineLyrics();
 
-						drawBackground(canvas, lyricsLeft, 10, SCALEIZEWORDDEF
-								+ INTERVAL);
+						drawBackground(canvas, lyricsLeft, 10, SCALEIZEWORDDEF + INTERVAL);
 
-						canvas.drawText(lyricsLeft, 10, SCALEIZEWORDDEF
-								+ INTERVAL, paint);
+						canvas.drawText(lyricsLeft, 10, SCALEIZEWORDDEF + INTERVAL, paint);
 					}
 
-					KscLyricsLineInfo kscLyricsLineInfo = lyricsLineTreeMap
-							.get(lyricsLineNum);
+					KscLyricsLineInfo kscLyricsLineInfo = lyricsLineTreeMap.get(lyricsLineNum);
 					// 整行歌词
 					String lineLyrics = kscLyricsLineInfo.getLineLyrics();
 					float lyricsRightWidth = paint.measureText(lineLyrics);
 
 					if (lyricsWordIndex != -1) {
-						String lyricsWords[] = kscLyricsLineInfo
-								.getLyricsWords();
-						int wordsDisInterval[] = kscLyricsLineInfo
-								.getWordsDisInterval();
+						String lyricsWords[] = kscLyricsLineInfo.getLyricsWords();
+						int wordsDisInterval[] = kscLyricsLineInfo.getWordsDisInterval();
 						// 当前歌词之前的歌词
 						String lyricsBeforeWord = "";
 						for (int i = 0; i < lyricsWordIndex; i++) {
 							lyricsBeforeWord += lyricsWords[i];
 						}
 						// 当前歌词
-						String lyricsNowWord = lyricsWords[lyricsWordIndex]
-								.trim();// 去掉空格
+						String lyricsNowWord = lyricsWords[lyricsWordIndex].trim();// 去掉空格
 						// 当前歌词之前的歌词长度
-						float lyricsBeforeWordWidth = paint
-								.measureText(lyricsBeforeWord);
+						float lyricsBeforeWordWidth = paint.measureText(lyricsBeforeWord);
 
 						// 当前歌词长度
-						float lyricsNowWordWidth = paint
-								.measureText(lyricsNowWord);
+						float lyricsNowWordWidth = paint.measureText(lyricsNowWord);
 
-						float len = lyricsNowWordWidth
-								/ wordsDisInterval[lyricsWordIndex]
-								* lyricsWordHLEDTime;
+						float len = lyricsNowWordWidth / wordsDisInterval[lyricsWordIndex] * lyricsWordHLEDTime;
 						lineLyricsHLWidth = lyricsBeforeWordWidth + len;
 					} else {
 						// 整行歌词
@@ -360,8 +320,7 @@ public class KscTwoLineMLyricsView extends View {
 							if ((lyricsRightWidth - lineLyricsHLWidth) >= getWidth() / 2) {
 								highLightLrcMoveX = (getWidth() / 2 - lineLyricsHLWidth);
 							} else {
-								highLightLrcMoveX = getWidth()
-										- lyricsRightWidth - 10;
+								highLightLrcMoveX = getWidth() - lyricsRightWidth - 10;
 							}
 						} else {
 							highLightLrcMoveX = 10;
@@ -373,25 +332,20 @@ public class KscTwoLineMLyricsView extends View {
 						textX = getWidth() - lyricsRightWidth - 10;
 					}
 
-					drawBackground(canvas, lineLyrics, textX,
-							(SCALEIZEWORDDEF + INTERVAL) * 2);
+					drawBackground(canvas, lineLyrics, textX, (SCALEIZEWORDDEF + INTERVAL) * 2);
 
 					// 画当前歌词
-					canvas.drawText(lineLyrics, textX,
-							(SCALEIZEWORDDEF + INTERVAL) * 2, paint);
+					canvas.drawText(lineLyrics, textX, (SCALEIZEWORDDEF + INTERVAL) * 2, paint);
 
 					FontMetrics fm = paint.getFontMetrics();
 					int height = (int) Math.ceil(fm.descent - fm.top) + 2;
-					canvas.clipRect(textX, SCALEIZEWORDDEF + INTERVAL * 2,
-							textX + lineLyricsHLWidth, SCALEIZEWORDDEF
-									+ INTERVAL * 2 + height);
+					canvas.clipRect(textX, SCALEIZEWORDDEF + INTERVAL * 2, textX + lineLyricsHLWidth,
+							SCALEIZEWORDDEF + INTERVAL * 2 + height);
 					// /////////////////////////////////////////////////////////////////////////////////////////
 
-					drawBackground(canvas, lineLyrics, textX,
-							(SCALEIZEWORDDEF + INTERVAL) * 2);
+					drawBackground(canvas, lineLyrics, textX, (SCALEIZEWORDDEF + INTERVAL) * 2);
 
-					canvas.drawText(lineLyrics, textX,
-							(SCALEIZEWORDDEF + INTERVAL) * 2, paintHL);
+					canvas.drawText(lineLyrics, textX, (SCALEIZEWORDDEF + INTERVAL) * 2, paintHL);
 
 					canvas.restore();
 				}
@@ -431,8 +385,7 @@ public class KscTwoLineMLyricsView extends View {
 		return lyricsLineTreeMap;
 	}
 
-	public void setLyricsLineTreeMap(
-			TreeMap<Integer, KscLyricsLineInfo> lyricsLineTreeMap) {
+	public void setLyricsLineTreeMap(TreeMap<Integer, KscLyricsLineInfo> lyricsLineTreeMap) {
 		this.lyricsLineTreeMap = lyricsLineTreeMap;
 	}
 
@@ -442,17 +395,14 @@ public class KscTwoLineMLyricsView extends View {
 	 * @param playProgress
 	 */
 	public void showLrc(int playProgress) {
-		int newLyricsLineNum = kscLyricsParser
-				.getLineNumberFromCurPlayingTime(playProgress);
+		int newLyricsLineNum = kscLyricsParser.getLineNumberFromCurPlayingTime(playProgress);
 		if (newLyricsLineNum != lyricsLineNum) {
 			lyricsLineNum = newLyricsLineNum;
 			highLightLrcMoveX = 0;
 		}
-		lyricsWordIndex = kscLyricsParser.getDisWordsIndexFromCurPlayingTime(
-				lyricsLineNum, playProgress);
+		lyricsWordIndex = kscLyricsParser.getDisWordsIndexFromCurPlayingTime(lyricsLineNum, playProgress);
 
-		lyricsWordHLEDTime = kscLyricsParser.getLenFromCurPlayingTime(
-				lyricsLineNum, playProgress);
+		lyricsWordHLEDTime = kscLyricsParser.getLenFromCurPlayingTime(lyricsLineNum, playProgress);
 
 		invalidate();
 	}
@@ -469,8 +419,7 @@ public class KscTwoLineMLyricsView extends View {
 			return lrc;
 		if (kscLyricsParser == null)
 			return lrc;
-		int index = kscLyricsParser
-				.getLineNumberFromCurPlayingTime(playProgress);
+		int index = kscLyricsParser.getLineNumberFromCurPlayingTime(playProgress);
 		// System.out.println("index:#########" + index);
 		if (lyricsLineTreeMap == null || index >= lyricsLineTreeMap.size())
 			return lrc;

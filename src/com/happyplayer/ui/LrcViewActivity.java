@@ -215,10 +215,8 @@ public class LrcViewActivity extends Activity implements Observer {
 				seekBar.setMax((int) songInfo.getDuration());
 				seekBar.setProgress((int) songInfo.getPlayProgress());
 
-				songProgressTextView.setText(MediaUtils
-						.formatTime((int) songInfo.getPlayProgress()));
-				songSizeTextView.setText(MediaUtils.formatTime((int) songInfo
-						.getDuration()));
+				songProgressTextView.setText(MediaUtils.formatTime((int) songInfo.getPlayProgress()));
+				songSizeTextView.setText(MediaUtils.formatTime((int) songInfo.getDuration()));
 
 				initKscLyrics(songInfo);
 
@@ -249,16 +247,14 @@ public class LrcViewActivity extends Activity implements Observer {
 
 				if (!isStartTrackingTouch) {
 					seekBar.setProgress((int) songInfo.getPlayProgress());
-					songProgressTextView.setText(MediaUtils
-							.formatTime((int) songInfo.getPlayProgress()));
+					songProgressTextView.setText(MediaUtils.formatTime((int) songInfo.getPlayProgress()));
 				}
 
 				reshLrcView((int) songInfo.getPlayProgress());
 				break;
 			case SongMessage.STOPING:
 				seekBar.setProgress((int) songInfo.getPlayProgress());
-				songProgressTextView.setText(MediaUtils
-						.formatTime((int) songInfo.getPlayProgress()));
+				songProgressTextView.setText(MediaUtils.formatTime((int) songInfo.getPlayProgress()));
 
 				pauseImageButton.setVisibility(View.INVISIBLE);
 				playImageButton.setVisibility(View.VISIBLE);
@@ -280,8 +276,7 @@ public class LrcViewActivity extends Activity implements Observer {
 
 			songNameTextView.setText(songInfo.getDisplayName());
 			songerTextView.setText(songInfo.getArtist());
-			int status = MediaManage.getMediaManage(LrcViewActivity.this)
-					.getPlayStatus();
+			int status = MediaManage.getMediaManage(LrcViewActivity.this).getPlayStatus();
 			if (status == MediaManage.STOP) {
 				pauseImageButton.setVisibility(View.INVISIBLE);
 				playImageButton.setVisibility(View.VISIBLE);
@@ -294,10 +289,8 @@ public class LrcViewActivity extends Activity implements Observer {
 			seekBar.setMax((int) songInfo.getDuration());
 			seekBar.setProgress((int) songInfo.getPlayProgress());
 
-			songProgressTextView.setText(MediaUtils.formatTime((int) songInfo
-					.getPlayProgress()));
-			songSizeTextView.setText(MediaUtils.formatTime((int) songInfo
-					.getDuration()));
+			songProgressTextView.setText(MediaUtils.formatTime((int) songInfo.getPlayProgress()));
+			songSizeTextView.setText(MediaUtils.formatTime((int) songInfo.getDuration()));
 
 			initKscLyrics(songInfo);
 		}
@@ -325,8 +318,7 @@ public class LrcViewActivity extends Activity implements Observer {
 
 			@Override
 			protected Object doInBackground() throws Exception {
-				SongInfo songInfo = MediaManage.getMediaManage(
-						LrcViewActivity.this).getPlaySongInfo();
+				SongInfo songInfo = MediaManage.getMediaManage(LrcViewActivity.this).getPlaySongInfo();
 				if (songInfo != null) {
 					Message msg = new Message();
 					msg.obj = songInfo;
@@ -354,18 +346,15 @@ public class LrcViewActivity extends Activity implements Observer {
 				kscTwoLineLyricsView.init();
 				if (lyricsLineTreeMap.size() != 0) {
 					kscTwoLineLyricsView.setKscLyricsParser(kscLyricsParser);
-					kscTwoLineLyricsView
-							.setLyricsLineTreeMap(lyricsLineTreeMap);
+					kscTwoLineLyricsView.setLyricsLineTreeMap(lyricsLineTreeMap);
 					kscTwoLineLyricsView.setBlLrc(true);
 					kscTwoLineLyricsView.invalidate();
 
 					kscManyLineLyricsView.setKscLyricsParser(kscLyricsParser);
-					kscManyLineLyricsView
-							.setLyricsLineTreeMap(lyricsLineTreeMap);
+					kscManyLineLyricsView.setLyricsLineTreeMap(lyricsLineTreeMap);
 
 					kscManyLineLyricsView.setBlLrc(true);
-					kscManyLineLyricsView
-							.setOnLrcClickListener(onLrcClickListener);
+					kscManyLineLyricsView.setOnLrcClickListener(onLrcClickListener);
 					kscManyLineLyricsView.invalidate();
 				} else {
 					kscTwoLineLyricsView.setBlLrc(false);
@@ -380,8 +369,7 @@ public class LrcViewActivity extends Activity implements Observer {
 			@Override
 			protected Object doInBackground() throws Exception {
 
-				return KscLyricsManamge.getKscLyricsParser(songInfo
-						.getDisplayName());
+				return KscLyricsManamge.getKscLyricsParser(songInfo.getDisplayName());
 			}
 		}.execute();
 	}
@@ -468,12 +456,10 @@ public class LrcViewActivity extends Activity implements Observer {
 				modeALLImageButton.setVisibility(View.INVISIBLE);
 				modeRandomImageButton.setVisibility(View.VISIBLE);
 				modeSingleImageButton.setVisibility(View.INVISIBLE);
-				Toast.makeText(LrcViewActivity.this, "随机播放", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(LrcViewActivity.this, "随机播放", Toast.LENGTH_SHORT).show();
 
 				Constants.PLAY_MODE = 2;
-				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY,
-						Constants.PLAY_MODE);
+				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY, Constants.PLAY_MODE);
 			}
 		});
 
@@ -487,12 +473,10 @@ public class LrcViewActivity extends Activity implements Observer {
 				modeALLImageButton.setVisibility(View.INVISIBLE);
 				modeRandomImageButton.setVisibility(View.INVISIBLE);
 				modeSingleImageButton.setVisibility(View.VISIBLE);
-				Toast.makeText(LrcViewActivity.this, "单曲循环", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(LrcViewActivity.this, "单曲循环", Toast.LENGTH_SHORT).show();
 
 				Constants.PLAY_MODE = 0;
-				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY,
-						Constants.PLAY_MODE);
+				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY, Constants.PLAY_MODE);
 			}
 		});
 
@@ -506,12 +490,10 @@ public class LrcViewActivity extends Activity implements Observer {
 				modeRandomImageButton.setVisibility(View.INVISIBLE);
 				modeSingleImageButton.setVisibility(View.INVISIBLE);
 
-				Toast.makeText(LrcViewActivity.this, "顺序播放", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(LrcViewActivity.this, "顺序播放", Toast.LENGTH_SHORT).show();
 
 				Constants.PLAY_MODE = 1;
-				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY,
-						Constants.PLAY_MODE);
+				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY, Constants.PLAY_MODE);
 			}
 		});
 
@@ -547,8 +529,7 @@ public class LrcViewActivity extends Activity implements Observer {
 				if (isStartTrackingTouch) {
 					int progress = seekBar.getProgress();
 					// 往弹出窗口传输相关的进度
-					seekBar.popupWindowShow(progress, seekbarRelativeLayout,
-							kscTwoLineLyricsView.getTimeLrc(progress));
+					seekBar.popupWindowShow(progress, seekbarRelativeLayout, kscTwoLineLyricsView.getTimeLrc(progress));
 
 				}
 			}
@@ -557,8 +538,7 @@ public class LrcViewActivity extends Activity implements Observer {
 			public void onStartTrackingTouch(SeekBar arg0) {
 				int progress = seekBar.getProgress();
 				// 往弹出窗口传输相关的进度
-				seekBar.popupWindowShow(progress, seekbarRelativeLayout,
-						kscTwoLineLyricsView.getTimeLrc(progress));
+				seekBar.popupWindowShow(progress, seekbarRelativeLayout, kscTwoLineLyricsView.getTimeLrc(progress));
 				isStartTrackingTouch = true;
 			}
 
@@ -589,9 +569,8 @@ public class LrcViewActivity extends Activity implements Observer {
 				int[] location = new int[2];
 				listImageButton.getLocationOnScreen(location);
 
-				mPopupWindow.showAtLocation(listImageButton,
-						Gravity.NO_GRAVITY, location[0], location[1]
-								- mPopupWindow.getHeight());
+				mPopupWindow.showAtLocation(listImageButton, Gravity.NO_GRAVITY, location[0],
+						location[1] - mPopupWindow.getHeight());
 			}
 		});
 
@@ -614,14 +593,11 @@ public class LrcViewActivity extends Activity implements Observer {
 				kscManyLineLyricsView.setVisibility(View.INVISIBLE);
 				kscTwoLineLyricsView.setVisibility(View.VISIBLE);
 
-				kscTwoLineLyricsViewParent
-						.setBackgroundResource(R.drawable.full_screen_cover_mini_lyric);
-				kscManyLineLyricsViewParent
-						.setBackgroundDrawable(new BitmapDrawable());
+				kscTwoLineLyricsViewParent.setBackgroundResource(R.drawable.full_screen_cover_mini_lyric);
+				kscManyLineLyricsViewParent.setBackgroundDrawable(new BitmapDrawable());
 
 				Constants.LRCTWOORMANY = 1;
-				DataUtil.save(LrcViewActivity.this, Constants.LRCTWOORMANY_KEY,
-						Constants.LRCTWOORMANY);
+				DataUtil.save(LrcViewActivity.this, Constants.LRCTWOORMANY_KEY, Constants.LRCTWOORMANY);
 			}
 		});
 
@@ -636,14 +612,11 @@ public class LrcViewActivity extends Activity implements Observer {
 				kscManyLineLyricsView.setVisibility(View.VISIBLE);
 				kscTwoLineLyricsView.setVisibility(View.INVISIBLE);
 
-				kscManyLineLyricsViewParent
-						.setBackgroundResource(R.drawable.full_screen_cover_mini_lyric);
-				kscTwoLineLyricsViewParent
-						.setBackgroundDrawable(new BitmapDrawable());
+				kscManyLineLyricsViewParent.setBackgroundResource(R.drawable.full_screen_cover_mini_lyric);
+				kscTwoLineLyricsViewParent.setBackgroundDrawable(new BitmapDrawable());
 
 				Constants.LRCTWOORMANY = 0;
-				DataUtil.save(LrcViewActivity.this, Constants.LRCTWOORMANY_KEY,
-						Constants.LRCTWOORMANY);
+				DataUtil.save(LrcViewActivity.this, Constants.LRCTWOORMANY_KEY, Constants.LRCTWOORMANY);
 			}
 		});
 
@@ -654,10 +627,8 @@ public class LrcViewActivity extends Activity implements Observer {
 			kscManyLineLyricsView.setVisibility(View.VISIBLE);
 			kscTwoLineLyricsView.setVisibility(View.INVISIBLE);
 
-			kscManyLineLyricsViewParent
-					.setBackgroundResource(R.drawable.full_screen_cover_mini_lyric);
-			kscTwoLineLyricsViewParent
-					.setBackgroundDrawable(new BitmapDrawable());
+			kscManyLineLyricsViewParent.setBackgroundResource(R.drawable.full_screen_cover_mini_lyric);
+			kscTwoLineLyricsViewParent.setBackgroundDrawable(new BitmapDrawable());
 		} else {
 			lyricCollapse.setVisibility(View.INVISIBLE);
 			lyricExpand.setVisibility(View.VISIBLE);
@@ -665,10 +636,8 @@ public class LrcViewActivity extends Activity implements Observer {
 			kscManyLineLyricsView.setVisibility(View.INVISIBLE);
 			kscTwoLineLyricsView.setVisibility(View.VISIBLE);
 
-			kscTwoLineLyricsViewParent
-					.setBackgroundResource(R.drawable.full_screen_cover_mini_lyric);
-			kscManyLineLyricsViewParent
-					.setBackgroundDrawable(new BitmapDrawable());
+			kscTwoLineLyricsViewParent.setBackgroundResource(R.drawable.full_screen_cover_mini_lyric);
+			kscManyLineLyricsViewParent.setBackgroundDrawable(new BitmapDrawable());
 		}
 	}
 
@@ -682,17 +651,14 @@ public class LrcViewActivity extends Activity implements Observer {
 		} else {
 			initPopuptWindow();
 
-			List<SongInfo> playlist = MediaManage.getMediaManage(
-					LrcViewActivity.this).getPlaylist();
+			List<SongInfo> playlist = MediaManage.getMediaManage(LrcViewActivity.this).getPlaylist();
 
 			popPlaysumTextTextView.setText("播放列表(" + playlist.size() + ")");
 
-			adapter = new PopupLrcPlayListAdapter(LrcViewActivity.this,
-					playlist, popPlayListView, mPopupWindow);
+			adapter = new PopupLrcPlayListAdapter(LrcViewActivity.this, playlist, popPlayListView, mPopupWindow);
 			popPlayListView.setAdapter(adapter);
 
-			int playIndex = MediaManage.getMediaManage(LrcViewActivity.this)
-					.getPlayIndex();
+			int playIndex = MediaManage.getMediaManage(LrcViewActivity.this).getPlayIndex();
 			if (playIndex != -1) {
 				popPlayListView.setSelection(playIndex);
 			}
@@ -704,12 +670,10 @@ public class LrcViewActivity extends Activity implements Observer {
 	 */
 	private void initPopuptWindow() {
 		LayoutInflater layoutInflater = LayoutInflater.from(this);
-		final View popupWindow = layoutInflater.inflate(
-				R.layout.popup_lrc_playlist, null);
+		final View popupWindow = layoutInflater.inflate(R.layout.popup_lrc_playlist, null);
 
-		mPopupWindow = new PopupWindow(popupWindow, getWindowManager()
-				.getDefaultDisplay().getWidth() / 4 * 3, getWindowManager()
-				.getDefaultDisplay().getHeight() / 3 * 2 - 80, true);
+		mPopupWindow = new PopupWindow(popupWindow, getWindowManager().getDefaultDisplay().getWidth() / 4 * 3,
+				getWindowManager().getDefaultDisplay().getHeight() / 3 * 2 - 80, true);
 
 		// 实例化一个ColorDrawable颜色为半透明
 		// ColorDrawable dw = new ColorDrawable(0xb0000000);
@@ -725,8 +689,7 @@ public class LrcViewActivity extends Activity implements Observer {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// int bottomHeight = mMenu.getTop();
-				int topHeight = popupWindow.findViewById(R.id.pop_layout)
-						.getTop();
+				int topHeight = popupWindow.findViewById(R.id.pop_layout).getTop();
 				int y = (int) event.getY();
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					// y > bottomHeight ||
@@ -750,18 +713,15 @@ public class LrcViewActivity extends Activity implements Observer {
 		/**
 		 * 顺序播放
 		 */
-		final ImageView modeALLImageButton = (ImageView) popupWindow
-				.findViewById(R.id.mode_all_buttom);
+		final ImageView modeALLImageButton = (ImageView) popupWindow.findViewById(R.id.mode_all_buttom);
 		/**
 		 * 随机播放
 		 */
-		final ImageView modeRandomImageButton = (ImageView) popupWindow
-				.findViewById(R.id.mode_random_buttom);
+		final ImageView modeRandomImageButton = (ImageView) popupWindow.findViewById(R.id.mode_random_buttom);
 		/**
 		 * 单曲循环
 		 */
-		final ImageView modeSingleImageButton = (ImageView) popupWindow
-				.findViewById(R.id.mode_single_buttom);
+		final ImageView modeSingleImageButton = (ImageView) popupWindow.findViewById(R.id.mode_single_buttom);
 
 		modeALLImageButton.setOnClickListener(new OnClickListener() {
 
@@ -771,12 +731,10 @@ public class LrcViewActivity extends Activity implements Observer {
 				modeALLImageButton.setVisibility(View.INVISIBLE);
 				modeRandomImageButton.setVisibility(View.VISIBLE);
 				modeSingleImageButton.setVisibility(View.INVISIBLE);
-				Toast.makeText(LrcViewActivity.this, "随机播放", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(LrcViewActivity.this, "随机播放", Toast.LENGTH_SHORT).show();
 
 				Constants.PLAY_MODE = 2;
-				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY,
-						Constants.PLAY_MODE);
+				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY, Constants.PLAY_MODE);
 
 				playmodeHandler.sendEmptyMessage(0);
 			}
@@ -790,12 +748,10 @@ public class LrcViewActivity extends Activity implements Observer {
 				modeALLImageButton.setVisibility(View.INVISIBLE);
 				modeRandomImageButton.setVisibility(View.INVISIBLE);
 				modeSingleImageButton.setVisibility(View.VISIBLE);
-				Toast.makeText(LrcViewActivity.this, "单曲循环", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(LrcViewActivity.this, "单曲循环", Toast.LENGTH_SHORT).show();
 
 				Constants.PLAY_MODE = 0;
-				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY,
-						Constants.PLAY_MODE);
+				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY, Constants.PLAY_MODE);
 				playmodeHandler.sendEmptyMessage(0);
 			}
 		});
@@ -808,12 +764,10 @@ public class LrcViewActivity extends Activity implements Observer {
 				modeRandomImageButton.setVisibility(View.INVISIBLE);
 				modeSingleImageButton.setVisibility(View.INVISIBLE);
 
-				Toast.makeText(LrcViewActivity.this, "顺序播放", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(LrcViewActivity.this, "顺序播放", Toast.LENGTH_SHORT).show();
 
 				Constants.PLAY_MODE = 1;
-				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY,
-						Constants.PLAY_MODE);
+				DataUtil.save(LrcViewActivity.this, Constants.PLAY_MODE_KEY, Constants.PLAY_MODE);
 				playmodeHandler.sendEmptyMessage(0);
 			}
 		});
@@ -837,8 +791,7 @@ public class LrcViewActivity extends Activity implements Observer {
 			break;
 		}
 
-		ImageView deleList = (ImageView) popupWindow
-				.findViewById(R.id.dele_list);
+		ImageView deleList = (ImageView) popupWindow.findViewById(R.id.dele_list);
 		deleList.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -849,11 +802,9 @@ public class LrcViewActivity extends Activity implements Observer {
 			}
 		});
 
-		popPlayListView = (ListView) popupWindow
-				.findViewById(R.id.playlistView);
+		popPlayListView = (ListView) popupWindow.findViewById(R.id.playlistView);
 
-		popPlaysumTextTextView = (TextView) popupWindow
-				.findViewById(R.id.playsumText);
+		popPlaysumTextTextView = (TextView) popupWindow.findViewById(R.id.playsumText);
 	}
 
 	/**
@@ -963,8 +914,7 @@ public class LrcViewActivity extends Activity implements Observer {
 					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_MUTE",
 					// Toast.LENGTH_SHORT).show();
 
-					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0,
-							0);
+					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
 					getVolumePopupWindowInstance();
 					return true;
 
@@ -972,15 +922,13 @@ public class LrcViewActivity extends Activity implements Observer {
 					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_DOWN",
 					// Toast.LENGTH_SHORT).show();
 
-					int currentVolume = mAudioManager
-							.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
+					int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
 					currentVolume = currentVolume - 1;
 					if (currentVolume <= 0) {
 						currentVolume = 0;
 					}
 
-					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-							currentVolume, 0);
+					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
 
 					getVolumePopupWindowInstance();
 
@@ -989,17 +937,14 @@ public class LrcViewActivity extends Activity implements Observer {
 				} else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
 					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_UP",
 					// Toast.LENGTH_SHORT).show();
-					int max = mAudioManager
-							.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 3 * 2;
-					int currentVolume = mAudioManager
-							.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
+					int max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 3 * 2;
+					int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
 					currentVolume = currentVolume + 1;
 					if (currentVolume >= max) {
 						currentVolume = max;
 					}
 
-					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-							currentVolume, 0);
+					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
 
 					getVolumePopupWindowInstance();
 					return true;
@@ -1011,8 +956,7 @@ public class LrcViewActivity extends Activity implements Observer {
 
 		});
 
-		volumeSizeSeekBar = (HBaseSeekBar) popupWindow
-				.findViewById(R.id.volumeSizeSeekBar);
+		volumeSizeSeekBar = (HBaseSeekBar) popupWindow.findViewById(R.id.volumeSizeSeekBar);
 
 		// 音乐音量
 		int max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 3 * 2;
@@ -1020,31 +964,26 @@ public class LrcViewActivity extends Activity implements Observer {
 		volumeSizeSeekBar.setMax(max);
 		volumeSizeSeekBar.setProgress(current);
 
-		volumeSizeSeekBar
-				.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+		volumeSizeSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
-					@Override
-					public void onProgressChanged(SeekBar arg0, int progress,
-							boolean arg2) {
-						volumeEndTime = 2000;
-						mAudioManager.setStreamVolume(
-								AudioManager.STREAM_MUSIC, progress, 0);
-						int currentVolume = mAudioManager
-								.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
-						volumeSizeSeekBar.setProgress(currentVolume);
-					}
+			@Override
+			public void onProgressChanged(SeekBar arg0, int progress, boolean arg2) {
+				volumeEndTime = 2000;
+				mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+				int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
+				volumeSizeSeekBar.setProgress(currentVolume);
+			}
 
-					@Override
-					public void onStartTrackingTouch(SeekBar arg0) {
-					}
+			@Override
+			public void onStartTrackingTouch(SeekBar arg0) {
+			}
 
-					@Override
-					public void onStopTrackingTouch(SeekBar arg0) {
-					}
-				});
+			@Override
+			public void onStopTrackingTouch(SeekBar arg0) {
+			}
+		});
 
-		volumePopupWindow = new PopupWindow(popupWindow,
-				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, true);
+		volumePopupWindow = new PopupWindow(popupWindow, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, true);
 		// 实例化一个ColorDrawable颜色为半透明
 		ColorDrawable dw = new ColorDrawable(0xb0000000);
 		// 设置SelectPicPopupWindow弹出窗体的背景
@@ -1066,8 +1005,7 @@ public class LrcViewActivity extends Activity implements Observer {
 
 		@Override
 		public void handleMessage(Message msg) {
-			int currentVolume = mAudioManager
-					.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
+			int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
 			volumeSizeSeekBar.setProgress(currentVolume);
 		}
 
@@ -1127,8 +1065,7 @@ public class LrcViewActivity extends Activity implements Observer {
 				EndTime -= 200;
 				mHandler.postDelayed(upDateVol, 200);
 			} else {
-				if (mPopupWindowDialog != null
-						&& mPopupWindowDialog.isShowing()) {
+				if (mPopupWindowDialog != null && mPopupWindowDialog.isShowing()) {
 					mPopupWindowDialog.dismiss();
 				}
 			}
@@ -1155,8 +1092,7 @@ public class LrcViewActivity extends Activity implements Observer {
 					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_MUTE",
 					// Toast.LENGTH_SHORT).show();
 
-					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0,
-							0);
+					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
 					getVolumePopupWindowInstance();
 					return true;
 
@@ -1164,15 +1100,13 @@ public class LrcViewActivity extends Activity implements Observer {
 					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_DOWN",
 					// Toast.LENGTH_SHORT).show();
 
-					int currentVolume = mAudioManager
-							.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
+					int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
 					currentVolume = currentVolume - 1;
 					if (currentVolume <= 0) {
 						currentVolume = 0;
 					}
 
-					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-							currentVolume, 0);
+					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
 
 					getVolumePopupWindowInstance();
 
@@ -1181,17 +1115,14 @@ public class LrcViewActivity extends Activity implements Observer {
 				} else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
 					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_UP",
 					// Toast.LENGTH_SHORT).show();
-					int max = mAudioManager
-							.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 3 * 2;
-					int currentVolume = mAudioManager
-							.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
+					int max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 3 * 2;
+					int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
 					currentVolume = currentVolume + 1;
 					if (currentVolume >= max) {
 						currentVolume = max;
 					}
 
-					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-							currentVolume, 0);
+					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
 
 					getVolumePopupWindowInstance();
 					return true;
@@ -1204,90 +1135,78 @@ public class LrcViewActivity extends Activity implements Observer {
 		});
 		int i = 0;
 		imageviews[i] = (ImageView) popupWindow.findViewById(R.id.colorpanel0);
-		flagimageviews[i] = (ImageView) popupWindow
-				.findViewById(R.id.select_flag0);
+		flagimageviews[i] = (ImageView) popupWindow.findViewById(R.id.select_flag0);
 		flagimageviews[i].setVisibility(View.INVISIBLE);
 		imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		imageviews[i].setBackgroundColor(Constants.LRCCOLORS[i++]);
 		imageviews[i] = (ImageView) popupWindow.findViewById(R.id.colorpanel1);
-		flagimageviews[i] = (ImageView) popupWindow
-				.findViewById(R.id.select_flag1);
+		flagimageviews[i] = (ImageView) popupWindow.findViewById(R.id.select_flag1);
 		flagimageviews[i].setVisibility(View.INVISIBLE);
 		imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		imageviews[i].setBackgroundColor(Constants.LRCCOLORS[i++]);
 		imageviews[i] = (ImageView) popupWindow.findViewById(R.id.colorpanel2);
-		flagimageviews[i] = (ImageView) popupWindow
-				.findViewById(R.id.select_flag2);
+		flagimageviews[i] = (ImageView) popupWindow.findViewById(R.id.select_flag2);
 		flagimageviews[i].setVisibility(View.INVISIBLE);
 		imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		imageviews[i].setBackgroundColor(Constants.LRCCOLORS[i++]);
 		imageviews[i] = (ImageView) popupWindow.findViewById(R.id.colorpanel3);
-		flagimageviews[i] = (ImageView) popupWindow
-				.findViewById(R.id.select_flag3);
+		flagimageviews[i] = (ImageView) popupWindow.findViewById(R.id.select_flag3);
 		flagimageviews[i].setVisibility(View.INVISIBLE);
 		imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		imageviews[i].setBackgroundColor(Constants.LRCCOLORS[i++]);
 		imageviews[i] = (ImageView) popupWindow.findViewById(R.id.colorpanel4);
-		flagimageviews[i] = (ImageView) popupWindow
-				.findViewById(R.id.select_flag4);
+		flagimageviews[i] = (ImageView) popupWindow.findViewById(R.id.select_flag4);
 		flagimageviews[i].setVisibility(View.INVISIBLE);
 		imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		imageviews[i].setBackgroundColor(Constants.LRCCOLORS[i++]);
 		imageviews[i] = (ImageView) popupWindow.findViewById(R.id.colorpanel5);
-		flagimageviews[i] = (ImageView) popupWindow
-				.findViewById(R.id.select_flag5);
+		flagimageviews[i] = (ImageView) popupWindow.findViewById(R.id.select_flag5);
 		flagimageviews[i].setVisibility(View.INVISIBLE);
 		imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		imageviews[i].setBackgroundColor(Constants.LRCCOLORS[i++]);
 
 		flagimageviews[Constants.LRC_COLOR_INDEX].setVisibility(View.VISIBLE);
 
-		final HBaseSeekBar colorSizeSeekBar = (HBaseSeekBar) popupWindow
-				.findViewById(R.id.colorSizeSeekBar);
+		final HBaseSeekBar colorSizeSeekBar = (HBaseSeekBar) popupWindow.findViewById(R.id.colorSizeSeekBar);
 
 		colorSizeSeekBar.setProgress(Constants.LRCFONTSIZE);
 
-		colorSizeSeekBar
-				.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+		colorSizeSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+			@Override
+			public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
+				EndTime = 5000;
+				// 过快刷新，导致页面闪屏
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				// 拖动条进度改变的时候调用
+				Constants.LRCFONTSIZE = colorSizeSeekBar.getProgress();
+
+				kscManyLineLyricsView.invalidate();
+				kscTwoLineLyricsView.invalidate();
+
+				new Thread() {
 
 					@Override
-					public void onProgressChanged(SeekBar arg0, int arg1,
-							boolean arg2) {
-						EndTime = 5000;
-						// 过快刷新，导致页面闪屏
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						// 拖动条进度改变的时候调用
-						Constants.LRCFONTSIZE = colorSizeSeekBar.getProgress();
-
-						kscManyLineLyricsView.invalidate();
-						kscTwoLineLyricsView.invalidate();
-
-						new Thread() {
-
-							@Override
-							public void run() {
-								DataUtil.save(LrcViewActivity.this,
-										Constants.LRCFONTSIZE_KEY,
-										Constants.LRCFONTSIZE);
-							}
-
-						}.start();
+					public void run() {
+						DataUtil.save(LrcViewActivity.this, Constants.LRCFONTSIZE_KEY, Constants.LRCFONTSIZE);
 					}
 
-					@Override
-					public void onStartTrackingTouch(SeekBar arg0) {
-					}
+				}.start();
+			}
 
-					@Override
-					public void onStopTrackingTouch(SeekBar arg0) {
-					}
-				});
-		ImageButton lyricDecrease = (ImageButton) popupWindow
-				.findViewById(R.id.lyric_decrease);
+			@Override
+			public void onStartTrackingTouch(SeekBar arg0) {
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar arg0) {
+			}
+		});
+		ImageButton lyricDecrease = (ImageButton) popupWindow.findViewById(R.id.lyric_decrease);
 
 		lyricDecrease.setOnClickListener(new OnClickListener() {
 
@@ -1306,17 +1225,14 @@ public class LrcViewActivity extends Activity implements Observer {
 
 					@Override
 					public void run() {
-						DataUtil.save(LrcViewActivity.this,
-								Constants.LRCFONTSIZE_KEY,
-								Constants.LRCFONTSIZE);
+						DataUtil.save(LrcViewActivity.this, Constants.LRCFONTSIZE_KEY, Constants.LRCFONTSIZE);
 					}
 
 				}.start();
 			}
 		});
 
-		ImageButton lyricIncrease = (ImageButton) popupWindow
-				.findViewById(R.id.lyric_increase);
+		ImageButton lyricIncrease = (ImageButton) popupWindow.findViewById(R.id.lyric_increase);
 		lyricIncrease.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1334,9 +1250,7 @@ public class LrcViewActivity extends Activity implements Observer {
 
 					@Override
 					public void run() {
-						DataUtil.save(LrcViewActivity.this,
-								Constants.LRCFONTSIZE_KEY,
-								Constants.LRCFONTSIZE);
+						DataUtil.save(LrcViewActivity.this, Constants.LRCFONTSIZE_KEY, Constants.LRCFONTSIZE);
 					}
 
 				}.start();
@@ -1348,8 +1262,7 @@ public class LrcViewActivity extends Activity implements Observer {
 		// dm = getResources().getDisplayMetrics();
 		// int screenWidth = dm.widthPixels;
 
-		mPopupWindowDialog = new PopupWindow(popupWindow,
-				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, true);
+		mPopupWindowDialog = new PopupWindow(popupWindow, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, true);
 		// 实例化一个ColorDrawable颜色为半透明
 		ColorDrawable dw = new ColorDrawable(0xb0000000);
 		// 设置SelectPicPopupWindow弹出窗体的背景
@@ -1360,9 +1273,8 @@ public class LrcViewActivity extends Activity implements Observer {
 		final int[] location = new int[2];
 		kscManyLineLyricsView.getLocationOnScreen(location);
 
-		mPopupWindowDialog.showAtLocation(kscManyLineLyricsView,
-				Gravity.NO_GRAVITY, location[0], location[1]
-						+ kscManyLineLyricsView.getHeight());
+		mPopupWindowDialog.showAtLocation(kscManyLineLyricsView, Gravity.NO_GRAVITY, location[0],
+				location[1] + kscManyLineLyricsView.getHeight());
 
 		// int left = kscTwoLineLyricsView.getLeft();
 		// int top = location[1] - kscTwoLineLyricsView.getHeight()
@@ -1372,11 +1284,9 @@ public class LrcViewActivity extends Activity implements Observer {
 		// kscTwoLineLyricsView.layout(left, top, width, height);
 		// kscTwoLineLyricsView.invalidate();
 
-		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) kscTwoLineLyricsView
-				.getLayoutParams();
+		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) kscTwoLineLyricsView.getLayoutParams();
 		params.leftMargin = 0;
-		params.topMargin = location[1] - kscTwoLineLyricsView.getHeight()
-				- kscTwoLineLyricsView.getHeight() / 4;
+		params.topMargin = location[1] - kscTwoLineLyricsView.getHeight() - kscTwoLineLyricsView.getHeight() / 4;
 		kscTwoLineLyricsView.setLayoutParams(params);
 
 		playSeekbarParent.setVisibility(View.INVISIBLE);
@@ -1398,8 +1308,7 @@ public class LrcViewActivity extends Activity implements Observer {
 				RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) kscTwoLineLyricsView
 						.getLayoutParams();
 				params.leftMargin = 0;
-				params.topMargin = location[1]
-						- kscTwoLineLyricsView.getHeight()
+				params.topMargin = location[1] - kscTwoLineLyricsView.getHeight()
 						+ kscTwoLineLyricsView.getHeight() / 4;
 				kscTwoLineLyricsView.setLayoutParams(params);
 
@@ -1450,8 +1359,7 @@ public class LrcViewActivity extends Activity implements Observer {
 			}
 			kscTwoLineLyricsView.invalidate();
 			kscManyLineLyricsView.invalidate();
-			DataUtil.save(LrcViewActivity.this, Constants.LRC_COLOR_INDEX_KEY,
-					Constants.LRC_COLOR_INDEX);
+			DataUtil.save(LrcViewActivity.this, Constants.LRC_COLOR_INDEX_KEY, Constants.LRC_COLOR_INDEX);
 		}
 	}
 
@@ -1492,12 +1400,10 @@ public class LrcViewActivity extends Activity implements Observer {
 			String path = skinMessage.getPath();
 			String url = skinMessage.getUrl();
 			String parentPath = skinMessage.getParentPath();
-			if (path!= null && !path.equals("")) {
-				ImageUtil.loadLocalImage(LrcViewActivity.this, parent,
-						Constants.PICIDS[Constants.DEF_PIC_INDEX], path);
-			} else if (parentPath != null && !parentPath.equals("") &&url!= null&& !url.equals("")) {
-				ImageUtil.loadImage(LrcViewActivity.this, parent,
-						Constants.PICIDS[Constants.DEF_PIC_INDEX], parentPath,
+			if (path != null && !path.equals("")) {
+				ImageUtil.loadLocalImage(LrcViewActivity.this, parent, Constants.PICIDS[Constants.DEF_PIC_INDEX], path);
+			} else if (parentPath != null && !parentPath.equals("") && url != null && !url.equals("")) {
+				ImageUtil.loadImage(LrcViewActivity.this, parent, Constants.PICIDS[Constants.DEF_PIC_INDEX], parentPath,
 						url);
 			}
 		}
@@ -1521,8 +1427,7 @@ public class LrcViewActivity extends Activity implements Observer {
 			}
 		} else if (data instanceof SongMessage) {
 			SongMessage songMessage = (SongMessage) data;
-			if (songMessage.getType() == SongMessage.INIT
-					|| songMessage.getType() == SongMessage.PLAYING
+			if (songMessage.getType() == SongMessage.INIT || songMessage.getType() == SongMessage.PLAYING
 					|| songMessage.getType() == SongMessage.STOPING
 					|| songMessage.getType() == SongMessage.LASTPLAYFINISH
 					|| songMessage.getType() == SongMessage.PLAY) {
@@ -1542,20 +1447,18 @@ public class LrcViewActivity extends Activity implements Observer {
 		@Override
 		public void handleMessage(Message msg) {
 			if (null != mPopupWindow) {
-				List<SongInfo> playlist = MediaManage.getMediaManage(
-						LrcViewActivity.this).getPlaylist();
+				List<SongInfo> playlist = MediaManage.getMediaManage(LrcViewActivity.this).getPlaylist();
 				popPlaysumTextTextView.setText("播放列表(" + playlist.size() + ")");
 				if (msg.what == 1) {
 					if (adapter != null) {
 						ObserverManage.getObserver().deleteObserver(adapter);
 					}
-					adapter = new PopupLrcPlayListAdapter(LrcViewActivity.this,
-							playlist, popPlayListView, mPopupWindow);
+					adapter = new PopupLrcPlayListAdapter(LrcViewActivity.this, playlist, popPlayListView,
+							mPopupWindow);
 
 					popPlayListView.setAdapter(adapter);
 
-					int playIndex = MediaManage.getMediaManage(
-							LrcViewActivity.this).getPlayIndex();
+					int playIndex = MediaManage.getMediaManage(LrcViewActivity.this).getPlayIndex();
 					if (playIndex != -1) {
 						popPlayListView.setSelection(playIndex);
 					}

@@ -51,10 +51,9 @@ public class SkinColorActivity extends Activity {
 
 	private void init() {
 		colorPanelIndex = Constants.DEF_COLOR_INDEX;
-		
+
 		linearLayoutBG = (LinearLayout) findViewById(R.id.skin_previewbg);
-		linearLayoutBG
-				.setBackgroundColor(Constants.BLACK_GROUND[Constants.DEF_COLOR_INDEX]);
+		linearLayoutBG.setBackgroundColor(Constants.BLACK_GROUND[Constants.DEF_COLOR_INDEX]);
 
 		selectPanelLinearLayout = (LinearLayout) findViewById(R.id.selectPanel);
 
@@ -67,14 +66,11 @@ public class SkinColorActivity extends Activity {
 
 		colors.put(index, Constants.DEF_COLOR_INDEX);
 
-		View viewFirst = LayoutInflater.from(this).inflate(
-				R.layout.skin_color_panel, null, false);
+		View viewFirst = LayoutInflater.from(this).inflate(R.layout.skin_color_panel, null, false);
 		imageviews[index] = (ImageView) viewFirst.findViewById(R.id.colorpanel);
 		imageviews[index].setImageResource(R.drawable.lib_contact_fram);
-		imageviews[index]
-				.setBackgroundColor(Constants.BLACK_GROUND[Constants.DEF_COLOR_INDEX]);
-		imageviews[index++]
-				.setOnClickListener(new MyImageViewOnClickListener());
+		imageviews[index].setBackgroundColor(Constants.BLACK_GROUND[Constants.DEF_COLOR_INDEX]);
+		imageviews[index++].setOnClickListener(new MyImageViewOnClickListener());
 		selectPanelLinearLayout.addView(viewFirst);
 
 		for (int i = 0; i < length; i++) {
@@ -83,12 +79,10 @@ public class SkinColorActivity extends Activity {
 
 			colors.put(index, i);
 
-			View view = LayoutInflater.from(this).inflate(
-					R.layout.skin_color_panel, null, false);
+			View view = LayoutInflater.from(this).inflate(R.layout.skin_color_panel, null, false);
 			imageviews[index] = (ImageView) view.findViewById(R.id.colorpanel);
 			imageviews[index].setBackgroundColor(Constants.BLACK_GROUND[i]);
-			imageviews[index++]
-					.setOnClickListener(new MyImageViewOnClickListener());
+			imageviews[index++].setOnClickListener(new MyImageViewOnClickListener());
 
 			selectPanelLinearLayout.addView(view);
 		}
@@ -119,8 +113,7 @@ public class SkinColorActivity extends Activity {
 					imageviews[i].setImageResource(R.drawable.lib_contact_fram);
 					int colorIndex = colors.get(i);
 					colorPanelIndex = colorIndex;
-					linearLayoutBG
-							.setBackgroundColor(Constants.BLACK_GROUND[colorIndex]);
+					linearLayoutBG.setBackgroundColor(Constants.BLACK_GROUND[colorIndex]);
 				} else {
 					imageviews[i].setImageDrawable(new BitmapDrawable());
 				}

@@ -17,8 +17,7 @@ public class PhoneReceiver extends BroadcastReceiver {
 		if (action.equals("android.intent.action.MEDIA_BUTTON")) {
 			// 耳机事件 Intent 附加值为(Extra)点击MEDIA_BUTTON的按键码
 
-			KeyEvent event = (KeyEvent) intent
-					.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
+			KeyEvent event = (KeyEvent) intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
 			if (event == null)
 				return;
 
@@ -34,7 +33,7 @@ public class PhoneReceiver extends BroadcastReceiver {
 			data.putInt("key_code", keyCode);
 			data.putLong("event_time", eventTime);
 			msg.setData(data);
-			
+
 			ObserverManage.getObserver().setMessage(msg);
 			// phoneHandler.sendMessage(msg);
 

@@ -89,13 +89,12 @@ public class MyLogger {
 
 	/**
 	 * 得到现在时间前的几天日期，用来得到需要删除的日志文件名
-	 * */
+	 */
 	private Date getDateBefore() {
 		Date nowtime = new Date();
 		Calendar now = Calendar.getInstance();
 		now.setTime(nowtime);
-		now.set(Calendar.DATE, now.get(Calendar.DATE)
-				- SDCARD_LOG_FILE_SAVE_DAYS);
+		now.set(Calendar.DATE, now.get(Calendar.DATE) - SDCARD_LOG_FILE_SAVE_DAYS);
 		return now.getTime();
 	}
 
@@ -150,10 +149,8 @@ public class MyLogger {
 			if (st.getClassName().equals(this.getClass().getName())) {
 				continue;
 			}
-			return "@" + userName + "@ " + "[ "
-					+ Thread.currentThread().getName() + ": "
-					+ st.getClassName() + ":" + st.getLineNumber() + " "
-					+ st.getMethodName() + " ]";
+			return "@" + userName + "@ " + "[ " + Thread.currentThread().getName() + ": " + st.getClassName() + ":"
+					+ st.getLineNumber() + " " + st.getMethodName() + " ]";
 		}
 		return null;
 	}

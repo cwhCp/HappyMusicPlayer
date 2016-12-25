@@ -87,25 +87,22 @@ public class BaseSeekBar extends SeekBar implements Observer {
 	protected synchronized void onDraw(Canvas canvas) {
 		Paint paint = new Paint();
 		paint.setColor(Color.rgb(185, 185, 185));
-		Rect r = new Rect(6, getHeight() / 2 - bmp.getHeight() / 20,
-				getWidth() - 10, getHeight() / 2 + bmp.getHeight() / 20);
+		Rect r = new Rect(6, getHeight() / 2 - bmp.getHeight() / 20, getWidth() - 10,
+				getHeight() / 2 + bmp.getHeight() / 20);
 		canvas.drawRect(r, paint);
 		// ///////////////////////////////////////////////////////////////
 		Paint paint2 = new Paint();
-		Rect r2 = new Rect(6, getHeight() / 2 - bmp.getHeight() / 20,
-				getProgress() * (getWidth() - 10) / getMax(), getHeight() / 2
-						+ bmp.getHeight() / 20);
+		Rect r2 = new Rect(6, getHeight() / 2 - bmp.getHeight() / 20, getProgress() * (getWidth() - 10) / getMax(),
+				getHeight() / 2 + bmp.getHeight() / 20);
 		paint2.setColor(Constants.BLACK_GROUND[Constants.DEF_COLOR_INDEX]);
 		canvas.drawRect(r2, paint2);
 		//
 		if (getProgress() == getMax()) {
-			canvas.drawBitmap(bmp, getProgress() * (getWidth() - 10) / getMax()
-					- bmp.getWidth() / 3 - 6, getHeight() / 2 - bmp.getHeight()
-					/ 2, paint);
+			canvas.drawBitmap(bmp, getProgress() * (getWidth() - 10) / getMax() - bmp.getWidth() / 3 - 6,
+					getHeight() / 2 - bmp.getHeight() / 2, paint);
 		} else {
-			canvas.drawBitmap(bmp, getProgress() * (getWidth() - 10) / getMax()
-					- bmp.getWidth() / 3 - 4, getHeight() / 2 - bmp.getHeight()
-					/ 2, paint);
+			canvas.drawBitmap(bmp, getProgress() * (getWidth() - 10) / getMax() - bmp.getWidth() / 3 - 4,
+					getHeight() / 2 - bmp.getHeight() / 2, paint);
 		}
 	}
 
@@ -128,11 +125,9 @@ public class BaseSeekBar extends SeekBar implements Observer {
 	private void init(Context context) {
 		this.context = context;
 
-		baseBitmap = BitmapFactory.decodeResource(context.getResources(),
-				R.drawable.progress_dot_default);
+		baseBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.progress_dot_default);
 
-		bmp = Bitmap.createBitmap(baseBitmap.getWidth(),
-				baseBitmap.getHeight(), baseBitmap.getConfig());
+		bmp = Bitmap.createBitmap(baseBitmap.getWidth(), baseBitmap.getHeight(), baseBitmap.getConfig());
 		initbm();
 
 		ObserverManage.getObserver().addObserver(this);
@@ -148,8 +143,8 @@ public class BaseSeekBar extends SeekBar implements Observer {
 		float progressA = Color.alpha(color) / 255f;
 
 		// 根据SeekBar定义RGBA的矩阵
-		float[] src = new float[] { progressR, 0, 0, 0, 0, 0, progressG, 0, 0,
-				0, 0, 0, progressB, 0, 0, 0, 0, 0, progressA, 0 };
+		float[] src = new float[] { progressR, 0, 0, 0, 0, 0, progressG, 0, 0, 0, 0, 0, progressB, 0, 0, 0, 0, 0,
+				progressA, 0 };
 		// 定义ColorMatrix，并指定RGBA矩阵
 		ColorMatrix colorMatrix = new ColorMatrix();
 		colorMatrix.set(src);
@@ -179,8 +174,7 @@ public class BaseSeekBar extends SeekBar implements Observer {
 		dm = context.getResources().getDisplayMetrics();
 		int screenWidth = dm.widthPixels;
 		LayoutInflater layoutInflater = LayoutInflater.from(context);
-		View popupWindow = layoutInflater.inflate(
-				R.layout.seekbar_progress_dialog, null);
+		View popupWindow = layoutInflater.inflate(R.layout.seekbar_progress_dialog, null);
 		timeTip = (TextView) popupWindow.findViewById(R.id.time_tip);
 		timeTip.setText(timeStr);
 

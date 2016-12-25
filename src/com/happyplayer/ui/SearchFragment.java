@@ -7,29 +7,29 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-public class SearchFragment extends Fragment{
+public class SearchFragment extends Fragment {
 	private View mMainView;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initComponent();
 	}
-	
+
 	private void initComponent() {
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		mMainView = inflater.inflate(R.layout.fragment_search, null, false);
 	}
-	
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ViewGroup viewGroup = (ViewGroup) mMainView.getParent();
 		if (viewGroup != null) {
 			viewGroup.removeAllViewsInLayout();
 		}
 		return mMainView;
 	}
-	
+
 	class ItemOnClick implements OnClickListener {
 
 		@Override

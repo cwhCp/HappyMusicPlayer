@@ -61,34 +61,28 @@ public class GuideActivity extends FragmentActivity {
 		firstGuideFragment = new GuideFragment();
 		firstGuideFragment.setParentColor(Color.rgb(163, 161, 212));
 		firstGuideFragment.setMainTitleImage(R.drawable.guide_first_top_image);
-		firstGuideFragment
-				.setSecondTitleImage(R.drawable.guide_first_middle_image);
+		firstGuideFragment.setSecondTitleImage(R.drawable.guide_first_middle_image);
 		firstGuideFragment.setCentPICImage(R.drawable.guide_first_person);
 		firstGuideFragment.setInitAni(true);
 		//
 		secondGuideFragment = new GuideFragment();
 		secondGuideFragment.setParentColor(Color.rgb(254, 153, 153));
-		secondGuideFragment
-				.setMainTitleImage(R.drawable.guide_second_top_image);
-		secondGuideFragment
-				.setSecondTitleImage(R.drawable.guide_second_middle_image);
+		secondGuideFragment.setMainTitleImage(R.drawable.guide_second_top_image);
+		secondGuideFragment.setSecondTitleImage(R.drawable.guide_second_middle_image);
 		secondGuideFragment.setCentPICImage(R.drawable.guide_second_person);
 		//
 		thirdGuideFragment = new GuideFragment();
 		thirdGuideFragment.setParentColor(Color.rgb(225, 184, 94));
 		thirdGuideFragment.setMainTitleImage(R.drawable.guide_four_top_image);
-		thirdGuideFragment
-				.setSecondTitleImage(R.drawable.guide_four_middle_image);
+		thirdGuideFragment.setSecondTitleImage(R.drawable.guide_four_middle_image);
 		thirdGuideFragment.setCentPICImage(R.drawable.guide_four_bottom_person);
 		//
 		fourthGuideFragment = new GuideFragment();
 		fourthGuideFragment.setVisibility(true);
 		fourthGuideFragment.setParentColor(Color.rgb(77, 199, 255));
 		fourthGuideFragment.setMainTitleImage(R.drawable.guide_third_top_image);
-		fourthGuideFragment
-				.setSecondTitleImage(R.drawable.guide_third_middle_image);
-		fourthGuideFragment
-				.setCentPICImage(R.drawable.guide_third_bottom_person);
+		fourthGuideFragment.setSecondTitleImage(R.drawable.guide_third_middle_image);
+		fourthGuideFragment.setCentPICImage(R.drawable.guide_third_bottom_person);
 
 		fragmentList.add(firstGuideFragment);
 		fragmentList.add(secondGuideFragment);
@@ -106,16 +100,13 @@ public class GuideActivity extends FragmentActivity {
 
 		for (int j = 0; j < imageViews.length; j++) {
 			if (j != 0) {
-				imageViews[j]
-						.setBackgroundResource(R.drawable.music_zone_indicator_common);
+				imageViews[j].setBackgroundResource(R.drawable.music_zone_indicator_common);
 			} else {
-				imageViews[j]
-						.setBackgroundResource(R.drawable.music_zone_indicator_current);
+				imageViews[j].setBackgroundResource(R.drawable.music_zone_indicator_current);
 			}
 		}
 
-		tabFragmentPagerAdapter = new TabFragmentPagerAdapter(
-				getSupportFragmentManager());
+		tabFragmentPagerAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(tabFragmentPagerAdapter);
 		// 设置viewpager的缓存页面
 		// viewPager.setOffscreenPageLimit(fragmentList.size());
@@ -154,11 +145,9 @@ public class GuideActivity extends FragmentActivity {
 			for (int i = 0; i < imageViews.length; i++) {
 				// 不是当前选中的page，其小圆点设置为未选中的状态
 				if (position != i) {
-					imageViews[i]
-							.setBackgroundResource(R.drawable.music_zone_indicator_common);
+					imageViews[i].setBackgroundResource(R.drawable.music_zone_indicator_common);
 				} else {
-					imageViews[position]
-							.setBackgroundResource(R.drawable.music_zone_indicator_current);
+					imageViews[position].setBackgroundResource(R.drawable.music_zone_indicator_current);
 				}
 			}
 		}
@@ -233,8 +222,7 @@ public class GuideActivity extends FragmentActivity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
 			if ((System.currentTimeMillis() - mExitTime) > 2000) {
-				Toast.makeText(this, R.string.exit_tip, Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(this, R.string.exit_tip, Toast.LENGTH_SHORT).show();
 				mExitTime = System.currentTimeMillis();
 			} else {
 				ActivityManager.getInstance().exit();

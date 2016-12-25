@@ -39,8 +39,8 @@ public class ShowLockActivity extends FragmentActivity implements Observer {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final Window win = getWindow();
-		win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-				| WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+		win.addFlags(
+				WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 		//
 		// getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
 		// getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -55,8 +55,7 @@ public class ShowLockActivity extends FragmentActivity implements Observer {
 	}
 
 	private void setBackground() {
-		viewPager
-				.setBackgroundResource(Constants.PICIDS[Constants.DEF_PIC_INDEX]);
+		viewPager.setBackgroundResource(Constants.PICIDS[Constants.DEF_PIC_INDEX]);
 	}
 
 	private void init() {
@@ -66,8 +65,7 @@ public class ShowLockActivity extends FragmentActivity implements Observer {
 		fragmentList.add(new TransparentFragment());
 		fragmentList.add(new LockMenuFragment());
 
-		tabFragmentPagerAdapter = new TabFragmentPagerAdapter(
-				getSupportFragmentManager());
+		tabFragmentPagerAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(tabFragmentPagerAdapter);
 
 		viewPager.setCurrentItem(1);

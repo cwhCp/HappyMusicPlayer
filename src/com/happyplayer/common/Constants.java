@@ -165,8 +165,7 @@ public class Constants {
 			R.drawable.bg_skin_thumb9, R.drawable.bg_skin_thumb10,
 			R.drawable.bg_skin_thumb11, R.drawable.bg_skin_thumb12,
 			R.drawable.bg_skin_thumb13, R.drawable.bg_skin_thumb14,
-			R.drawable.bg_skin_thumb15, R.drawable.bg_skin_thumb16,
-			R.drawable.bg_skin_thumb17 };
+			R.drawable.bg_skin_thumb15, R.drawable.bg_skin_thumb16, R.drawable.bg_skin_thumb17 };
 	/**
 	 * 图片皮肤索引
 	 */

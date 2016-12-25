@@ -25,10 +25,8 @@ public class PingYinUtil {
 
 		try {
 			for (int i = 0; i < input.length; i++) {
-				if (java.lang.Character.toString(input[i]).matches(
-						"[\\u4E00-\\u9FA5]+")) {
-					String[] temp = PinyinHelper.toHanyuPinyinStringArray(
-							input[i], format);
+				if (java.lang.Character.toString(input[i]).matches("[\\u4E00-\\u9FA5]+")) {
+					String[] temp = PinyinHelper.toHanyuPinyinStringArray(input[i], format);
 					output += temp[0];
 				} else
 					output += java.lang.Character.toString(input[i]);
@@ -49,28 +47,21 @@ public class PingYinUtil {
 		int sub_index = 0;
 		String show = "";
 		if (length >= 1073741824) {
-			sub_index = (String.valueOf((float) length / 1073741824))
-					.indexOf(".");
-			show = ((float) length / 1073741824 + "000").substring(0,
-					sub_index + 3) + "GB";
+			sub_index = (String.valueOf((float) length / 1073741824)).indexOf(".");
+			show = ((float) length / 1073741824 + "000").substring(0, sub_index + 3) + "GB";
 		} else if (length >= 1048576) {
 			sub_index = (String.valueOf((float) length / 1048576)).indexOf(".");
-			String myshow = ((float) length / 1048576 + "000").substring(0,
-					sub_index + 3) + "";
-			if (Float.parseFloat(myshow) < 1024
-					&& Float.parseFloat(myshow) > 1000) {
+			String myshow = ((float) length / 1048576 + "000").substring(0, sub_index + 3) + "";
+			if (Float.parseFloat(myshow) < 1024 && Float.parseFloat(myshow) > 1000) {
 
-				show = String.valueOf(Float.parseFloat(myshow) / 1024)
-						.substring(0, 4) + "GB";
+				show = String.valueOf(Float.parseFloat(myshow) / 1024).substring(0, 4) + "GB";
 
 			} else {
-				show = ((float) length / 1048576 + "000").substring(0,
-						sub_index + 3) + "MB";
+				show = ((float) length / 1048576 + "000").substring(0, sub_index + 3) + "MB";
 			}
 		} else if (length >= 1024) {
 			sub_index = (String.valueOf((float) length / 1024)).indexOf(".");
-			show = ((float) length / 1024 + "000").substring(0, sub_index + 3)
-					+ "KB";
+			show = ((float) length / 1024 + "000").substring(0, sub_index + 3) + "KB";
 		} else if (length < 1024) {
 			show = String.valueOf(length) + "B";
 		}

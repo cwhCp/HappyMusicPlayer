@@ -32,8 +32,7 @@ import com.happyplayer.ui.R;
 
 public class MediaUtils {
 	// 获取专辑封面的Uri
-	private static final Uri albumArtUri = Uri
-			.parse("content://media/external/audio/albumart");
+	private static final Uri albumArtUri = Uri.parse("content://media/external/audio/albumart");
 
 	/**
 	 * 获取媒体的游标
@@ -41,9 +40,8 @@ public class MediaUtils {
 	 * @return Cursor
 	 */
 	public static Cursor getMediaCursor(Context context) {
-		Cursor cursor = context.getContentResolver().query(
-				MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null, null,
-				MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
+		Cursor cursor = context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, null, null,
+				null, MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
 		return cursor;
 	}
 
@@ -145,13 +143,11 @@ public class MediaUtils {
 	public static Mp3Info getMp3InfoByCursor(Cursor cursor) {
 		cursor.moveToNext();
 
-		int isMusic = cursor.getInt(cursor
-				.getColumnIndex(MediaStore.Audio.Media.IS_MUSIC));
+		int isMusic = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.IS_MUSIC));
 		if (isMusic == 0)
 			return null;
 
-		String url = cursor.getString(cursor
-				.getColumnIndex(MediaStore.Audio.Media.DATA));
+		String url = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
 		if (url.startsWith(".")) {
 			return null;
 		}
@@ -165,19 +161,15 @@ public class MediaUtils {
 		String artist = "";
 		String title = "";
 
-		long id = cursor.getLong(cursor
-				.getColumnIndex(MediaStore.Audio.Media._ID));
-		String tmpTitle = cursor.getString(cursor
-				.getColumnIndex(MediaStore.Audio.Media.TITLE));
+		long id = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media._ID));
+		String tmpTitle = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
 		if (tmpTitle.contains("-")) {
 			String[] titleArr = tmpTitle.split("-");
 			artist = titleArr[0].trim();
 			title = titleArr[1].trim();
 		} else {
-			title = cursor.getString(cursor
-					.getColumnIndex(MediaStore.Audio.Media.TITLE));
-			artist = cursor.getString(cursor
-					.getColumnIndex(MediaStore.Audio.Media.ARTIST));
+			title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE));
+			artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
 		}
 		if (title.equals("<unknown>")) {
 			title = tmpTitle;
@@ -186,23 +178,18 @@ public class MediaUtils {
 			artist = "";
 		}
 
-		String displayName = cursor.getString(cursor
-				.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
+		String displayName = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
 
 		if (displayName.contains(".mp3")) {
 			String[] displayNameArr = displayName.split(".mp3");
 			displayName = displayNameArr[0].trim();
 		}
 
-		long duration = cursor.getLong(cursor
-				.getColumnIndex(MediaStore.Audio.Media.DURATION));
-		long size = cursor.getLong(cursor
-				.getColumnIndex(MediaStore.Audio.Media.SIZE));
-		String album = cursor.getString(cursor
-				.getColumnIndex(MediaStore.Audio.Media.ALBUM)); // 专辑
+		long duration = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
+		long size = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.SIZE));
+		String album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM)); // 专辑
 
-		long albumid = cursor.getLong(cursor
-				.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
+		long albumid = cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
 
 		if (size < 1024 * 1024) {
 			return null;
@@ -267,13 +254,11 @@ public class MediaUtils {
 		BitmapFactory.Options opts = new BitmapFactory.Options();
 		opts.inPreferredConfig = Bitmap.Config.RGB_565;
 		if (small) { // 返回小图片
-			return BitmapFactory.decodeStream(context.getResources()
-					.openRawResource(R.drawable.playing_bar_default_avatar),
-					null, opts);
+			return BitmapFactory.decodeStream(
+					context.getResources().openRawResource(R.drawable.playing_bar_default_avatar), null, opts);
 		}
-		return BitmapFactory.decodeStream(context.getResources()
-				.openRawResource(R.drawable.playing_bar_default_avatar), null,
-				opts);
+		return BitmapFactory.decodeStream(context.getResources().openRawResource(R.drawable.playing_bar_default_avatar),
+				null, opts);
 	}
 
 	/**
@@ -284,28 +269,23 @@ public class MediaUtils {
 	 * @param albumid
 	 * @return
 	 */
-	private static Bitmap getArtworkFromFile(Context context, long songid,
-			long albumid) {
+	private static Bitmap getArtworkFromFile(Context context, long songid, long albumid) {
 		Bitmap bm = null;
 		if (albumid < 0 && songid < 0) {
-			throw new IllegalArgumentException(
-					"Must specify an album or a song id");
+			throw new IllegalArgumentException("Must specify an album or a song id");
 		}
 		try {
 			BitmapFactory.Options options = new BitmapFactory.Options();
 			FileDescriptor fd = null;
 			if (albumid < 0) {
-				Uri uri = Uri.parse("content://media/external/audio/media/"
-						+ songid + "/albumart");
-				ParcelFileDescriptor pfd = context.getContentResolver()
-						.openFileDescriptor(uri, "r");
+				Uri uri = Uri.parse("content://media/external/audio/media/" + songid + "/albumart");
+				ParcelFileDescriptor pfd = context.getContentResolver().openFileDescriptor(uri, "r");
 				if (pfd != null) {
 					fd = pfd.getFileDescriptor();
 				}
 			} else {
 				Uri uri = ContentUris.withAppendedId(albumArtUri, albumid);
-				ParcelFileDescriptor pfd = context.getContentResolver()
-						.openFileDescriptor(uri, "r");
+				ParcelFileDescriptor pfd = context.getContentResolver().openFileDescriptor(uri, "r");
 				if (pfd != null) {
 					fd = pfd.getFileDescriptor();
 				}
@@ -340,8 +320,7 @@ public class MediaUtils {
 	 * @param allowdefalut
 	 * @return
 	 */
-	public static Bitmap getArtwork(Context context, long song_id,
-			long album_id, boolean allowdefalut, boolean small) {
+	public static Bitmap getArtwork(Context context, long song_id, long album_id, boolean allowdefalut, boolean small) {
 		if (album_id < 0) {
 			if (song_id >= 0) {
 				Bitmap bm = getArtworkFromFile(context, song_id, -1);

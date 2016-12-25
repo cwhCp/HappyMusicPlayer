@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * 
  * @author Administrator
@@ -78,8 +79,7 @@ public class SwipeLayout extends FrameLayout {
 	}
 
 	public interface OnRevealListener {
-		public void onReveal(View child, DragEdge edge, float fraction,
-				int distance);
+		public void onReveal(View child, DragEdge edge, float fraction, int distance);
 	}
 
 	/**
@@ -95,8 +95,7 @@ public class SwipeLayout extends FrameLayout {
 	public void addRevealListener(int childId, OnRevealListener l) {
 		View child = findViewById(childId);
 		if (child == null) {
-			throw new IllegalArgumentException(
-					"Child does not belong to SwipeListener.");
+			throw new IllegalArgumentException("Child does not belong to SwipeListener.");
 		}
 
 		if (mShowEntirely.containsKey(child) == false) {
@@ -220,8 +219,7 @@ public class SwipeLayout extends FrameLayout {
 					} else {
 						if (getSurfaceView().getTop() + dy < getPaddingTop())
 							return getPaddingTop();
-						if (getSurfaceView().getTop() + dy > getPaddingTop()
-								+ mDragDistance)
+						if (getSurfaceView().getTop() + dy > getPaddingTop() + mDragDistance)
 							return getPaddingTop() + mDragDistance;
 					}
 					break;
@@ -232,8 +230,7 @@ public class SwipeLayout extends FrameLayout {
 					} else {
 						if (getSurfaceView().getTop() + dy >= getPaddingTop())
 							return getPaddingTop();
-						if (getSurfaceView().getTop() + dy <= getPaddingTop()
-								- mDragDistance)
+						if (getSurfaceView().getTop() + dy <= getPaddingTop() - mDragDistance)
 							return getPaddingTop() - mDragDistance;
 					}
 				}
@@ -275,16 +272,13 @@ public class SwipeLayout extends FrameLayout {
 		}
 
 		@Override
-		public void onViewPositionChanged(View changedView, int left, int top,
-				int dx, int dy) {
-			int evLeft = getSurfaceView().getLeft(), evRight = getSurfaceView()
-					.getRight(), evTop = getSurfaceView().getTop(), evBottom = getSurfaceView()
-					.getBottom();
+		public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
+			int evLeft = getSurfaceView().getLeft(), evRight = getSurfaceView().getRight(),
+					evTop = getSurfaceView().getTop(), evBottom = getSurfaceView().getBottom();
 			if (changedView == getSurfaceView()) {
 
 				if (mShowMode == ShowMode.PullOut) {
-					if (mDragEdge == DragEdge.Left
-							|| mDragEdge == DragEdge.Right)
+					if (mDragEdge == DragEdge.Left || mDragEdge == DragEdge.Right)
 						getBottomView().offsetLeftAndRight(dx);
 					else
 						getBottomView().offsetTopAndBottom(dy);
@@ -297,27 +291,20 @@ public class SwipeLayout extends FrameLayout {
 					getSurfaceView().offsetTopAndBottom(dy);
 				} else {
 					Rect rect = computeBottomLayDown(mDragEdge);
-					getBottomView().layout(rect.left, rect.top, rect.right,
-							rect.bottom);
+					getBottomView().layout(rect.left, rect.top, rect.right, rect.bottom);
 
-					int newLeft = getSurfaceView().getLeft() + dx, newTop = getSurfaceView()
-							.getTop() + dy;
+					int newLeft = getSurfaceView().getLeft() + dx, newTop = getSurfaceView().getTop() + dy;
 
-					if (mDragEdge == DragEdge.Left
-							&& newLeft < getPaddingLeft())
+					if (mDragEdge == DragEdge.Left && newLeft < getPaddingLeft())
 						newLeft = getPaddingLeft();
-					else if (mDragEdge == DragEdge.Right
-							&& newLeft > getPaddingLeft())
+					else if (mDragEdge == DragEdge.Right && newLeft > getPaddingLeft())
 						newLeft = getPaddingLeft();
-					else if (mDragEdge == DragEdge.Top
-							&& newTop < getPaddingTop())
+					else if (mDragEdge == DragEdge.Top && newTop < getPaddingTop())
 						newTop = getPaddingTop();
-					else if (mDragEdge == DragEdge.Bottom
-							&& newTop > getPaddingTop())
+					else if (mDragEdge == DragEdge.Bottom && newTop > getPaddingTop())
 						newTop = getPaddingTop();
 
-					getSurfaceView().layout(newLeft, newTop,
-							newLeft + getMeasuredWidth(),
+					getSurfaceView().layout(newLeft, newTop, newLeft + getMeasuredWidth(),
 							newTop + getMeasuredHeight());
 				}
 
@@ -345,8 +332,7 @@ public class SwipeLayout extends FrameLayout {
 	 * @param surfaceBottom
 	 * @return
 	 */
-	protected boolean isViewTotallyFirstShowed(View child,
-			Rect relativePosition, DragEdge edge, int surfaceLeft,
+	protected boolean isViewTotallyFirstShowed(View child, Rect relativePosition, DragEdge edge, int surfaceLeft,
 			int surfaceTop, int surfaceRight, int surfaceBottom) {
 		if (mShowEntirely.get(child))
 			return false;
@@ -371,9 +357,8 @@ public class SwipeLayout extends FrameLayout {
 		return r;
 	}
 
-	protected boolean isViewShowing(View child, Rect relativePosition,
-			DragEdge availableEdge, int surfaceLeft, int surfaceTop,
-			int surfaceRight, int surfaceBottom) {
+	protected boolean isViewShowing(View child, Rect relativePosition, DragEdge availableEdge, int surfaceLeft,
+			int surfaceTop, int surfaceRight, int surfaceBottom) {
 		int childLeft = relativePosition.left;
 		int childRight = relativePosition.right;
 		int childTop = relativePosition.top;
@@ -408,13 +393,11 @@ public class SwipeLayout extends FrameLayout {
 					return true;
 				break;
 			case Left:
-				if (childRight >= getPaddingLeft()
-						&& childLeft < getPaddingLeft())
+				if (childRight >= getPaddingLeft() && childLeft < getPaddingLeft())
 					return true;
 				break;
 			case Top:
-				if (childTop < getPaddingTop()
-						&& childBottom >= getPaddingTop())
+				if (childTop < getPaddingTop() && childBottom >= getPaddingTop())
 					return true;
 				break;
 			case Bottom:
@@ -453,8 +436,7 @@ public class SwipeLayout extends FrameLayout {
 
 		if (mSwipeListeners.isEmpty() == false) {
 			for (SwipeListener l : mSwipeListeners) {
-				l.onUpdate(SwipeLayout.this, surfaceLeft - getPaddingLeft(),
-						surfaceTop - getPaddingTop());
+				l.onUpdate(SwipeLayout.this, surfaceLeft - getPaddingLeft(), surfaceTop - getPaddingTop());
 			}
 
 			if (getOpenStatus() == Status.Close) {
@@ -486,17 +468,14 @@ public class SwipeLayout extends FrameLayout {
 		}
 	}
 
-	protected void dispatchRevealEvent(final int surfaceLeft,
-			final int surfaceTop, final int surfaceRight,
+	protected void dispatchRevealEvent(final int surfaceLeft, final int surfaceTop, final int surfaceRight,
 			final int surfaceBottom) {
 		if (mRevealListeners.isEmpty())
 			return;
-		for (Map.Entry<View, ArrayList<OnRevealListener>> entry : mRevealListeners
-				.entrySet()) {
+		for (Map.Entry<View, ArrayList<OnRevealListener>> entry : mRevealListeners.entrySet()) {
 			View child = entry.getKey();
 			Rect rect = getRelativePosition(child);
-			if (isViewShowing(child, rect, mDragEdge, surfaceLeft, surfaceTop,
-					surfaceRight, surfaceBottom)) {
+			if (isViewShowing(child, rect, mDragEdge, surfaceLeft, surfaceTop, surfaceRight, surfaceBottom)) {
 				mShowEntirely.put(child, false);
 				int distance = 0;
 				float fraction = 0f;
@@ -548,12 +527,11 @@ public class SwipeLayout extends FrameLayout {
 				}
 			}
 
-			if (isViewTotallyFirstShowed(child, rect, mDragEdge, surfaceLeft,
-					surfaceTop, surfaceRight, surfaceBottom)) {
+			if (isViewTotallyFirstShowed(child, rect, mDragEdge, surfaceLeft, surfaceTop, surfaceRight,
+					surfaceBottom)) {
 				mShowEntirely.put(child, true);
 				for (OnRevealListener l : entry.getValue()) {
-					if (mDragEdge == DragEdge.Left
-							|| mDragEdge == DragEdge.Right)
+					if (mDragEdge == DragEdge.Left || mDragEdge == DragEdge.Right)
 						l.onReveal(child, mDragEdge, 1, child.getWidth());
 					else
 						l.onReveal(child, mDragEdge, 1, child.getHeight());
@@ -595,10 +573,8 @@ public class SwipeLayout extends FrameLayout {
 		if (childCount != 2) {
 			throw new IllegalStateException("You need 2  views in SwipeLayout");
 		}
-		if (!(getChildAt(0) instanceof ViewGroup)
-				|| !(getChildAt(1) instanceof ViewGroup)) {
-			throw new IllegalArgumentException(
-					"The 2 children in SwipeLayout must be an instance of ViewGroup");
+		if (!(getChildAt(0) instanceof ViewGroup) || !(getChildAt(1) instanceof ViewGroup)) {
+			throw new IllegalArgumentException("The 2 children in SwipeLayout must be an instance of ViewGroup");
 		}
 
 		if (mShowMode == ShowMode.PullOut)
@@ -744,8 +720,7 @@ public class SwipeLayout extends FrameLayout {
 		return true;
 	}
 
-	private GestureDetector gestureDetector = new GestureDetector(getContext(),
-			new SwipeDetector());
+	private GestureDetector gestureDetector = new GestureDetector(getContext(), new SwipeDetector());
 
 	class SwipeDetector extends GestureDetector.SimpleOnGestureListener {
 		@Override
@@ -768,14 +743,9 @@ public class SwipeLayout extends FrameLayout {
 			ViewParent t = getParent();
 			while (t != null) {
 				if (t instanceof AdapterView) {
-					int p = ((AdapterView) t)
-							.getPositionForView(SwipeLayout.this);
-					if (p != AdapterView.INVALID_POSITION
-							&& ((AdapterView) t)
-									.performItemClick(((AdapterView) t)
-											.getChildAt(p), p,
-											((AdapterView) t).getAdapter()
-													.getItemId(p)))
+					int p = ((AdapterView) t).getPositionForView(SwipeLayout.this);
+					if (p != AdapterView.INVALID_POSITION && ((AdapterView) t).performItemClick(
+							((AdapterView) t).getChildAt(p), p, ((AdapterView) t).getAdapter().getItemId(p)))
 						return true;
 				} else {
 					if (t instanceof View && ((View) t).performClick())
@@ -859,10 +829,8 @@ public class SwipeLayout extends FrameLayout {
 		if (surfaceLeft == getPaddingLeft() && surfaceTop == getPaddingTop())
 			return Status.Close;
 
-		if (surfaceLeft == (getPaddingLeft() - mDragDistance)
-				|| surfaceLeft == (getPaddingLeft() + mDragDistance)
-				|| surfaceTop == (getPaddingTop() - mDragDistance)
-				|| surfaceTop == (getPaddingTop() + mDragDistance))
+		if (surfaceLeft == (getPaddingLeft() - mDragDistance) || surfaceLeft == (getPaddingLeft() + mDragDistance)
+				|| surfaceTop == (getPaddingTop() - mDragDistance) || surfaceTop == (getPaddingTop() + mDragDistance))
 			return Status.Open;
 
 		return Status.Middle;
@@ -985,16 +953,12 @@ public class SwipeLayout extends FrameLayout {
 	public void open(boolean smooth) {
 		Rect rect = computeSurfaceLayoutArea(true);
 		if (smooth) {
-			mDragHelper
-					.smoothSlideViewTo(getSurfaceView(), rect.left, rect.top);
+			mDragHelper.smoothSlideViewTo(getSurfaceView(), rect.left, rect.top);
 		} else {
-			getSurfaceView().layout(rect.left, rect.top, rect.right,
-					rect.bottom);
+			getSurfaceView().layout(rect.left, rect.top, rect.right, rect.bottom);
 			if (getShowMode() == ShowMode.PullOut) {
-				Rect bRect = computeBottomLayoutAreaViaSurface(
-						ShowMode.PullOut, rect);
-				getBottomView().layout(bRect.left, bRect.top, bRect.right,
-						bRect.bottom);
+				Rect bRect = computeBottomLayoutAreaViaSurface(ShowMode.PullOut, rect);
+				getBottomView().layout(bRect.left, bRect.top, bRect.right, bRect.bottom);
 			}
 			dispatchRevealEvent(rect.left, rect.top, rect.right, rect.bottom);
 			dispatchSwipeEvent(rect.left, rect.top);
@@ -1017,12 +981,10 @@ public class SwipeLayout extends FrameLayout {
 	 */
 	public void close(boolean smooth) {
 		if (smooth)
-			mDragHelper.smoothSlideViewTo(getSurfaceView(), getPaddingLeft(),
-					getPaddingTop());
+			mDragHelper.smoothSlideViewTo(getSurfaceView(), getPaddingLeft(), getPaddingTop());
 		else {
 			Rect rect = computeSurfaceLayoutArea(false);
-			getSurfaceView().layout(rect.left, rect.top, rect.right,
-					rect.bottom);
+			getSurfaceView().layout(rect.left, rect.top, rect.right, rect.bottom);
 			dispatchRevealEvent(rect.left, rect.top, rect.right, rect.bottom);
 			dispatchSwipeEvent(rect.left, rect.top);
 		}
@@ -1062,8 +1024,7 @@ public class SwipeLayout extends FrameLayout {
 		return new Rect(l, t, l + getMeasuredWidth(), t + getMeasuredHeight());
 	}
 
-	private Rect computeBottomLayoutAreaViaSurface(ShowMode mode,
-			Rect surfaceArea) {
+	private Rect computeBottomLayoutAreaViaSurface(ShowMode mode, Rect surfaceArea) {
 		Rect rect = surfaceArea;
 
 		int bl = rect.left, bt = rect.top, br = rect.right, bb = rect.bottom;
@@ -1118,7 +1079,6 @@ public class SwipeLayout extends FrameLayout {
 	}
 
 	private int dp2px(float dp) {
-		return (int) (dp
-				* getContext().getResources().getDisplayMetrics().density + 0.5f);
+		return (int) (dp * getContext().getResources().getDisplayMetrics().density + 0.5f);
 	}
 }

@@ -61,13 +61,10 @@ public class CircleImageView extends ImageView {
 		super(context, attrs, defStyle);
 		super.setScaleType(SCALE_TYPE);
 
-		TypedArray a = context.obtainStyledAttributes(attrs,
-				R.styleable.CircleImageView, defStyle, 0);
+		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyle, 0);
 
-		mBorderWidth = a.getDimensionPixelSize(
-				R.styleable.CircleImageView_border_width, DEFAULT_BORDER_WIDTH);
-		mBorderColor = a.getColor(R.styleable.CircleImageView_border_color,
-				DEFAULT_BORDER_COLOR);
+		mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_border_width, DEFAULT_BORDER_WIDTH);
+		mBorderColor = a.getColor(R.styleable.CircleImageView_border_color, DEFAULT_BORDER_COLOR);
 
 		a.recycle();
 
@@ -87,8 +84,7 @@ public class CircleImageView extends ImageView {
 	@Override
 	public void setScaleType(ScaleType scaleType) {
 		if (scaleType != SCALE_TYPE) {
-			throw new IllegalArgumentException(String.format(
-					"ScaleType %s not supported.", scaleType));
+			throw new IllegalArgumentException(String.format("ScaleType %s not supported.", scaleType));
 		}
 	}
 
@@ -98,10 +94,8 @@ public class CircleImageView extends ImageView {
 			return;
 		}
 
-		canvas.drawCircle(getWidth() / 2, getHeight() / 2, mDrawableRadius,
-				mBitmapPaint);
-		canvas.drawCircle(getWidth() / 2, getHeight() / 2, mBorderRadius,
-				mBorderPaint);
+		canvas.drawCircle(getWidth() / 2, getHeight() / 2, mDrawableRadius, mBitmapPaint);
+		canvas.drawCircle(getWidth() / 2, getHeight() / 2, mBorderRadius, mBorderPaint);
 	}
 
 	@Override
@@ -171,11 +165,10 @@ public class CircleImageView extends ImageView {
 			Bitmap bitmap;
 
 			if (drawable instanceof ColorDrawable) {
-				bitmap = Bitmap.createBitmap(COLORDRAWABLE_DIMENSION,
-						COLORDRAWABLE_DIMENSION, BITMAP_CONFIG);
+				bitmap = Bitmap.createBitmap(COLORDRAWABLE_DIMENSION, COLORDRAWABLE_DIMENSION, BITMAP_CONFIG);
 			} else {
-				bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
-						drawable.getIntrinsicHeight(), BITMAP_CONFIG);
+				bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(),
+						BITMAP_CONFIG);
 			}
 
 			Canvas canvas = new Canvas(bitmap);
@@ -197,8 +190,7 @@ public class CircleImageView extends ImageView {
 			return;
 		}
 
-		mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP,
-				Shader.TileMode.CLAMP);
+		mBitmapShader = new BitmapShader(mBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 
 		mBitmapPaint.setAntiAlias(true);
 		mBitmapPaint.setShader(mBitmapShader);
@@ -212,13 +204,11 @@ public class CircleImageView extends ImageView {
 		mBitmapWidth = mBitmap.getWidth();
 
 		mBorderRect.set(0, 0, getWidth(), getHeight());
-		mBorderRadius = Math.min((mBorderRect.height() - mBorderWidth) / 2,
-				(mBorderRect.width() - mBorderWidth) / 2);
+		mBorderRadius = Math.min((mBorderRect.height() - mBorderWidth) / 2, (mBorderRect.width() - mBorderWidth) / 2);
 
-		mDrawableRect.set(mBorderWidth, mBorderWidth, mBorderRect.width()
-				- mBorderWidth, mBorderRect.height() - mBorderWidth);
-		mDrawableRadius = Math.min(mDrawableRect.height() / 2,
-				mDrawableRect.width() / 2);
+		mDrawableRect.set(mBorderWidth, mBorderWidth, mBorderRect.width() - mBorderWidth,
+				mBorderRect.height() - mBorderWidth);
+		mDrawableRadius = Math.min(mDrawableRect.height() / 2, mDrawableRect.width() / 2);
 
 		updateShaderMatrix();
 		invalidate();
@@ -231,8 +221,7 @@ public class CircleImageView extends ImageView {
 
 		mShaderMatrix.set(null);
 
-		if (mBitmapWidth * mDrawableRect.height() > mDrawableRect.width()
-				* mBitmapHeight) {
+		if (mBitmapWidth * mDrawableRect.height() > mDrawableRect.width() * mBitmapHeight) {
 			scale = mDrawableRect.height() / (float) mBitmapHeight;
 			dx = (mDrawableRect.width() - mBitmapWidth * scale) * 0.5f;
 		} else {
@@ -241,8 +230,7 @@ public class CircleImageView extends ImageView {
 		}
 
 		mShaderMatrix.setScale(scale, scale);
-		mShaderMatrix.postTranslate((int) (dx + 0.5f) + mBorderWidth,
-				(int) (dy + 0.5f) + mBorderWidth);
+		mShaderMatrix.postTranslate((int) (dx + 0.5f) + mBorderWidth, (int) (dy + 0.5f) + mBorderWidth);
 
 		mBitmapShader.setLocalMatrix(mShaderMatrix);
 	}

@@ -33,7 +33,7 @@ public class TransparentFragment extends Fragment{
 		}
 		return mMainView;
 	}
-	
+
 	class ItemOnClick implements OnClickListener {
 
 		@Override

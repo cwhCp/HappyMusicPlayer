@@ -56,8 +56,7 @@ public class KscLyricsParser {
 		String dataLine = "";
 		try {
 			FileInputStream stream = new FileInputStream(kscFile);
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					stream, "GB2312"));
+			BufferedReader br = new BufferedReader(new InputStreamReader(stream, "GB2312"));
 			int index = 0;
 			while ((dataLine = br.readLine()) != null) {
 				if (dataLine.startsWith(LEGAL_SONGNAME_PREFIX)) {
@@ -76,8 +75,7 @@ public class KscLyricsParser {
 
 					int left = LEGAL_LYRICS_LINE_PREFIX.length() + 1;
 					int right = dataLine.length();
-					String[] dataLineComment = dataLine.substring(left + 2,
-							right - 3).split("', '");
+					String[] dataLineComment = dataLine.substring(left + 2, right - 3).split("', '");
 
 					// 获取开始时间
 					info.setStartTimeStr(dataLineComment[0]);
@@ -118,12 +116,10 @@ public class KscLyricsParser {
 					info.setLyricsWords(lyricsWords);
 
 					// 获取每个歌词的时间
-					String wordsDisIntervalStr[] = dataLineComment[3]
-							.split(",");
+					String wordsDisIntervalStr[] = dataLineComment[3].split(",");
 					int[] wordsDisInterval = new int[wordsDisIntervalStr.length];
 					for (int i = 0; i < wordsDisIntervalStr.length; i++) {
-						wordsDisInterval[i] = Integer
-								.parseInt(wordsDisIntervalStr[i]);
+						wordsDisInterval[i] = Integer.parseInt(wordsDisIntervalStr[i]);
 					}
 					info.setWordsDisInterval(wordsDisInterval);
 
@@ -304,18 +300,15 @@ public class KscLyricsParser {
 	 */
 	public int getLineNumberFromCurPlayingTime(int msec) {
 		for (int i = 0; i < lyricsLineTreeMap.size(); i++) {
-			if (msec >= lyricsLineTreeMap.get(i).getStartTime()
-					&& msec <= lyricsLineTreeMap.get(i).getEndTime()) {
+			if (msec >= lyricsLineTreeMap.get(i).getStartTime() && msec <= lyricsLineTreeMap.get(i).getEndTime()) {
 				return i;
 			}
-			if (msec > lyricsLineTreeMap.get(i).getEndTime()
-					&& i + 1 < lyricsLineTreeMap.size()
+			if (msec > lyricsLineTreeMap.get(i).getEndTime() && i + 1 < lyricsLineTreeMap.size()
 					&& msec < lyricsLineTreeMap.get(i + 1).getStartTime()) {
 				return i;
 			}
 		}
-		if (msec >= lyricsLineTreeMap.get(lyricsLineTreeMap.size() - 1)
-				.getEndTime()) {
+		if (msec >= lyricsLineTreeMap.get(lyricsLineTreeMap.size() - 1).getEndTime()) {
 			return lyricsLineTreeMap.size() - 1;
 		}
 		return -1;
@@ -376,8 +369,7 @@ public class KscLyricsParser {
 	 *            要上下移动的总距离
 	 * @return 要上下移动的距离
 	 */
-	public float getOffsetDYFromCurPlayingTime(int lyricsLineNum, int msec,
-			int sy) {
+	public float getOffsetDYFromCurPlayingTime(int lyricsLineNum, int msec, int sy) {
 		if (lyricsLineNum == -1)
 			return sy;
 		KscLyricsLineInfo lyrLine = lyricsLineTreeMap.get(lyricsLineNum);
@@ -408,8 +400,7 @@ public class KscLyricsParser {
 	 *            上下移动的总长度
 	 * @return 需要移动的距离
 	 */
-	public float getoffsetYFromCurPlayingTime(int lyricsLineNum, int msec,
-			float height) {
+	public float getoffsetYFromCurPlayingTime(int lyricsLineNum, int msec, float height) {
 		if (lyricsLineNum == -1)
 			return 0;
 		KscLyricsLineInfo lyrLine = lyricsLineTreeMap.get(lyricsLineNum);
@@ -445,8 +436,7 @@ public class KscLyricsParser {
 		return lyricsLineTreeMap;
 	}
 
-	public void setLyricsLineTreeMap(
-			TreeMap<Integer, KscLyricsLineInfo> lyricsLineTreeMap) {
+	public void setLyricsLineTreeMap(TreeMap<Integer, KscLyricsLineInfo> lyricsLineTreeMap) {
 		this.lyricsLineTreeMap = lyricsLineTreeMap;
 	}
 

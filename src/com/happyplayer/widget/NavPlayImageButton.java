@@ -70,8 +70,8 @@ public class NavPlayImageButton extends ImageButton implements Observer {
 			if (pressedBitmap == null) {
 				baseBitmap = BitmapFactory.decodeResource(getResources(),
 						R.drawable.kg_btn_navigation_localmusic_play_pressed);
-				pressedBitmap = Bitmap.createBitmap(baseBitmap.getWidth(),
-						baseBitmap.getHeight(), baseBitmap.getConfig());
+				pressedBitmap = Bitmap.createBitmap(baseBitmap.getWidth(), baseBitmap.getHeight(),
+						baseBitmap.getConfig());
 				pCanvas = new Canvas(pressedBitmap);
 
 				int color = Constants.BLACK_GROUND[Constants.DEF_COLOR_INDEX];
@@ -81,9 +81,8 @@ public class NavPlayImageButton extends ImageButton implements Observer {
 				float progressA = Color.alpha(color) / 255f;
 
 				// 根据SeekBar定义RGBA的矩阵
-				float[] src = new float[] { progressR, 0, 0, 0, 0, 0,
-						progressG, 0, 0, 0, 0, 0, progressB, 0, 0, 0, 0, 0,
-						progressA, 0 };
+				float[] src = new float[] { progressR, 0, 0, 0, 0, 0, progressG, 0, 0, 0, 0, 0, progressB, 0, 0, 0, 0,
+						0, progressA, 0 };
 				// 定义ColorMatrix，并指定RGBA矩阵
 				ColorMatrix colorMatrix = new ColorMatrix();
 				colorMatrix.set(src);
@@ -99,8 +98,7 @@ public class NavPlayImageButton extends ImageButton implements Observer {
 			if (defBitmap == null) {
 				baseBitmap = BitmapFactory.decodeResource(getResources(),
 						R.drawable.kg_btn_navigation_localmusic_play_default);
-				defBitmap = Bitmap.createBitmap(baseBitmap.getWidth(),
-						baseBitmap.getHeight(), baseBitmap.getConfig());
+				defBitmap = Bitmap.createBitmap(baseBitmap.getWidth(), baseBitmap.getHeight(), baseBitmap.getConfig());
 				pCanvas = new Canvas(defBitmap);
 
 				int color = Constants.BLACK_GROUND[Constants.DEF_COLOR_INDEX];
@@ -110,9 +108,8 @@ public class NavPlayImageButton extends ImageButton implements Observer {
 				float progressA = Color.alpha(color) / 255f;
 
 				// 根据SeekBar定义RGBA的矩阵
-				float[] src = new float[] { progressR, 0, 0, 0, 0, 0,
-						progressG, 0, 0, 0, 0, 0, progressB, 0, 0, 0, 0, 0,
-						progressA, 0 };
+				float[] src = new float[] { progressR, 0, 0, 0, 0, 0, progressG, 0, 0, 0, 0, 0, progressB, 0, 0, 0, 0,
+						0, progressA, 0 };
 				// 定义ColorMatrix，并指定RGBA矩阵
 				ColorMatrix colorMatrix = new ColorMatrix();
 				colorMatrix.set(src);

@@ -219,8 +219,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 					protected Object doInBackground() throws Exception {
 
-						DataUtil.save(MainActivity.this,
-								Constants.DESLRCMOVE_KEY, Constants.DESLRCMOVE);
+						DataUtil.save(MainActivity.this, Constants.DESLRCMOVE_KEY, Constants.DESLRCMOVE);
 						return null;
 					}
 				}.execute();
@@ -237,44 +236,36 @@ public class MainActivity extends FragmentActivity implements Observer {
 			case 0:
 				// 自定义界面
 				if (mRemoteViews == null) {
-					mRemoteViews = new RemoteViews(getPackageName(),
-							R.layout.notify_view);
+					mRemoteViews = new RemoteViews(getPackageName(), R.layout.notify_view);
 				}
 
 				Intent buttoncloseIntent = new Intent("close");
-				PendingIntent pendcloseButtonIntent = PendingIntent
-						.getBroadcast(MainActivity.this, 0, buttoncloseIntent,
-								0);
+				PendingIntent pendcloseButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0,
+						buttoncloseIntent, 0);
 
-				mRemoteViews.setOnClickPendingIntent(R.id.close,
-						pendcloseButtonIntent);
+				mRemoteViews.setOnClickPendingIntent(R.id.close, pendcloseButtonIntent);
 
 				Intent buttonplayIntent = new Intent("play");
-				PendingIntent pendplayButtonIntent = PendingIntent
-						.getBroadcast(MainActivity.this, 0, buttonplayIntent, 0);
+				PendingIntent pendplayButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0, buttonplayIntent,
+						0);
 
-				mRemoteViews.setOnClickPendingIntent(R.id.play,
-						pendplayButtonIntent);
+				mRemoteViews.setOnClickPendingIntent(R.id.play, pendplayButtonIntent);
 
 				Intent buttonpauseIntent = new Intent("pause");
-				PendingIntent pendpauseButtonIntent = PendingIntent
-						.getBroadcast(MainActivity.this, 0, buttonpauseIntent,
-								0);
+				PendingIntent pendpauseButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0,
+						buttonpauseIntent, 0);
 
 				Intent buttonnextIntent = new Intent("next");
-				PendingIntent pendnextButtonIntent = PendingIntent
-						.getBroadcast(MainActivity.this, 0, buttonnextIntent, 0);
+				PendingIntent pendnextButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0, buttonnextIntent,
+						0);
 
-				mRemoteViews.setOnClickPendingIntent(R.id.next,
-						pendnextButtonIntent);
+				mRemoteViews.setOnClickPendingIntent(R.id.next, pendnextButtonIntent);
 
 				Intent buttonprewtIntent = new Intent("prew");
-				PendingIntent pendprewButtonIntent = PendingIntent
-						.getBroadcast(MainActivity.this, 0, buttonprewtIntent,
-								0);
+				PendingIntent pendprewButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0, buttonprewtIntent,
+						0);
 
-				mRemoteViews.setOnClickPendingIntent(R.id.prew,
-						pendprewButtonIntent);
+				mRemoteViews.setOnClickPendingIntent(R.id.prew, pendprewButtonIntent);
 
 				SongMessage songMessage = (SongMessage) msg.obj;
 				final SongInfo songInfo = songMessage.getSongInfo();
@@ -283,13 +274,10 @@ public class MainActivity extends FragmentActivity implements Observer {
 					switch (songMessage.getType()) {
 					case SongMessage.INIT:
 
-						mRemoteViews.setTextViewText(R.id.songName,
-								songInfo.getDisplayName());
+						mRemoteViews.setTextViewText(R.id.songName, songInfo.getDisplayName());
 
-						mRemoteViews.setImageViewResource(R.id.play,
-								R.drawable.statusbar_btn_play);
-						mRemoteViews.setOnClickPendingIntent(R.id.play,
-								pendplayButtonIntent);
+						mRemoteViews.setImageViewResource(R.id.play, R.drawable.statusbar_btn_play);
+						mRemoteViews.setOnClickPendingIntent(R.id.play, pendplayButtonIntent);
 
 						// // 本地歌曲
 						// if (songInfo.getType() == SongInfo.LOCAL) {
@@ -305,53 +293,42 @@ public class MainActivity extends FragmentActivity implements Observer {
 						// } else {
 						// // 网上下载歌曲
 						// }
-						Bitmap bm = ImageUtil.getAlbum(MainActivity.this,
-								songInfo.getPath(), songInfo.getSid(),
+						Bitmap bm = ImageUtil.getAlbum(MainActivity.this, songInfo.getPath(), songInfo.getSid(),
 								songInfo.getDownUrl(), "");
 						if (bm != null) {
 							mRemoteViews.setImageViewBitmap(R.id.icon_pic, bm);// 显示专辑封面图片
 						} else {
-							mRemoteViews.setImageViewResource(R.id.icon_pic,
-									R.drawable.ic_launcher);// 显示专辑封面图片
+							mRemoteViews.setImageViewResource(R.id.icon_pic, R.drawable.ic_launcher);// 显示专辑封面图片
 						}
 						break;
 					case SongMessage.LASTPLAYFINISH:
 
 						mRemoteViews.setTextViewText(R.id.songName, "歌名");
-						mRemoteViews.setImageViewResource(R.id.play,
-								R.drawable.statusbar_btn_play);
-						mRemoteViews.setOnClickPendingIntent(R.id.play,
-								pendplayButtonIntent);
+						mRemoteViews.setImageViewResource(R.id.play, R.drawable.statusbar_btn_play);
+						mRemoteViews.setOnClickPendingIntent(R.id.play, pendplayButtonIntent);
 
 						break;
 					case SongMessage.PLAY:
 
-						mRemoteViews.setImageViewResource(R.id.play,
-								R.drawable.statusbar_btn_pause);
-						mRemoteViews.setOnClickPendingIntent(R.id.play,
-								pendpauseButtonIntent);
+						mRemoteViews.setImageViewResource(R.id.play, R.drawable.statusbar_btn_pause);
+						mRemoteViews.setOnClickPendingIntent(R.id.play, pendpauseButtonIntent);
 
 						break;
 					case SongMessage.STOPING:
 
-						mRemoteViews.setImageViewResource(R.id.play,
-								R.drawable.statusbar_btn_play);
-						mRemoteViews.setOnClickPendingIntent(R.id.play,
-								pendplayButtonIntent);
+						mRemoteViews.setImageViewResource(R.id.play, R.drawable.statusbar_btn_play);
+						mRemoteViews.setOnClickPendingIntent(R.id.play, pendplayButtonIntent);
 
 						break;
 
 					case SongMessage.ERROR:
 						mRemoteViews.setTextViewText(R.id.songName, "歌名");
-						mRemoteViews.setImageViewResource(R.id.play,
-								R.drawable.statusbar_btn_play);
-						mRemoteViews.setOnClickPendingIntent(R.id.play,
-								pendplayButtonIntent);
+						mRemoteViews.setImageViewResource(R.id.play, R.drawable.statusbar_btn_play);
+						mRemoteViews.setOnClickPendingIntent(R.id.play, pendplayButtonIntent);
 						break;
 					}
 				} else {
-					mRemoteViews.setImageViewResource(R.id.icon_pic,
-							R.drawable.ic_launcher);// 显示专辑封面图片
+					mRemoteViews.setImageViewResource(R.id.icon_pic, R.drawable.ic_launcher);// 显示专辑封面图片
 				}
 
 				mNotification.contentView = mRemoteViews;
@@ -364,23 +341,18 @@ public class MainActivity extends FragmentActivity implements Observer {
 			case 1:
 				if (notifyLrcView == null) {
 					// 自定义界面
-					notifyLrcView = new RemoteViews(getPackageName(),
-							R.layout.notify_lrc_view);
+					notifyLrcView = new RemoteViews(getPackageName(), R.layout.notify_lrc_view);
 				}
 				Intent lrcMoveIntent = new Intent("lrcMove");
-				PendingIntent pendlrcMoveIntent = PendingIntent.getBroadcast(
-						MainActivity.this, 0, lrcMoveIntent, 0);
+				PendingIntent pendlrcMoveIntent = PendingIntent.getBroadcast(MainActivity.this, 0, lrcMoveIntent, 0);
 
-				notifyLrcView.setOnClickPendingIntent(R.id.bg,
-						pendlrcMoveIntent);
+				notifyLrcView.setOnClickPendingIntent(R.id.bg, pendlrcMoveIntent);
 				if (Constants.DESLRCMOVE) {
-					notifyLrcView.setImageViewResource(R.id.lrc_pic,
-							R.drawable.minilyric_desktop_unlocked);
+					notifyLrcView.setImageViewResource(R.id.lrc_pic, R.drawable.minilyric_desktop_unlocked);
 					notifyLrcView.setTextViewText(R.id.title1, "点击解锁桌面歌词");
 					notifyLrcView.setTextViewText(R.id.title2, "桌面歌词已解锁");
 				} else {
-					notifyLrcView.setImageViewResource(R.id.lrc_pic,
-							R.drawable.minilyric_desktop_lock);
+					notifyLrcView.setImageViewResource(R.id.lrc_pic, R.drawable.minilyric_desktop_lock);
 					notifyLrcView.setTextViewText(R.id.title1, "点击解锁桌面歌词");
 					notifyLrcView.setTextViewText(R.id.title2, "桌面歌词已锁定");
 				}
@@ -438,10 +410,8 @@ public class MainActivity extends FragmentActivity implements Observer {
 				// // 网上下载歌曲
 				// }
 
-				ImageUtil.loadAlbum(MainActivity.this, singerPicImageView,
-						R.drawable.playing_bar_default_avatar,
-						songInfo.getPath(), songInfo.getSid(),
-						songInfo.getDownUrl());
+				ImageUtil.loadAlbum(MainActivity.this, singerPicImageView, R.drawable.playing_bar_default_avatar,
+						songInfo.getPath(), songInfo.getSid(), songInfo.getDownUrl());
 
 				// pauseImageButton.setVisibility(View.INVISIBLE);
 				// playImageButton.setVisibility(View.VISIBLE);
@@ -451,8 +421,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 				seekBar.setEnabled(true);
 				seekBar.setMax((int) songInfo.getDuration());
 				seekBar.setProgress((int) songInfo.getPlayProgress());
-				timeTextView.setText("-"
-						+ MediaUtils.formatTime(songInfo.getSurplusProgress()));
+				timeTextView.setText("-" + MediaUtils.formatTime(songInfo.getSurplusProgress()));
 
 				initKscLyrics(songInfo);
 				initArtistAlbum(songInfo, true);
@@ -469,10 +438,8 @@ public class MainActivity extends FragmentActivity implements Observer {
 				seekBar.setProgress((int) songInfo.getPlayProgress());
 				timeTextView.setText("-00:00");
 
-				Bitmap bm = MediaUtils.getDefaultArtwork(MainActivity.this,
-						false);
-				singerPicImageView
-						.setBackgroundDrawable(new BitmapDrawable(bm));// 显示专辑封面图片
+				Bitmap bm = MediaUtils.getDefaultArtwork(MainActivity.this, false);
+				singerPicImageView.setBackgroundDrawable(new BitmapDrawable(bm));// 显示专辑封面图片
 
 				initKscLyrics(songInfo);
 
@@ -492,11 +459,8 @@ public class MainActivity extends FragmentActivity implements Observer {
 				if (!isStartTrackingTouch) {
 					seekBar.setProgress((int) songInfo.getPlayProgress());
 
-					timeTextView
-							.setText("-"
-									+ MediaUtils.formatTime((int) (songInfo
-											.getDuration() - songInfo
-											.getPlayProgress())));
+					timeTextView.setText(
+							"-" + MediaUtils.formatTime((int) (songInfo.getDuration() - songInfo.getPlayProgress())));
 				}
 
 				if (mMenu.isMenuShowing()) {
@@ -509,8 +473,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 				playImageButton.setVisibility(View.VISIBLE);
 
 				seekBar.setProgress((int) songInfo.getPlayProgress());
-				timeTextView.setText("-"
-						+ MediaUtils.formatTime(songInfo.getSurplusProgress()));
+				timeTextView.setText("-" + MediaUtils.formatTime(songInfo.getSurplusProgress()));
 
 				reshLrcView((int) songInfo.getPlayProgress());
 				break;
@@ -541,8 +504,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 				kscTwoLineLyricsView.init();
 				if (lyricsLineTreeMap.size() != 0) {
 					kscTwoLineLyricsView.setKscLyricsParser(kscLyricsParser);
-					kscTwoLineLyricsView
-							.setLyricsLineTreeMap(lyricsLineTreeMap);
+					kscTwoLineLyricsView.setLyricsLineTreeMap(lyricsLineTreeMap);
 					kscTwoLineLyricsView.setBlLrc(true);
 					kscTwoLineLyricsView.invalidate();
 				} else {
@@ -554,8 +516,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 			@Override
 			protected Object doInBackground() throws Exception {
 
-				return KscLyricsManamge.getKscLyricsParser(songInfo
-						.getDisplayName());
+				return KscLyricsManamge.getKscLyricsParser(songInfo.getDisplayName());
 			}
 		}.execute();
 	}
@@ -569,17 +530,16 @@ public class MainActivity extends FragmentActivity implements Observer {
 	 */
 	private void initArtistAlbum(SongInfo songInfo, boolean isLoadImage) {
 		imageHandler.removeCallbacks(myRunnable);
-		
+
 		SkinMessage msg = new SkinMessage();
 		msg.type = SkinMessage.PIC;
 		ObserverManage.getObserver().setMessage(msg);
-		
+
 		if (isLoadImage) {
 			artistList = new ArrayList<SkinMessage>();
 			String artist = songInfo.getArtist();
 			// 从本地文件夹里查找图片
-			File artFile = new File(Constants.PATH_ARTIST + File.separator
-					+ artist);
+			File artFile = new File(Constants.PATH_ARTIST + File.separator + artist);
 			if (!artFile.exists()) {
 				artFile.mkdirs();
 				loadNetPic(artist);
@@ -605,8 +565,8 @@ public class MainActivity extends FragmentActivity implements Observer {
 			int index = new Random().nextInt(length);
 
 			ObserverManage.getObserver().setMessage(artistList.get(index));
-			
-			imageHandler.postDelayed(this, 1000* 30);
+
+			imageHandler.postDelayed(this, 1000 * 30);
 		}
 	};
 
@@ -667,8 +627,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 			@Override
 			protected Object doInBackground() throws Exception {
-				return ArtistAlbumJson.getArtistAlbum(artist,
-						MainActivity.this, 4);
+				return ArtistAlbumJson.getArtistAlbum(artist, MainActivity.this, 4);
 			}
 		}.execute();
 	}
@@ -681,19 +640,16 @@ public class MainActivity extends FragmentActivity implements Observer {
 		Constants.APPCLOSE = true;
 
 		if (EasytouchService.isServiceRunning) {
-			Intent easytouchServiceIntent = new Intent(MainActivity.this,
-					EasytouchService.class);
+			Intent easytouchServiceIntent = new Intent(MainActivity.this, EasytouchService.class);
 			stopService(easytouchServiceIntent);
 		}
 		if (FloatLrcService.isServiceRunning) {
-			Intent floatLrcServiceIntent = new Intent(MainActivity.this,
-					FloatLrcService.class);
+			Intent floatLrcServiceIntent = new Intent(MainActivity.this, FloatLrcService.class);
 			stopService(floatLrcServiceIntent);
 		}
 
 		if (LockService.isServiceRunning) {
-			Intent lockServiceIntent = new Intent(MainActivity.this,
-					LockService.class);
+			Intent lockServiceIntent = new Intent(MainActivity.this, LockService.class);
 			stopService(lockServiceIntent);
 		}
 
@@ -706,8 +662,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 		this.unregisterReceiver(mSystemReceiver);
 
 		// this.unregisterReceiver(phoneReceiver);
-		ComponentName name = new ComponentName(this.getPackageName(),
-				PhoneReceiver.class.getName());
+		ComponentName name = new ComponentName(this.getPackageName(), PhoneReceiver.class.getName());
 		mAudioManager.unregisterMediaButtonEventReceiver(name);
 
 		// TelephonyManager tmgr = (TelephonyManager)
@@ -743,8 +698,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mainView = LayoutInflater.from(this).inflate(R.layout.activity_main,
-				null);
+		mainView = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
 		setContentView(mainView);
 		init();
 		createNotifiView();
@@ -754,14 +708,12 @@ public class MainActivity extends FragmentActivity implements Observer {
 			createNotifiLrcView();
 
 		if (Constants.SHOWEASYTOUCH) {
-			Intent easytouchServiceIntent = new Intent(this,
-					EasytouchService.class);
+			Intent easytouchServiceIntent = new Intent(this, EasytouchService.class);
 			startService(easytouchServiceIntent);
 		}
 
 		if (Constants.SHOWDESLRC) {
-			Intent floatLrcServiceIntent = new Intent(this,
-					FloatLrcService.class);
+			Intent floatLrcServiceIntent = new Intent(this, FloatLrcService.class);
 			startService(floatLrcServiceIntent);
 		}
 
@@ -795,14 +747,12 @@ public class MainActivity extends FragmentActivity implements Observer {
 		// phoneFilter.setPriority(2147483647);
 		// this.registerReceiver(phoneReceiver, phoneFilter);
 
-		ComponentName name = new ComponentName(this.getPackageName(),
-				PhoneReceiver.class.getName());
+		ComponentName name = new ComponentName(this.getPackageName(), PhoneReceiver.class.getName());
 		mAudioManager.registerMediaButtonEventReceiver(name);
 
 		// 添加来电监听事件
 		TelephonyManager telManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE); // 获取系统服务
-		telManager.listen(new MobliePhoneStateListener(),
-				PhoneStateListener.LISTEN_CALL_STATE);
+		telManager.listen(new MobliePhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);
 	}
 
 	private void init() {
@@ -813,8 +763,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 		action = new MainPageAction();
 		fragmentList.add(new MyFragment(action));
 
-		tabFragmentPagerAdapter = new TabFragmentPagerAdapter(
-				getSupportFragmentManager());
+		tabFragmentPagerAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
 		viewPager.setAdapter(tabFragmentPagerAdapter);
 
 		viewPager.setCurrentItem(0);
@@ -830,8 +779,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 		mMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		mMenu.setTouchModeAbove(SlidingMenu.SLIDING_CONTENT);
 
-		View centMenu = LayoutInflater.from(this).inflate(R.layout.cent_menu,
-				null, false);
+		View centMenu = LayoutInflater.from(this).inflate(R.layout.cent_menu, null, false);
 		flagImageView = (ImageView) centMenu.findViewById(R.id.flag);
 		timeTextView = (TextView) centMenu.findViewById(R.id.time);
 		timeTextView.setVisibility(View.INVISIBLE);
@@ -854,8 +802,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 			}
 		});
 
-		pauseImageButton = (ImageButton) centMenu
-				.findViewById(R.id.pause_buttom);
+		pauseImageButton = (ImageButton) centMenu.findViewById(R.id.pause_buttom);
 		pauseImageButton.setVisibility(View.INVISIBLE);
 
 		pauseImageButton.setOnClickListener(new OnClickListener() {
@@ -895,30 +842,26 @@ public class MainActivity extends FragmentActivity implements Observer {
 				int[] location = new int[2];
 				mMenu.getLocationOnScreen(location);
 
-				mPopupWindow.showAtLocation(mMenu, Gravity.NO_GRAVITY,
-						location[0], location[1] - mPopupWindow.getHeight());
+				mPopupWindow.showAtLocation(mMenu, Gravity.NO_GRAVITY, location[0],
+						location[1] - mPopupWindow.getHeight());
 			}
 		});
 
 		mMenu.setContent(centMenu);
 
-		View left_Menu = LayoutInflater.from(this).inflate(R.layout.left_menu,
-				null, false);
+		View left_Menu = LayoutInflater.from(this).inflate(R.layout.left_menu, null, false);
 
-		kscTwoLineLyricsView = (KscTwoLineLyricsView) left_Menu
-				.findViewById(R.id.kscTwoLineLyricsView);
+		kscTwoLineLyricsView = (KscTwoLineLyricsView) left_Menu.findViewById(R.id.kscTwoLineLyricsView);
 
 		mMenu.setMenu(left_Menu);
 		mMenu.setOnOpenedListener(new OnOpenedListener() {
 
 			@Override
 			public void onOpened() {
-				flagImageView
-						.setBackgroundResource(R.drawable.kg_ic_playing_bar_drag_opened);
+				flagImageView.setBackgroundResource(R.drawable.kg_ic_playing_bar_drag_opened);
 				timeTextView.setVisibility(View.VISIBLE);
 				Constants.BAR_LRC_IS_OPEN = true;
-				DataUtil.save(MainActivity.this, Constants.BAR_LRC_IS_OPEN_KEY,
-						Constants.BAR_LRC_IS_OPEN);
+				DataUtil.save(MainActivity.this, Constants.BAR_LRC_IS_OPEN_KEY, Constants.BAR_LRC_IS_OPEN);
 			}
 		});
 
@@ -926,13 +869,11 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 			@Override
 			public void onClosed() {
-				flagImageView
-						.setBackgroundResource(R.drawable.kg_ic_playing_bar_drag_closed);
+				flagImageView.setBackgroundResource(R.drawable.kg_ic_playing_bar_drag_closed);
 				timeTextView.setVisibility(View.INVISIBLE);
 
 				Constants.BAR_LRC_IS_OPEN = false;
-				DataUtil.save(MainActivity.this, Constants.BAR_LRC_IS_OPEN_KEY,
-						Constants.BAR_LRC_IS_OPEN);
+				DataUtil.save(MainActivity.this, Constants.BAR_LRC_IS_OPEN_KEY, Constants.BAR_LRC_IS_OPEN);
 			}
 		});
 
@@ -948,8 +889,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 					int progress = seekBar.getProgress();
 					// System.out.println("onProgressChanged :--->" + progress);
 					// 往弹出窗口传输相关的进度
-					seekBar.popupWindowShow(progress, mMenu,
-							kscTwoLineLyricsView.getTimeLrc(progress));
+					seekBar.popupWindowShow(progress, mMenu, kscTwoLineLyricsView.getTimeLrc(progress));
 				}
 			}
 
@@ -958,8 +898,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 				int progress = seekBar.getProgress();
 				// System.out.println("onStartTrackingTouch :--->" + progress);
 				// 拖动条开始拖动的时候调用
-				seekBar.popupWindowShow(progress, mMenu,
-						kscTwoLineLyricsView.getTimeLrc(progress));
+				seekBar.popupWindowShow(progress, mMenu, kscTwoLineLyricsView.getTimeLrc(progress));
 				isStartTrackingTouch = true;
 			}
 
@@ -995,18 +934,15 @@ public class MainActivity extends FragmentActivity implements Observer {
 		} else {
 			initPopuptWindow();
 
-			List<SongInfo> playlist = MediaManage.getMediaManage(
-					MainActivity.this).getPlaylist();
+			List<SongInfo> playlist = MediaManage.getMediaManage(MainActivity.this).getPlaylist();
 
 			popPlaysumTextTextView.setText("播放列表(" + playlist.size() + ")");
 
-			adapter = new PopupPlayListAdapter(MainActivity.this, playlist,
-					popPlayListView, mPopupWindow);
+			adapter = new PopupPlayListAdapter(MainActivity.this, playlist, popPlayListView, mPopupWindow);
 
 			popPlayListView.setAdapter(adapter);
 
-			int playIndex = MediaManage.getMediaManage(MainActivity.this)
-					.getPlayIndex();
+			int playIndex = MediaManage.getMediaManage(MainActivity.this).getPlayIndex();
 			if (playIndex != -1) {
 				popPlayListView.setSelection(playIndex);
 			}
@@ -1018,12 +954,10 @@ public class MainActivity extends FragmentActivity implements Observer {
 	 */
 	private void initPopuptWindow() {
 		LayoutInflater layoutInflater = LayoutInflater.from(this);
-		final View popupWindow = layoutInflater.inflate(
-				R.layout.popup_main_playlist, null);
+		final View popupWindow = layoutInflater.inflate(R.layout.popup_main_playlist, null);
 
 		mPopupWindow = new PopupWindow(popupWindow, LayoutParams.FILL_PARENT,
-				getWindowManager().getDefaultDisplay().getHeight()
-						- mMenu.getHeight() - 50, true);
+				getWindowManager().getDefaultDisplay().getHeight() - mMenu.getHeight() - 50, true);
 
 		// 实例化一个ColorDrawable颜色为半透明
 		ColorDrawable dw = new ColorDrawable(0xb0000000);
@@ -1039,8 +973,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// int bottomHeight = mMenu.getTop();
-				int topHeight = popupWindow.findViewById(R.id.pop_layout)
-						.getTop();
+				int topHeight = popupWindow.findViewById(R.id.pop_layout).getTop();
 				int y = (int) event.getY();
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					// y > bottomHeight ||
@@ -1064,18 +997,15 @@ public class MainActivity extends FragmentActivity implements Observer {
 		/**
 		 * 顺序播放
 		 */
-		final ImageView modeALLImageButton = (ImageView) popupWindow
-				.findViewById(R.id.mode_all_buttom);
+		final ImageView modeALLImageButton = (ImageView) popupWindow.findViewById(R.id.mode_all_buttom);
 		/**
 		 * 随机播放
 		 */
-		final ImageView modeRandomImageButton = (ImageView) popupWindow
-				.findViewById(R.id.mode_random_buttom);
+		final ImageView modeRandomImageButton = (ImageView) popupWindow.findViewById(R.id.mode_random_buttom);
 		/**
 		 * 单曲循环
 		 */
-		final ImageView modeSingleImageButton = (ImageView) popupWindow
-				.findViewById(R.id.mode_single_buttom);
+		final ImageView modeSingleImageButton = (ImageView) popupWindow.findViewById(R.id.mode_single_buttom);
 
 		modeALLImageButton.setOnClickListener(new OnClickListener() {
 
@@ -1085,12 +1015,10 @@ public class MainActivity extends FragmentActivity implements Observer {
 				modeALLImageButton.setVisibility(View.INVISIBLE);
 				modeRandomImageButton.setVisibility(View.VISIBLE);
 				modeSingleImageButton.setVisibility(View.INVISIBLE);
-				Toast.makeText(MainActivity.this, "随机播放", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(MainActivity.this, "随机播放", Toast.LENGTH_SHORT).show();
 
 				Constants.PLAY_MODE = 2;
-				DataUtil.save(MainActivity.this, Constants.PLAY_MODE_KEY,
-						Constants.PLAY_MODE);
+				DataUtil.save(MainActivity.this, Constants.PLAY_MODE_KEY, Constants.PLAY_MODE);
 			}
 		});
 
@@ -1102,12 +1030,10 @@ public class MainActivity extends FragmentActivity implements Observer {
 				modeALLImageButton.setVisibility(View.INVISIBLE);
 				modeRandomImageButton.setVisibility(View.INVISIBLE);
 				modeSingleImageButton.setVisibility(View.VISIBLE);
-				Toast.makeText(MainActivity.this, "单曲循环", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(MainActivity.this, "单曲循环", Toast.LENGTH_SHORT).show();
 
 				Constants.PLAY_MODE = 0;
-				DataUtil.save(MainActivity.this, Constants.PLAY_MODE_KEY,
-						Constants.PLAY_MODE);
+				DataUtil.save(MainActivity.this, Constants.PLAY_MODE_KEY, Constants.PLAY_MODE);
 			}
 		});
 
@@ -1119,12 +1045,10 @@ public class MainActivity extends FragmentActivity implements Observer {
 				modeRandomImageButton.setVisibility(View.INVISIBLE);
 				modeSingleImageButton.setVisibility(View.INVISIBLE);
 
-				Toast.makeText(MainActivity.this, "顺序播放", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(MainActivity.this, "顺序播放", Toast.LENGTH_SHORT).show();
 
 				Constants.PLAY_MODE = 1;
-				DataUtil.save(MainActivity.this, Constants.PLAY_MODE_KEY,
-						Constants.PLAY_MODE);
+				DataUtil.save(MainActivity.this, Constants.PLAY_MODE_KEY, Constants.PLAY_MODE);
 			}
 		});
 
@@ -1147,8 +1071,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 			break;
 		}
 
-		ImageView deleList = (ImageView) popupWindow
-				.findViewById(R.id.dele_list);
+		ImageView deleList = (ImageView) popupWindow.findViewById(R.id.dele_list);
 		deleList.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -1159,11 +1082,9 @@ public class MainActivity extends FragmentActivity implements Observer {
 			}
 		});
 
-		popPlayListView = (ListView) popupWindow
-				.findViewById(R.id.playlistView);
+		popPlayListView = (ListView) popupWindow.findViewById(R.id.playlistView);
 
-		popPlaysumTextTextView = (TextView) popupWindow
-				.findViewById(R.id.playsumText);
+		popPlaysumTextTextView = (TextView) popupWindow.findViewById(R.id.playsumText);
 	}
 
 	private void createNotifiView() {
@@ -1199,12 +1120,10 @@ public class MainActivity extends FragmentActivity implements Observer {
 		Intent intent = new Intent(Intent.ACTION_MAIN);
 		intent.addCategory(Intent.CATEGORY_LAUNCHER);
 		intent.setClass(MainActivity.this, MainActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-				| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 
-		PendingIntent pendingIntent = PendingIntent
-				.getActivity(MainActivity.this, 0, intent,
-						PendingIntent.FLAG_CANCEL_CURRENT);
+		PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent,
+				PendingIntent.FLAG_CANCEL_CURRENT);
 		mNotification.contentIntent = pendingIntent;
 
 		SongMessage songMessage = new SongMessage();
@@ -1229,13 +1148,11 @@ public class MainActivity extends FragmentActivity implements Observer {
 				logger.i("SCREEN_OFF");
 				SCREEN_OFF = true;
 				if (FloatLrcService.isServiceRunning) {
-					stopService(new Intent(MainActivity.this,
-							FloatLrcService.class));
+					stopService(new Intent(MainActivity.this, FloatLrcService.class));
 				}
 
 				if (EasytouchService.isServiceRunning) {
-					stopService(new Intent(MainActivity.this,
-							EasytouchService.class));
+					stopService(new Intent(MainActivity.this, EasytouchService.class));
 				}
 
 				// if (LockService.isServiceRunning) {
@@ -1255,13 +1172,10 @@ public class MainActivity extends FragmentActivity implements Observer {
 				// .getSystemService(Context.KEYGUARD_SERVICE);
 				// if (km.inKeyguardRestrictedInputMode()) {
 
-				int status = MediaManage.getMediaManage(context)
-						.getPlayStatus();
+				int status = MediaManage.getMediaManage(context).getPlayStatus();
 
-				if (!ShowLockActivity.active && status == MediaManage.PLAYING
-						&& Constants.SHOWLOCK) {
-					Intent lockIntent = new Intent(MainActivity.this,
-							ShowLockActivity.class);
+				if (!ShowLockActivity.active && status == MediaManage.PLAYING && Constants.SHOWLOCK) {
+					Intent lockIntent = new Intent(MainActivity.this, ShowLockActivity.class);
 					lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 					startActivity(lockIntent);
@@ -1271,24 +1185,19 @@ public class MainActivity extends FragmentActivity implements Observer {
 				logger.i("SCREEN_ON");
 				SCREEN_OFF = false;
 				if (!FloatLrcService.isServiceRunning) {
-					startService(new Intent(MainActivity.this,
-							FloatLrcService.class));
+					startService(new Intent(MainActivity.this, FloatLrcService.class));
 				}
 				if (!EasytouchService.isServiceRunning) {
-					startService(new Intent(MainActivity.this,
-							EasytouchService.class));
+					startService(new Intent(MainActivity.this, EasytouchService.class));
 				}
 
 				// KeyguardManager km = (KeyguardManager) context
 				// .getSystemService(Context.KEYGUARD_SERVICE);
 				// if (km.inKeyguardRestrictedInputMode()) {
-				int status = MediaManage.getMediaManage(context)
-						.getPlayStatus();
+				int status = MediaManage.getMediaManage(context).getPlayStatus();
 
-				if (!ShowLockActivity.active && status == MediaManage.PLAYING
-						&& Constants.SHOWLOCK) {
-					Intent lockIntent = new Intent(MainActivity.this,
-							ShowLockActivity.class);
+				if (!ShowLockActivity.active && status == MediaManage.PLAYING && Constants.SHOWLOCK) {
+					Intent lockIntent = new Intent(MainActivity.this, ShowLockActivity.class);
 					lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 					startActivity(lockIntent);
@@ -1440,8 +1349,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 		}
 
 		private void fastPrevious(int dProgress) {
-			SongInfo tempSongInfo = MediaManage.getMediaManage(
-					MainActivity.this).getPlaySongInfo();
+			SongInfo tempSongInfo = MediaManage.getMediaManage(MainActivity.this).getPlaySongInfo();
 			if (tempSongInfo != null) {
 				long progress = tempSongInfo.getPlayProgress();
 				long minProgress = 0;
@@ -1458,8 +1366,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 		}
 
 		private void fastNext(int dProgress) {
-			SongInfo tempSongInfo = MediaManage.getMediaManage(
-					MainActivity.this).getPlaySongInfo();
+			SongInfo tempSongInfo = MediaManage.getMediaManage(MainActivity.this).getPlaySongInfo();
 			if (tempSongInfo != null) {
 				long progress = tempSongInfo.getPlayProgress();
 				long maxProgress = tempSongInfo.getDuration();
@@ -1554,8 +1461,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 	}
 
 	private void setBackground() {
-		viewPager
-				.setBackgroundResource(Constants.PICIDS[Constants.DEF_PIC_INDEX]);
+		viewPager.setBackgroundResource(Constants.PICIDS[Constants.DEF_PIC_INDEX]);
 	}
 
 	/**
@@ -1579,8 +1485,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 				// tabFragmentPagerAdapter.removeFragment(fragmentList.get(1));
 				fragmentList.remove(1);
 				// tabFragmentPagerAdapter.notifyDataSetChanged();
-				tabFragmentPagerAdapter = new TabFragmentPagerAdapter(
-						getSupportFragmentManager());
+				tabFragmentPagerAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
 				viewPager.setAdapter(tabFragmentPagerAdapter);
 			}
 		}
@@ -1675,8 +1580,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
 			if (TAB_INDEX == 0) {
 				if ((System.currentTimeMillis() - mExitTime) > 2000) {
-					Toast.makeText(this, R.string.exit_tip, Toast.LENGTH_SHORT)
-							.show();
+					Toast.makeText(this, R.string.exit_tip, Toast.LENGTH_SHORT).show();
 					mExitTime = System.currentTimeMillis();
 				} else {
 					close();
@@ -1762,8 +1666,8 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 				int[] location = new int[2];
 				mMenu.getLocationOnScreen(location);
-				volumePopupWindow.showAtLocation(mMenu, Gravity.NO_GRAVITY,
-						location[0], location[1] - mMenu.getHeight());
+				volumePopupWindow.showAtLocation(mMenu, Gravity.NO_GRAVITY, location[0],
+						location[1] - mMenu.getHeight());
 
 				mVolumeHandler.sendEmptyMessage(0);
 
@@ -1781,8 +1685,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 		@Override
 		public void handleMessage(Message msg) {
-			int currentVolume = mAudioManager
-					.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
+			int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
 			volumeSizeSeekBar.setProgress(currentVolume);
 		}
 
@@ -1819,8 +1722,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_MUTE",
 					// Toast.LENGTH_SHORT).show();
 
-					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0,
-							0);
+					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
 					getVolumePopupWindowInstance();
 					return true;
 
@@ -1828,15 +1730,13 @@ public class MainActivity extends FragmentActivity implements Observer {
 					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_DOWN",
 					// Toast.LENGTH_SHORT).show();
 
-					int currentVolume = mAudioManager
-							.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
+					int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
 					currentVolume = currentVolume - 1;
 					if (currentVolume <= 0) {
 						currentVolume = 0;
 					}
 
-					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-							currentVolume, 0);
+					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
 
 					getVolumePopupWindowInstance();
 
@@ -1845,17 +1745,14 @@ public class MainActivity extends FragmentActivity implements Observer {
 				} else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
 					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_UP",
 					// Toast.LENGTH_SHORT).show();
-					int max = mAudioManager
-							.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 3 * 2;
-					int currentVolume = mAudioManager
-							.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
+					int max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 3 * 2;
+					int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
 					currentVolume = currentVolume + 1;
 					if (currentVolume >= max) {
 						currentVolume = max;
 					}
 
-					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-							currentVolume, 0);
+					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
 
 					getVolumePopupWindowInstance();
 					return true;
@@ -1867,8 +1764,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 		});
 
-		volumeSizeSeekBar = (HBaseSeekBar) popupWindow
-				.findViewById(R.id.volumeSizeSeekBar);
+		volumeSizeSeekBar = (HBaseSeekBar) popupWindow.findViewById(R.id.volumeSizeSeekBar);
 
 		// 音乐音量
 		int max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 3 * 2;
@@ -1876,31 +1772,26 @@ public class MainActivity extends FragmentActivity implements Observer {
 		volumeSizeSeekBar.setMax(max);
 		volumeSizeSeekBar.setProgress(current);
 
-		volumeSizeSeekBar
-				.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+		volumeSizeSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
-					@Override
-					public void onProgressChanged(SeekBar arg0, int progress,
-							boolean arg2) {
-						volumeEndTime = 2000;
-						mAudioManager.setStreamVolume(
-								AudioManager.STREAM_MUSIC, progress, 0);
-						int currentVolume = mAudioManager
-								.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
-						volumeSizeSeekBar.setProgress(currentVolume);
-					}
+			@Override
+			public void onProgressChanged(SeekBar arg0, int progress, boolean arg2) {
+				volumeEndTime = 2000;
+				mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+				int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
+				volumeSizeSeekBar.setProgress(currentVolume);
+			}
 
-					@Override
-					public void onStartTrackingTouch(SeekBar arg0) {
-					}
+			@Override
+			public void onStartTrackingTouch(SeekBar arg0) {
+			}
 
-					@Override
-					public void onStopTrackingTouch(SeekBar arg0) {
-					}
-				});
+			@Override
+			public void onStopTrackingTouch(SeekBar arg0) {
+			}
+		});
 
-		volumePopupWindow = new PopupWindow(popupWindow,
-				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, true);
+		volumePopupWindow = new PopupWindow(popupWindow, LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, true);
 		// 实例化一个ColorDrawable颜色为半透明
 		ColorDrawable dw = new ColorDrawable(0xb0000000);
 		// 设置SelectPicPopupWindow弹出窗体的背景
@@ -1910,8 +1801,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 		int[] location = new int[2];
 		mMenu.getLocationOnScreen(location);
-		volumePopupWindow.showAtLocation(mMenu, Gravity.NO_GRAVITY,
-				location[0], location[1] - mMenu.getHeight());
+		volumePopupWindow.showAtLocation(mMenu, Gravity.NO_GRAVITY, location[0], location[1] - mMenu.getHeight());
 
 		if (volumeEndTime < 0) {
 			volumeEndTime = 2000;
@@ -1964,17 +1854,14 @@ public class MainActivity extends FragmentActivity implements Observer {
 			}
 		} else if (data instanceof SongMessage) {
 			SongMessage songMessage = (SongMessage) data;
-			if (songMessage.getType() == SongMessage.INIT
-					|| songMessage.getType() == SongMessage.PLAY
-					|| songMessage.getType() == SongMessage.PLAYING
-					|| songMessage.getType() == SongMessage.STOPING
+			if (songMessage.getType() == SongMessage.INIT || songMessage.getType() == SongMessage.PLAY
+					|| songMessage.getType() == SongMessage.PLAYING || songMessage.getType() == SongMessage.STOPING
 					|| songMessage.getType() == SongMessage.ERROR
 					|| songMessage.getType() == SongMessage.LASTPLAYFINISH) {
 				Message msg = new Message();
 				msg.obj = songMessage;
 				songHandler.sendMessage(msg);
-				if (songMessage.getType() == SongMessage.INIT
-						|| songMessage.getType() == SongMessage.PLAY
+				if (songMessage.getType() == SongMessage.INIT || songMessage.getType() == SongMessage.PLAY
 						|| songMessage.getType() == SongMessage.STOPING
 						|| songMessage.getType() == SongMessage.LASTPLAYFINISH) {
 					Message msg2 = new Message();
@@ -2010,21 +1897,18 @@ public class MainActivity extends FragmentActivity implements Observer {
 		@Override
 		public void handleMessage(Message msg) {
 			if (null != mPopupWindow) {
-				List<SongInfo> playlist = MediaManage.getMediaManage(
-						MainActivity.this).getPlaylist();
+				List<SongInfo> playlist = MediaManage.getMediaManage(MainActivity.this).getPlaylist();
 				popPlaysumTextTextView.setText("播放列表(" + playlist.size() + ")");
 
 				if (msg.what == 1) {
 					if (adapter != null) {
 						ObserverManage.getObserver().deleteObserver(adapter);
 					}
-					adapter = new PopupPlayListAdapter(MainActivity.this,
-							playlist, popPlayListView, mPopupWindow);
+					adapter = new PopupPlayListAdapter(MainActivity.this, playlist, popPlayListView, mPopupWindow);
 
 					popPlayListView.setAdapter(adapter);
 
-					int playIndex = MediaManage.getMediaManage(
-							MainActivity.this).getPlayIndex();
+					int playIndex = MediaManage.getMediaManage(MainActivity.this).getPlayIndex();
 					if (playIndex != -1) {
 						popPlayListView.setSelection(playIndex);
 					}

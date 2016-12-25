@@ -3,7 +3,6 @@ package com.happyplayer.util;
 import java.util.LinkedList;
 import java.util.List;
 
-
 import android.app.Activity;
 
 /**

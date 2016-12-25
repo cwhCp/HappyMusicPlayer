@@ -26,8 +26,7 @@ public class ArtistAlbumJson {
 	 *            获取的张数
 	 * @return
 	 */
-	public static List<SkinMessage> getArtistAlbum(String artist, Context context,
-			int num) {
+	public static List<SkinMessage> getArtistAlbum(String artist, Context context, int num) {
 		List<SkinMessage> msgList = new ArrayList<SkinMessage>();
 		String responseText = HttpUtil.getArtistAlbum(artist);
 		JSONObject jsonb;
@@ -42,8 +41,7 @@ public class ArtistAlbumJson {
 						String json = jsonb.getString("comment");
 						JSONObject jsonComment = new JSONObject(json);
 						if (jsonComment.has("list")) {
-							JSONArray listArray = jsonComment
-									.getJSONArray("list");
+							JSONArray listArray = jsonComment.getJSONArray("list");
 							int length = 0;
 							if (listArray.length() < num) {
 								length = listArray.length();
@@ -51,11 +49,9 @@ public class ArtistAlbumJson {
 								length = num;
 							}
 							for (int i = 0; i < length; i++) {
-								JSONObject jSONObject = listArray
-										.getJSONObject(i);
+								JSONObject jSONObject = listArray.getJSONObject(i);
 								if (jSONObject.has("thumb_bak")) {
-									String thumb_bak = jSONObject
-											.getString("thumb_bak");
+									String thumb_bak = jSONObject.getString("thumb_bak");
 									SkinMessage skinMessage = new SkinMessage();
 									skinMessage.setUrl(thumb_bak);
 									skinMessage.type = SkinMessage.ART;
@@ -68,8 +64,7 @@ public class ArtistAlbumJson {
 					break;
 
 				case 404:
-					Toast.makeText(context, "获取歌手图片出错!!", Toast.LENGTH_SHORT)
-							.show();
+					Toast.makeText(context, "获取歌手图片出错!!", Toast.LENGTH_SHORT).show();
 					break;
 				}
 			}

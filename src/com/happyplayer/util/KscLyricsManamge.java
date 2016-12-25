@@ -19,8 +19,7 @@ public class KscLyricsManamge {
 		if (kscLyricsParsers.containsKey(fileName)) {
 			kscLyricsParser = kscLyricsParsers.get(fileName);
 		} else {
-			kscLyricsParser = new KscLyricsParser(Constants.PATH_KSC + "/"
-					+ fileName + ".ksc");
+			kscLyricsParser = new KscLyricsParser(Constants.PATH_KSC + "/" + fileName + ".ksc");
 		}
 
 		return kscLyricsParser;

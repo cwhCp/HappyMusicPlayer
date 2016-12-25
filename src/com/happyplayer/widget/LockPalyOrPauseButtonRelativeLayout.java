@@ -21,14 +21,12 @@ public class LockPalyOrPauseButtonRelativeLayout extends RelativeLayout {
 	private int maxProgress = 0;
 	private int playingProgress = 0;
 
-	public LockPalyOrPauseButtonRelativeLayout(Context context,
-			AttributeSet attrs, int defStyle) {
+	public LockPalyOrPauseButtonRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context);
 	}
 
-	public LockPalyOrPauseButtonRelativeLayout(Context context,
-			AttributeSet attrs) {
+	public LockPalyOrPauseButtonRelativeLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
 	}
@@ -83,9 +81,7 @@ public class LockPalyOrPauseButtonRelativeLayout extends RelativeLayout {
 				oval.top = (getHeight() / 2 - r);
 				oval.right = getWidth() / 2 + r;
 				oval.bottom = getHeight() / 2 + r;
-				canvas.drawArc(oval, -90,
-						((float) playingProgress / maxProgress) * 360, false,
-						progressPaint);
+				canvas.drawArc(oval, -90, ((float) playingProgress / maxProgress) * 360, false, progressPaint);
 			}
 
 		}

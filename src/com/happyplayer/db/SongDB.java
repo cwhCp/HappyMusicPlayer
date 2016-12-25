@@ -27,13 +27,10 @@ public class SongDB {
 	/**
 	 * 建表语句
 	 */
-	public static final String CREATE_TBL = "create table " + TBL_NAME + "("
-			+ "sid text," + "id int," + "title text," + "album text,"
-			+ "albumId long," + "displayName text," + "artist text,"
-			+ "duration long," + "size long," + "sizeStr text," + "path text,"
-			+ "type int," + "albumUrl text," + "downUrl text,"
-			+ "downSize long," + "playProgress long," + "category text,"
-			+ "valid int," + "createTime text," + "childCategory text" + ")";
+	public static final String CREATE_TBL = "create table " + TBL_NAME + "(" + "sid text," + "id int," + "title text,"
+			+ "album text," + "albumId long," + "displayName text," + "artist text," + "duration long," + "size long,"
+			+ "sizeStr text," + "path text," + "type int," + "albumUrl text," + "downUrl text," + "downSize long,"
+			+ "playProgress long," + "category text," + "valid int," + "createTime text," + "childCategory text" + ")";
 
 	private static SongDB _SongInfoDB;
 
@@ -79,8 +76,7 @@ public class SongDB {
 		values.put("downUrl", songInfo.getDownUrl());
 		values.put("downSize", songInfo.getDownSize());
 		values.put("playProgress", songInfo.getPlayProgress());
-		String category = PingYinUtil.getPingYin(songInfo.getDisplayName())
-				.toUpperCase();
+		String category = PingYinUtil.getPingYin(songInfo.getDisplayName()).toUpperCase();
 		char cat = category.charAt(0);
 		if (cat <= 'Z' && cat >= 'A') {
 			values.put("category", cat + "");
@@ -141,8 +137,7 @@ public class SongDB {
 	 */
 	public Cursor query() {
 		db = mDBHlper.getReadableDatabase();
-		Cursor c = db.query(TBL_NAME, null, null, null, null, null,
-				"category asc , childCategory asc");
+		Cursor c = db.query(TBL_NAME, null, null, null, null, null, "category asc , childCategory asc");
 		return c;
 	}
 
@@ -175,9 +170,8 @@ public class SongDB {
 	public List<String> getAllCategory() {
 		List<String> list = new ArrayList<String>();
 		db = mDBHlper.getReadableDatabase();
-		Cursor cursor = db.query(true, TBL_NAME, new String[] { "category" },
-				null, null, null, null, "category asc , childCategory asc",
-				null);
+		Cursor cursor = db.query(true, TBL_NAME, new String[] { "category" }, null, null, null, null,
+				"category asc , childCategory asc", null);
 		while (cursor.moveToNext()) {
 			list.add(cursor.getString(cursor.getColumnIndex("category")));
 		}
@@ -198,9 +192,8 @@ public class SongDB {
 	public List<SongInfo> getAllCategorySong(String category) {
 		List<SongInfo> list = new ArrayList<SongInfo>();
 		db = mDBHlper.getReadableDatabase();
-		Cursor cursor = db.query(TBL_NAME, null, "category= ?",
-				new String[] { category }, null, null, "childCategory asc",
-				null);
+		Cursor cursor = db.query(TBL_NAME, null, "category= ?", new String[] { category }, null, null,
+				"childCategory asc", null);
 		while (cursor.moveToNext()) {
 			SongInfo songInfo = getSongInfo(cursor);
 			File file = new File(songInfo.getPath());
@@ -242,8 +235,7 @@ public class SongDB {
 		song.setTitle(cursor.getString(cursor.getColumnIndex("title")));
 		song.setAlbum(cursor.getString(cursor.getColumnIndex("album")));
 		song.setAlbumId(cursor.getLong(cursor.getColumnIndex("albumId")));
-		song.setDisplayName(cursor.getString(cursor
-				.getColumnIndex("displayName")));
+		song.setDisplayName(cursor.getString(cursor.getColumnIndex("displayName")));
 		song.setArtist(cursor.getString(cursor.getColumnIndex("artist")));
 		song.setDuration(cursor.getInt(cursor.getColumnIndex("duration")));
 		song.setSize(cursor.getLong(cursor.getColumnIndex("size")));
@@ -254,11 +246,9 @@ public class SongDB {
 		song.setAlbumUrl(cursor.getString(cursor.getColumnIndex("albumUrl")));
 		song.setDownUrl(cursor.getString(cursor.getColumnIndex("downUrl")));
 		song.setDownSize(cursor.getLong(cursor.getColumnIndex("downSize")));
-		song.setPlayProgress(cursor.getLong(cursor
-				.getColumnIndex("playProgress")));
+		song.setPlayProgress(cursor.getLong(cursor.getColumnIndex("playProgress")));
 		song.setCategory(cursor.getString(cursor.getColumnIndex("category")));
-		song.setChildCategory(cursor.getString(cursor
-				.getColumnIndex("childCategory")));
+		song.setChildCategory(cursor.getString(cursor.getColumnIndex("childCategory")));
 		song.setValid(cursor.getInt(cursor.getColumnIndex("valid")));
 
 		return song;
@@ -279,8 +269,7 @@ public class SongDB {
 		// 第五个参数String:对查询的结果进行分组
 		// 第六个参数String：对分组的结果进行限制
 		// 第七个参数String：对查询的结果进行排序
-		Cursor cursor = db.rawQuery("select * from " + TBL_NAME
-				+ " where sid=?", new String[] { sid + "" });
+		Cursor cursor = db.rawQuery("select * from " + TBL_NAME + " where sid=?", new String[] { sid + "" });
 		if (!cursor.moveToNext()) {
 			return null;
 		}
@@ -338,8 +327,8 @@ public class SongDB {
 		// 第五个参数String:对查询的结果进行分组
 		// 第六个参数String：对分组的结果进行限制
 		// 第七个参数String：对查询的结果进行排序
-		Cursor cursor = db.query(TBL_NAME, new String[] { "displayName" },
-				" displayName=?", new String[] { fileName }, null, null, null);
+		Cursor cursor = db.query(TBL_NAME, new String[] { "displayName" }, " displayName=?", new String[] { fileName },
+				null, null, null);
 		if (!cursor.moveToNext()) {
 			cursor.close();
 			return false;

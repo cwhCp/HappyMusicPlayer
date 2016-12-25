@@ -116,8 +116,7 @@ public class EasytouchService extends Service implements Observer {
 		width = wm.getDefaultDisplay().getWidth();
 		height = wm.getDefaultDisplay().getHeight();
 
-		stateHeight = Math
-				.ceil(25 * context.getResources().getDisplayMetrics().density);
+		stateHeight = Math.ceil(25 * context.getResources().getDisplayMetrics().density);
 
 		// 设置LayoutParams(全局变量）相关参数
 		iconParams = new WindowManager.LayoutParams();
@@ -130,8 +129,7 @@ public class EasytouchService extends Service implements Observer {
 		iconParams.x = Constants.ICON_VIEWX;
 		iconParams.y = Constants.ICON_VIEWY;
 
-		iconView = LayoutInflater.from(context).inflate(R.layout.magic_main,
-				null, false);
+		iconView = LayoutInflater.from(context).inflate(R.layout.magic_main, null, false);
 
 		singerPicImageView = (ImageView) iconView.findViewById(R.id.singer_pic);
 
@@ -139,16 +137,14 @@ public class EasytouchService extends Service implements Observer {
 
 		songNameTextView = (TextView) iconView.findViewById(R.id.song_name);
 
-		playingStatus = (StopImageView) iconView
-				.findViewById(R.id.playing_status);
+		playingStatus = (StopImageView) iconView.findViewById(R.id.playing_status);
 
 		// 设置悬浮窗口长宽数据
 		iconParams.width = 140;
 		iconParams.height = 140;
 
 		iconParams.alpha = 0.6f;
-		iconView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-				LayoutParams.FILL_PARENT));
+		iconView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
 		iconView.setOnTouchListener(new View.OnTouchListener() {
 
@@ -186,18 +182,15 @@ public class EasytouchService extends Service implements Observer {
 							if (endRawX > endRawY) {
 								updateIconViewPosition(endRawX, 0);
 							} else if (endRawX > height - event.getRawY() - 140) {
-								updateIconViewPosition(endRawX, (float) (height
-										- stateHeight - 140));
+								updateIconViewPosition(endRawX, (float) (height - stateHeight - 140));
 							} else {
 								updateIconViewPosition(0, endRawY);
 							}
 						} else {
 							if (width - endRawX - 140 > endRawY) {
 								updateIconViewPosition(endRawX, 0);
-							} else if (width - endRawX - 140 > height
-									- event.getRawY() - 140) {
-								updateIconViewPosition(endRawX, (float) (height
-										- stateHeight - 140));
+							} else if (width - endRawX - 140 > height - event.getRawY() - 140) {
+								updateIconViewPosition(endRawX, (float) (height - stateHeight - 140));
 							} else {
 								updateIconViewPosition(width - 140, endRawY);
 							}
@@ -238,8 +231,7 @@ public class EasytouchService extends Service implements Observer {
 		mainParams.height = WindowManager.LayoutParams.MATCH_PARENT;
 		mainParams.gravity = Gravity.LEFT | Gravity.TOP;
 
-		mainView = LayoutInflater.from(context).inflate(R.layout.magic_menu,
-				null);
+		mainView = LayoutInflater.from(context).inflate(R.layout.magic_menu, null);
 
 		wmItemExit = (ImageButton) mainView.findViewById(R.id.wm_item_exit);
 		wmItemPause = (ImageButton) mainView.findViewById(R.id.wm_item_pause);
@@ -250,8 +242,7 @@ public class EasytouchService extends Service implements Observer {
 		wmItemHome = (ImageButton) mainView.findViewById(R.id.wm_item_home);
 		View bgView = mainView.findViewById(R.id.wm_main_bgview);
 
-		final RelativeLayout wmMainLayout = (RelativeLayout) mainView
-				.findViewById(R.id.wm_main_layout);
+		final RelativeLayout wmMainLayout = (RelativeLayout) mainView.findViewById(R.id.wm_main_layout);
 		wmMainLayout.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -330,8 +321,7 @@ public class EasytouchService extends Service implements Observer {
 						Intent intent = new Intent(Intent.ACTION_MAIN);
 						intent.addCategory(Intent.CATEGORY_LAUNCHER);
 						intent.setClass(getBaseContext(), MainActivity.class);
-						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-								| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 
 						getApplication().startActivity(intent);
 						return null;
@@ -349,9 +339,7 @@ public class EasytouchService extends Service implements Observer {
 				int y = (int) event.getY();
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 
-					if (wmMainLayout.getLeft() < x
-							&& x < wmMainLayout.getRight()
-							&& wmMainLayout.getTop() < y
+					if (wmMainLayout.getLeft() < x && x < wmMainLayout.getRight() && wmMainLayout.getTop() < y
 							&& y < wmMainLayout.getBottom()) {
 					} else {
 						EndTime = -200;
@@ -447,10 +435,8 @@ public class EasytouchService extends Service implements Observer {
 				// // 网上下载歌曲
 				// }
 
-				ImageUtil.loadAlbum(context, singerPicImageView,
-						R.drawable.playing_bar_default_avatar,
-						songInfo.getPath(), songInfo.getSid(),
-						songInfo.getDownUrl());
+				ImageUtil.loadAlbum(context, singerPicImageView, R.drawable.playing_bar_default_avatar,
+						songInfo.getPath(), songInfo.getSid(), songInfo.getDownUrl());
 
 				songNameTextView.setText(songInfo.getDisplayName());
 
@@ -491,8 +477,7 @@ public class EasytouchService extends Service implements Observer {
 
 			@Override
 			protected Object doInBackground() throws Exception {
-				SongInfo songInfo = MediaManage.getMediaManage(context)
-						.getPlaySongInfo();
+				SongInfo songInfo = MediaManage.getMediaManage(context).getPlaySongInfo();
 				if (songInfo != null) {
 					Message msg = new Message();
 					msg.what = 1;
@@ -534,8 +519,7 @@ public class EasytouchService extends Service implements Observer {
 
 			@Override
 			protected Object doInBackground() throws Exception {
-				SongInfo songInfo = MediaManage.getMediaManage(context)
-						.getPlaySongInfo();
+				SongInfo songInfo = MediaManage.getMediaManage(context).getPlaySongInfo();
 				if (songInfo != null) {
 					Message msg = new Message();
 					msg.what = 0;
@@ -543,8 +527,7 @@ public class EasytouchService extends Service implements Observer {
 					mHandler.sendMessage(msg);
 				} else {
 					Bitmap bm = MediaUtils.getDefaultArtwork(context, false);
-					singerPicImageView
-							.setBackgroundDrawable(new BitmapDrawable(bm));// 显示专辑封面图片
+					singerPicImageView.setBackgroundDrawable(new BitmapDrawable(bm));// 显示专辑封面图片
 					songNameTextView.setText("");
 					timeTextView.setVisibility(View.INVISIBLE);
 					playingStatus.setVisibility(View.VISIBLE);
@@ -572,10 +555,8 @@ public class EasytouchService extends Service implements Observer {
 				Constants.ICON_VIEWX = iconViewX;
 				Constants.ICON_VIEWY = iconViewY;
 
-				DataUtil.save(context, Constants.ICON_VIEWX_KEY,
-						Constants.ICON_VIEWX);
-				DataUtil.save(context, Constants.ICON_VIEWY_KEY,
-						Constants.ICON_VIEWY);
+				DataUtil.save(context, Constants.ICON_VIEWX_KEY, Constants.ICON_VIEWX);
+				DataUtil.save(context, Constants.ICON_VIEWY_KEY, Constants.ICON_VIEWY);
 				return null;
 			}
 		}.execute();
@@ -674,10 +655,8 @@ public class EasytouchService extends Service implements Observer {
 				// // 网上下载歌曲
 				// }
 
-				ImageUtil.loadAlbum(context, singerPicImageView,
-						R.drawable.playing_bar_default_avatar,
-						songInfo.getPath(), songInfo.getSid(),
-						songInfo.getDownUrl());
+				ImageUtil.loadAlbum(context, singerPicImageView, R.drawable.playing_bar_default_avatar,
+						songInfo.getPath(), songInfo.getSid(), songInfo.getDownUrl());
 
 				songNameTextView.setText(songInfo.getDisplayName());
 
@@ -689,8 +668,7 @@ public class EasytouchService extends Service implements Observer {
 					timeTextView.setVisibility(View.INVISIBLE);
 					playingStatus.setVisibility(View.VISIBLE);
 					Bitmap bm = MediaUtils.getDefaultArtwork(context, false);
-					singerPicImageView
-							.setBackgroundDrawable(new BitmapDrawable(bm));// 显示专辑封面图片
+					singerPicImageView.setBackgroundDrawable(new BitmapDrawable(bm));// 显示专辑封面图片
 				}
 				if (mainViewShow) {
 					wmItemPause.setVisibility(View.INVISIBLE);
@@ -705,9 +683,7 @@ public class EasytouchService extends Service implements Observer {
 					if (playingStatus.getVisibility() != View.INVISIBLE) {
 						playingStatus.setVisibility(View.INVISIBLE);
 					}
-					timeTextView.setText("-"
-							+ MediaUtils.formatTime(songInfo
-									.getSurplusProgress()));
+					timeTextView.setText("-" + MediaUtils.formatTime(songInfo.getSurplusProgress()));
 				}
 				break;
 			case SongMessage.PLAY:
@@ -787,10 +763,8 @@ public class EasytouchService extends Service implements Observer {
 	// }
 
 	public static boolean isBackground(Context context) {
-		ActivityManager activityManager = (ActivityManager) context
-				.getSystemService(Context.ACTIVITY_SERVICE);
-		List<RunningAppProcessInfo> appProcesses = activityManager
-				.getRunningAppProcesses();
+		ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+		List<RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
 		for (RunningAppProcessInfo appProcess : appProcesses) {
 			if (appProcess.processName.equals(context.getPackageName())) {
 				/*
@@ -819,10 +793,8 @@ public class EasytouchService extends Service implements Observer {
 	public void update(Observable arg0, Object data) {
 		if (data instanceof SongMessage) {
 			SongMessage songMessage = (SongMessage) data;
-			if (songMessage.getType() == SongMessage.INIT
-					|| songMessage.getType() == SongMessage.PLAYING
-					|| songMessage.getType() == SongMessage.STOPING
-					|| songMessage.getType() == SongMessage.ERROR
+			if (songMessage.getType() == SongMessage.INIT || songMessage.getType() == SongMessage.PLAYING
+					|| songMessage.getType() == SongMessage.STOPING || songMessage.getType() == SongMessage.ERROR
 					|| songMessage.getType() == SongMessage.LASTPLAYFINISH
 					|| songMessage.getType() == SongMessage.PLAY) {
 				Message msg = new Message();

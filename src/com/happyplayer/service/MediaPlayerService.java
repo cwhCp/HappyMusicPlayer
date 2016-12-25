@@ -93,7 +93,7 @@ public class MediaPlayerService extends Service implements Observer {
 			// AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
 			// 请求播放的音频焦点
 			int result = audioManager.requestAudioFocus(afChangeListener,
-			// 指定所使用的音频流
+					// 指定所使用的音频流
 					AudioManager.STREAM_MUSIC,
 					// 请求长时间的音频焦点
 					AudioManager.AUDIOFOCUS_GAIN);
@@ -256,14 +256,12 @@ public class MediaPlayerService extends Service implements Observer {
 					if (player != null && player.isPlaying()) {
 
 						if (songInfo != null) {
-							songInfo.setPlayProgress(player
-									.getCurrentPosition());
+							songInfo.setPlayProgress(player.getCurrentPosition());
 
 							songMessage = new SongMessage();
 							songMessage.setType(SongMessage.PLAYING);
 							songMessage.setSongInfo(songInfo);
-							ObserverManage.getObserver()
-									.setMessage(songMessage);
+							ObserverManage.getObserver().setMessage(songMessage);
 						}
 					}
 				} catch (InterruptedException e) {
@@ -350,8 +348,7 @@ public class MediaPlayerService extends Service implements Observer {
 							songMessage = new SongMessage();
 							songMessage.setSongInfo(songInfo);
 							songMessage.setType(SongMessage.STOPING);
-							ObserverManage.getObserver()
-									.setMessage(songMessage);
+							ObserverManage.getObserver().setMessage(songMessage);
 						}
 					}
 					player.reset();

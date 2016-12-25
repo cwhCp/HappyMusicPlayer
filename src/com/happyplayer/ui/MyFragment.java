@@ -114,37 +114,30 @@ public class MyFragment extends Fragment implements Observer {
 
 		numTextView = (TextView) mMainView.findViewById(R.id.num);
 
-		scanmusic = (ListViewRelativeLayout) mMainView
-				.findViewById(R.id.scanmusic);
+		scanmusic = (ListViewRelativeLayout) mMainView.findViewById(R.id.scanmusic);
 		scanmusic.setOnClickListener(new ItemOnClick());
 
 		// mylove = (ListViewRelativeLayout)
 		// mMainView.findViewById(R.id.mylove);
 		// mylove.setOnClickListener(new ItemOnClick());
 
-		showLock = (ListViewRelativeLayout) mMainView
-				.findViewById(R.id.showLock);
+		showLock = (ListViewRelativeLayout) mMainView.findViewById(R.id.showLock);
 		showLock.setOnClickListener(new ItemOnClick());
 		showlockCheckBox = (CheckBox) mMainView.findViewById(R.id.lockCheckbox);
 		showlockCheckBox.setChecked(Constants.SHOWLOCK);
 
-		showdesLrc = (ListViewRelativeLayout) mMainView
-				.findViewById(R.id.showdesLrc);
+		showdesLrc = (ListViewRelativeLayout) mMainView.findViewById(R.id.showdesLrc);
 		showdesLrc.setOnClickListener(new ItemOnClick());
 
-		showcheckboxCheckBox = (CheckBox) mMainView
-				.findViewById(R.id.showcheckbox);
+		showcheckboxCheckBox = (CheckBox) mMainView.findViewById(R.id.showcheckbox);
 		showcheckboxCheckBox.setChecked(Constants.SHOWDESLRC);
 
-		showEasyTouch = (ListViewRelativeLayout) mMainView
-				.findViewById(R.id.showEasyTouch);
+		showEasyTouch = (ListViewRelativeLayout) mMainView.findViewById(R.id.showEasyTouch);
 		showEasyTouch.setOnClickListener(new ItemOnClick());
-		showEasyTouchCheckBox = (CheckBox) mMainView
-				.findViewById(R.id.EasyTouchcheckbox);
+		showEasyTouchCheckBox = (CheckBox) mMainView.findViewById(R.id.EasyTouchcheckbox);
 		showEasyTouchCheckBox.setChecked(Constants.SHOWEASYTOUCH);
 
-		skinsetting = (ListViewRelativeLayout) mMainView
-				.findViewById(R.id.skinsetting);
+		skinsetting = (ListViewRelativeLayout) mMainView.findViewById(R.id.skinsetting);
 		skinsetting.setOnClickListener(new ItemOnClick());
 
 		// mydownload = (ListViewRelativeLayout) mMainView
@@ -155,8 +148,7 @@ public class MyFragment extends Fragment implements Observer {
 		// mMainView.findViewById(R.id.setting);
 		// setting.setOnClickListener(new ItemOnClick());
 
-		navPlayImageButton = (NavPlayImageButton) mMainView
-				.findViewById(R.id.navPlayImageButton);
+		navPlayImageButton = (NavPlayImageButton) mMainView.findViewById(R.id.navPlayImageButton);
 		navPlayImageButton.setOnClickListener(new ItemOnClick());
 	}
 
@@ -178,8 +170,7 @@ public class MyFragment extends Fragment implements Observer {
 
 				Thread.sleep(50);
 
-				mCOUNT = MediaManage.getMediaManage(
-						MyFragment.this.getActivity()).getCount();
+				mCOUNT = MediaManage.getMediaManage(MyFragment.this.getActivity()).getCount();
 
 				return null;
 			}
@@ -187,8 +178,7 @@ public class MyFragment extends Fragment implements Observer {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ViewGroup viewGroup = (ViewGroup) mMainView.getParent();
 		if (viewGroup != null) {
 			viewGroup.removeAllViewsInLayout();
@@ -207,15 +197,15 @@ public class MyFragment extends Fragment implements Observer {
 			case R.id.scanmusic:
 				scanmusic();
 				break;
-			case R.id.mylove:
-				mylove();
-				break;
-			case R.id.mydownload:
-				mydownload();
-				break;
-			case R.id.setting:
-				setting();
-				break;
+			// case R.id.mylove:
+			// mylove();
+			// break;
+			// case R.id.mydownload:
+			// mydownload();
+			// break;
+			// case R.id.setting:
+			// setting();
+			// break;
 			case R.id.navPlayImageButton:
 				navPlayImageButton();
 				break;
@@ -250,22 +240,19 @@ public class MyFragment extends Fragment implements Observer {
 			showEasyTouchCheckBox.setChecked(false);
 			Constants.SHOWEASYTOUCH = false;
 
-			Intent easytouchServiceIntent = new Intent(getActivity(),
-					EasytouchService.class);
+			Intent easytouchServiceIntent = new Intent(getActivity(), EasytouchService.class);
 			getActivity().stopService(easytouchServiceIntent);
 
 		} else {
 			Constants.SHOWEASYTOUCH = true;
 			showEasyTouchCheckBox.setChecked(true);
 
-			Intent easytouchServiceIntent = new Intent(getActivity(),
-					EasytouchService.class);
+			Intent easytouchServiceIntent = new Intent(getActivity(), EasytouchService.class);
 			getActivity().startService(easytouchServiceIntent);
 
 		}
 
-		DataUtil.save(getActivity(), Constants.SHOWEASYTOUCH_KEY,
-				Constants.SHOWEASYTOUCH);
+		DataUtil.save(getActivity(), Constants.SHOWEASYTOUCH_KEY, Constants.SHOWEASYTOUCH);
 	}
 
 	private void showLock() {
@@ -286,16 +273,14 @@ public class MyFragment extends Fragment implements Observer {
 			showcheckboxCheckBox.setChecked(false);
 			Constants.SHOWDESLRC = false;
 
-			Intent floatLrcServiceIntent = new Intent(getActivity(),
-					FloatLrcService.class);
+			Intent floatLrcServiceIntent = new Intent(getActivity(), FloatLrcService.class);
 			getActivity().stopService(floatLrcServiceIntent);
 
 		} else {
 			Constants.SHOWDESLRC = true;
 			showcheckboxCheckBox.setChecked(true);
 
-			Intent floatLrcServiceIntent = new Intent(getActivity(),
-					FloatLrcService.class);
+			Intent floatLrcServiceIntent = new Intent(getActivity(), FloatLrcService.class);
 			getActivity().startService(floatLrcServiceIntent);
 		}
 
@@ -308,8 +293,7 @@ public class MyFragment extends Fragment implements Observer {
 
 			protected Object doInBackground() throws Exception {
 
-				DataUtil.save(getActivity(), Constants.SHOWDESLRC_KEY,
-						Constants.SHOWDESLRC);
+				DataUtil.save(getActivity(), Constants.SHOWDESLRC_KEY, Constants.SHOWDESLRC);
 				return null;
 			}
 		}.execute();

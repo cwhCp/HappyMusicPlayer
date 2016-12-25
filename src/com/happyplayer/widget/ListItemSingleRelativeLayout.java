@@ -20,15 +20,13 @@ import com.happyplayer.common.Constants;
 import com.happyplayer.model.SkinMessage;
 import com.happyplayer.observable.ObserverManage;
 
-public class ListItemSingleRelativeLayout extends RelativeLayout implements
-		Observer {
+public class ListItemSingleRelativeLayout extends RelativeLayout implements Observer {
 	private Paint paint;
 	private boolean isTouch = false;
 
 	private Map<String, Integer> childsTextColor = null;
 
-	public ListItemSingleRelativeLayout(Context context, AttributeSet attrs,
-			int defStyle) {
+	public ListItemSingleRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context);
 	}
@@ -69,8 +67,7 @@ public class ListItemSingleRelativeLayout extends RelativeLayout implements
 			Rect r = new Rect(0, 0, getWidth(), getHeight());
 			canvas.drawRect(r, paint);
 			paint.setColor(Color.rgb(210, 210, 210));
-			canvas.drawLine(10, getHeight() - 1, getWidth() - 10, getHeight(),
-					paint);
+			canvas.drawLine(10, getHeight() - 1, getWidth() - 10, getHeight(), paint);
 			childsTextColor = null;
 		}
 		super.dispatchDraw(canvas);

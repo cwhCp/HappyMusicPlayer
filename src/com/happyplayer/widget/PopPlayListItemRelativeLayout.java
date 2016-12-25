@@ -18,8 +18,7 @@ public class PopPlayListItemRelativeLayout extends RelativeLayout {
 	private boolean isPressed = false;
 	private boolean isSelected = false;
 
-	public PopPlayListItemRelativeLayout(Context context, AttributeSet attrs,
-			int defStyle) {
+	public PopPlayListItemRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context);
 	}

@@ -35,8 +35,7 @@ public class HttpUtil {
 	 * @return 歌手的相关图片列表
 	 */
 	public static String getArtistAlbum(String artist) {
-		String url = "http://image.haosou.com/j?q=" + artist
-				+ "&src=srp&query_tag=壁纸&sn=30&pn=30";
+		String url = "http://image.haosou.com/j?q=" + artist + "&src=srp&query_tag=壁纸&sn=30&pn=30";
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		String temp = getResponseText(url, params);
 		return temp;
@@ -58,16 +57,13 @@ public class HttpUtil {
 		try {
 			httpost = new HttpPost(url);
 			httpost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-			httpclient.getParams().setParameter(
-					CoreConnectionPNames.CONNECTION_TIMEOUT, REQUEST_TIMEOUT);
-			httpclient.getParams().setParameter(
-					CoreConnectionPNames.SO_TIMEOUT, SO_TIMEOUT);
+			httpclient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, REQUEST_TIMEOUT);
+			httpclient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, SO_TIMEOUT);
 			HttpResponse response = httpclient.execute(httpost);
 			flag = response.getStatusLine().getStatusCode();
 			if (flag == 200) {
 				HttpEntity entity = response.getEntity();
-				result = result + "\"comment\":"
-						+ EntityUtils.toString(entity, HTTP.UTF_8) + ",";
+				result = result + "\"comment\":" + EntityUtils.toString(entity, HTTP.UTF_8) + ",";
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

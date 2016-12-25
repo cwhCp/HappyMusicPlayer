@@ -136,8 +136,7 @@ public class SplashActivity extends Activity {
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if ((keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)
-				|| keyCode == KeyEvent.KEYCODE_HOME) {
+		if ((keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) || keyCode == KeyEvent.KEYCODE_HOME) {
 			ActivityManager.getInstance().exit();
 		}
 		return false;

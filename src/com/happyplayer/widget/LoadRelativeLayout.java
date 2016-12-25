@@ -52,16 +52,13 @@ public class LoadRelativeLayout extends RelativeLayout {
 		contentView.setVisibility(View.INVISIBLE);
 
 		LayoutInflater inflater = LayoutInflater.from(context);
-		LayoutParams params = new RelativeLayout.LayoutParams(
-				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+		LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 
 		loadingView = inflater.inflate(R.layout.view_loading, null, false);
-		loadingImageView = (LoadingImageView) loadingView
-				.findViewById(R.id.loadingImageView);
+		loadingImageView = (LoadingImageView) loadingView.findViewById(R.id.loadingImageView);
 		loadingView.setVisibility(View.INVISIBLE);
 		loadingView.setLayoutParams(params);
-		rotateAnimation = AnimationUtils.loadAnimation(context,
-				R.anim.anim_rotate);
+		rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.anim_rotate);
 		rotateAnimation.setInterpolator(new LinearInterpolator());// 匀速
 		addView(loadingView);
 	}
@@ -84,7 +81,7 @@ public class LoadRelativeLayout extends RelativeLayout {
 	public void showSuccessView() {
 		if (contentView == null)
 			return;
-		//停止动画
+		// 停止动画
 		loadingImageView.clearAnimation();
 		contentView.setVisibility(View.VISIBLE);
 		loadingView.setVisibility(View.INVISIBLE);

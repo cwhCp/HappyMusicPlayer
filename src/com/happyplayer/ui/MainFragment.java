@@ -75,8 +75,7 @@ public class MainFragment extends Fragment implements PageAction {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ViewGroup viewGroup = (ViewGroup) mMainView.getParent();
 		if (viewGroup != null) {
 			viewGroup.removeAllViewsInLayout();
@@ -130,8 +129,7 @@ public class MainFragment extends Fragment implements PageAction {
 		public void onCheckedChanged(RadioGroup arg0, int arg1) {
 			int index = 0;
 			for (int i = 0; i < tabButton.length; i++) {
-				if (tabButton[i].getId() == arg1
-						&& tabButton[i].isChecked() == true) {
+				if (tabButton[i].getId() == arg1 && tabButton[i].isChecked() == true) {
 					viewPager.setCurrentItem(i);
 					index = i;
 				}

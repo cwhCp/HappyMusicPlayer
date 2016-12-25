@@ -17,8 +17,7 @@ public class LockButtonRelativeLayout extends RelativeLayout {
 	private Paint paint;
 	private boolean isTouch = false;
 
-	public LockButtonRelativeLayout(Context context, AttributeSet attrs,
-			int defStyle) {
+	public LockButtonRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context);
 	}

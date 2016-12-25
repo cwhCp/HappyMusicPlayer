@@ -120,8 +120,7 @@ public class MediaManage implements Observer {
 				if (playSongInfo != null) {
 					SongInfo songInfo = songMessage.getSongInfo();
 					if (playSongInfo.getSid().equals(songInfo.getSid())) {
-						playSongInfo
-								.setPlayProgress(songInfo.getPlayProgress());
+						playSongInfo.setPlayProgress(songInfo.getPlayProgress());
 					}
 				}
 			} else if (songMessage.getType() == SongMessage.STOPPLAY) {
@@ -310,8 +309,7 @@ public class MediaManage implements Observer {
 
 					}
 
-					DataUtil.save(context, Constants.PLAY_SID_KEY,
-							Constants.PLAY_SID);
+					DataUtil.save(context, Constants.PLAY_SID_KEY, Constants.PLAY_SID);
 
 				} else {
 					songMessage = new SongMessage();
@@ -525,8 +523,7 @@ public class MediaManage implements Observer {
 
 			@Override
 			public void run() {
-				DataUtil.save(context, Constants.PLAY_SID_KEY,
-						Constants.PLAY_SID);
+				DataUtil.save(context, Constants.PLAY_SID_KEY, Constants.PLAY_SID);
 			}
 
 		}.start();

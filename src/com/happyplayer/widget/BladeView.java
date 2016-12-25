@@ -17,9 +17,8 @@ import com.happyplayer.ui.R;
 
 public class BladeView extends View {
 	private OnItemClickListener mOnItemClickListener;
-	String[] b = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
-			"M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y",
-			"Z", "#" };
+	String[] b = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
+			"U", "V", "W", "X", "Y", "Z", "#" };
 	int choose = -1;
 	private boolean isFirstPress = true;
 	Paint paint = new Paint();
@@ -53,8 +52,7 @@ public class BladeView extends View {
 		for (int i = 0; i < b.length; i++) {
 			paint.setColor(Color.parseColor("#ff2f2f2f"));
 			// paint.setTypeface(Typeface.DEFAULT_BOLD); //加粗
-			paint.setTextSize(getResources().getDimensionPixelSize(
-					R.dimen.bladeview_fontsize));// 设置字体的大小
+			paint.setTextSize(getResources().getDimensionPixelSize(R.dimen.bladeview_fontsize));// 设置字体的大小
 			paint.setFakeBoldText(true);
 			paint.setAntiAlias(true);
 			if (i == choose) {
@@ -114,13 +112,10 @@ public class BladeView extends View {
 			mPopupText = new TextView(getContext());
 			mPopupText.setBackgroundColor(Color.GRAY);
 			mPopupText.setTextColor(Color.WHITE);
-			mPopupText.setTextSize(getResources().getDimensionPixelSize(
-					R.dimen.bladeview_popup_fontsize));
-			mPopupText.setGravity(Gravity.CENTER_HORIZONTAL
-					| Gravity.CENTER_VERTICAL);
+			mPopupText.setTextSize(getResources().getDimensionPixelSize(R.dimen.bladeview_popup_fontsize));
+			mPopupText.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
 
-			int height = getResources().getDimensionPixelSize(
-					R.dimen.bladeview_popup_height);
+			int height = getResources().getDimensionPixelSize(R.dimen.bladeview_popup_height);
 
 			mPopupWindow = new PopupWindow(mPopupText, height, height);
 		}
@@ -130,8 +125,7 @@ public class BladeView extends View {
 		if (mPopupWindow.isShowing()) {
 			mPopupWindow.update();
 		} else {
-			mPopupWindow.showAtLocation(getRootView(),
-					Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
+			mPopupWindow.showAtLocation(getRootView(), Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 0, 0);
 		}
 	}
 

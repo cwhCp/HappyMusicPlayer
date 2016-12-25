@@ -46,8 +46,7 @@ public class ImageUtil {
 	 * @param resourceID
 	 * @param defResourceID
 	 */
-	public static void loadResourceImage(final Context context,
-			final ImageView imageview, final int resourceID,
+	public static void loadResourceImage(final Context context, final ImageView imageview, final int resourceID,
 			final int defResourceID) {
 		imageview.setBackgroundResource(defResourceID);
 		new AsyncTaskHandler() {
@@ -114,11 +113,9 @@ public class ImageUtil {
 	 * @param fileSid
 	 * @param url
 	 */
-	public static void loadCircleAlbum(final Context context,
-			final CircleImageView imageview, final int defResourceID,
+	public static void loadCircleAlbum(final Context context, final CircleImageView imageview, final int defResourceID,
 			final String filePath, final String fileSid, final String url) {
-		final String fileName = Constants.PATH_ALBUM + File.separator + fileSid
-				+ ".jpg";
+		final String fileName = Constants.PATH_ALBUM + File.separator + fileSid + ".jpg";
 		imageview.setImageResource(defResourceID);
 		new AsyncTaskHandler() {
 
@@ -156,11 +153,9 @@ public class ImageUtil {
 	 * @param fileSid
 	 * @param url
 	 */
-	public static void loadAlbum(final Context context,
-			final ImageView imageview, final int defResourceID,
+	public static void loadAlbum(final Context context, final ImageView imageview, final int defResourceID,
 			final String filePath, final String fileSid, final String url) {
-		final String fileName = Constants.PATH_ALBUM + File.separator + fileSid
-				+ ".jpg";
+		final String fileName = Constants.PATH_ALBUM + File.separator + fileSid + ".jpg";
 		imageview.setBackgroundResource(defResourceID);
 		new AsyncTaskHandler() {
 
@@ -197,8 +192,7 @@ public class ImageUtil {
 	 * @param url
 	 * @return
 	 */
-	public static Bitmap getAlbum(Context context, String filePath,
-			String fileSid, String url, String fileName) {
+	public static Bitmap getAlbum(Context context, String filePath, String fileSid, String url, String fileName) {
 		if (fileName == null || fileName.equals("")) {
 			fileName = Constants.PATH_ALBUM + File.separator + fileSid + ".jpg";
 		}
@@ -222,8 +216,7 @@ public class ImageUtil {
 	 *            文件路径
 	 * @return
 	 */
-	private static Bitmap getFirstArtwork(Context context, String filePath,
-			String fileSid, String fileName) {
+	private static Bitmap getFirstArtwork(Context context, String filePath, String fileSid, String fileName) {
 
 		Bitmap bm = null;
 		if (sImageCache.containsKey(filePath)) {
@@ -246,8 +239,7 @@ public class ImageUtil {
 	 *            文件路径
 	 * @return
 	 */
-	private static Bitmap loadFirstArtwork(String filePath, String fileName,
-			Context context) {
+	private static Bitmap loadFirstArtwork(String filePath, String fileName, Context context) {
 		File artworkFile = new File(fileName);
 		Bitmap bm = null;
 		if (artworkFile.exists()) {
@@ -312,17 +304,14 @@ public class ImageUtil {
 			MP3File mp3file = new MP3File(sourceFile);
 			if (mp3file.hasID3v2Tag()) {
 				AbstractID3v2Tag tag = mp3file.getID3v2Tag();
-				AbstractID3v2Frame frame = (AbstractID3v2Frame) tag
-						.getFrame("APIC");
+				AbstractID3v2Frame frame = (AbstractID3v2Frame) tag.getFrame("APIC");
 				if (frame != null) {
 					FrameBodyAPIC body = (FrameBodyAPIC) frame.getBody();
 					if (body != null) {
 						byte[] imageData = body.getImageData();
 						// 通过BitmapFactory转成Bitmap
-						bm = BitmapFactory.decodeByteArray(imageData, 0,
-								imageData.length);
-						sImageCache
-								.put(filePath, new SoftReference<Bitmap>(bm));
+						bm = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+						sImageCache.put(filePath, new SoftReference<Bitmap>(bm));
 						return bm;
 					} else {
 						return null;
@@ -363,10 +352,8 @@ public class ImageUtil {
 		return null;
 	}
 
-	private static int computeSampleSize(BitmapFactory.Options options,
-			int minSideLength, int maxNumOfPixels) {
-		int initialSize = computeInitialSampleSize(options, minSideLength,
-				maxNumOfPixels);
+	private static int computeSampleSize(BitmapFactory.Options options, int minSideLength, int maxNumOfPixels) {
+		int initialSize = computeInitialSampleSize(options, minSideLength, maxNumOfPixels);
 
 		int roundedSize;
 		if (initialSize <= 8) {
@@ -381,14 +368,12 @@ public class ImageUtil {
 		return roundedSize;
 	}
 
-	private static int computeInitialSampleSize(BitmapFactory.Options options,
-			int minSideLength, int maxNumOfPixels) {
+	private static int computeInitialSampleSize(BitmapFactory.Options options, int minSideLength, int maxNumOfPixels) {
 		double w = options.outWidth;
 		double h = options.outHeight;
-		int lowerBound = (maxNumOfPixels == -1) ? 1 : (int) Math.ceil(Math
-				.sqrt(w * h / maxNumOfPixels));
-		int upperBound = (minSideLength == -1) ? 128 : (int) Math.min(
-				Math.floor(w / minSideLength), Math.floor(h / minSideLength));
+		int lowerBound = (maxNumOfPixels == -1) ? 1 : (int) Math.ceil(Math.sqrt(w * h / maxNumOfPixels));
+		int upperBound = (minSideLength == -1) ? 128
+				: (int) Math.min(Math.floor(w / minSideLength), Math.floor(h / minSideLength));
 		if (upperBound < lowerBound) {
 			// return the larger one when there is no overlapping zone.
 			return lowerBound;
@@ -413,8 +398,7 @@ public class ImageUtil {
 		URL myFileUrl = imageUri;
 		Bitmap bitmap = null;
 		try {
-			HttpURLConnection conn = (HttpURLConnection) myFileUrl
-					.openConnection();
+			HttpURLConnection conn = (HttpURLConnection) myFileUrl.openConnection();
 			conn.setDoInput(true);
 			conn.connect();
 			InputStream is = conn.getInputStream();
@@ -438,8 +422,7 @@ public class ImageUtil {
 		Bitmap bitmap = null;
 		try {
 			URL myFileUrl = new URL(imageUri);
-			HttpURLConnection conn = (HttpURLConnection) myFileUrl
-					.openConnection();
+			HttpURLConnection conn = (HttpURLConnection) myFileUrl.openConnection();
 			conn.setDoInput(true);
 			conn.connect();
 			InputStream is = conn.getInputStream();
@@ -463,11 +446,9 @@ public class ImageUtil {
 	 *            图片保存的文件夹
 	 * @param url
 	 */
-	public static void loadImage(final Context context, final View imageview,
-			final int defResourceID, final String fileParentPath,
-			final String url) {
-		final String filePath = fileParentPath + File.separator
-				+ url.hashCode() + ".jpg";
+	public static void loadImage(final Context context, final View imageview, final int defResourceID,
+			final String fileParentPath, final String url) {
+		final String filePath = fileParentPath + File.separator + url.hashCode() + ".jpg";
 		imageview.setBackgroundResource(defResourceID);
 		new AsyncTaskHandler() {
 
@@ -496,8 +477,8 @@ public class ImageUtil {
 	 * @param defResourceID
 	 * @param filePath
 	 */
-	public static void loadLocalImage(final Context context,
-			final View imageview, final int defResourceID, final String filePath) {
+	public static void loadLocalImage(final Context context, final View imageview, final int defResourceID,
+			final String filePath) {
 		imageview.setBackgroundResource(defResourceID);
 		new AsyncTaskHandler() {
 

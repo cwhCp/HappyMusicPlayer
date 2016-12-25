@@ -27,8 +27,7 @@ public class ListViewRelativeLayout extends RelativeLayout implements Observer {
 
 	private Map<String, Integer> childsTextColor = null;
 
-	public ListViewRelativeLayout(Context context, AttributeSet attrs,
-			int defStyle) {
+	public ListViewRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context);
 	}
@@ -70,8 +69,7 @@ public class ListViewRelativeLayout extends RelativeLayout implements Observer {
 			Rect r = new Rect(0, 0, getWidth(), getHeight());
 			canvas.drawRect(r, paint);
 			paint.setColor(Color.rgb(210, 210, 210));
-			canvas.drawLine(10, getHeight() - 1, getWidth() - 10, getHeight(),
-					paint);
+			canvas.drawLine(10, getHeight() - 1, getWidth() - 10, getHeight(), paint);
 			childsTextColor = null;
 		}
 		super.dispatchDraw(canvas);

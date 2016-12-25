@@ -136,8 +136,7 @@ public class LockMenuFragment extends Fragment implements Observer {
 
 			songNameTextView.setText(songInfo.getDisplayName());
 			songerTextView.setText(songInfo.getArtist());
-			int status = MediaManage.getMediaManage(
-					LockMenuFragment.this.getActivity()).getPlayStatus();
+			int status = MediaManage.getMediaManage(LockMenuFragment.this.getActivity()).getPlayStatus();
 			if (status == MediaManage.STOP) {
 				pauseImageView.setVisibility(View.INVISIBLE);
 				playImageView.setVisibility(View.VISIBLE);
@@ -236,8 +235,7 @@ public class LockMenuFragment extends Fragment implements Observer {
 			@Override
 			protected Object doInBackground() throws Exception {
 
-				SongInfo songInfo = MediaManage.getMediaManage(getActivity())
-						.getPlaySongInfo();
+				SongInfo songInfo = MediaManage.getMediaManage(getActivity()).getPlaySongInfo();
 				if (songInfo != null) {
 					Message msg = new Message();
 					msg.obj = songInfo;
@@ -266,8 +264,7 @@ public class LockMenuFragment extends Fragment implements Observer {
 				playOrPauseButton.invalidate();
 				if (lyricsLineTreeMap.size() != 0) {
 					kscManyLineLyricsView.setKscLyricsParser(kscLyricsParser);
-					kscManyLineLyricsView
-							.setLyricsLineTreeMap(lyricsLineTreeMap);
+					kscManyLineLyricsView.setLyricsLineTreeMap(lyricsLineTreeMap);
 					kscManyLineLyricsView.setCanScroll(false);
 					kscManyLineLyricsView.setBlLrc(true);
 					kscManyLineLyricsView.setOnLrcClickListener(null);
@@ -283,8 +280,7 @@ public class LockMenuFragment extends Fragment implements Observer {
 			@Override
 			protected Object doInBackground() throws Exception {
 
-				return KscLyricsManamge.getKscLyricsParser(songInfo
-						.getDisplayName());
+				return KscLyricsManamge.getKscLyricsParser(songInfo.getDisplayName());
 			}
 		}.execute();
 	}
@@ -318,20 +314,16 @@ public class LockMenuFragment extends Fragment implements Observer {
 		dateTextView = (TextView) mMainView.findViewById(R.id.date);
 		dayTextView = (TextView) mMainView.findViewById(R.id.day);
 
-		kscManyLineLyricsView = (KscManyLineLyricsView) mMainView
-				.findViewById(R.id.kscManyLineLyricsView);
+		kscManyLineLyricsView = (KscManyLineLyricsView) mMainView.findViewById(R.id.kscManyLineLyricsView);
 
-		prewButton = (LockButtonRelativeLayout) mMainView
-				.findViewById(R.id.prev_button);
+		prewButton = (LockButtonRelativeLayout) mMainView.findViewById(R.id.prev_button);
 
 		prewButton.setOnClickListener(new ItemOnClick());
 
-		nextButton = (LockButtonRelativeLayout) mMainView
-				.findViewById(R.id.next_button);
+		nextButton = (LockButtonRelativeLayout) mMainView.findViewById(R.id.next_button);
 		nextButton.setOnClickListener(new ItemOnClick());
 
-		playOrPauseButton = (LockPalyOrPauseButtonRelativeLayout) mMainView
-				.findViewById(R.id.play_pause_button);
+		playOrPauseButton = (LockPalyOrPauseButtonRelativeLayout) mMainView.findViewById(R.id.play_pause_button);
 		playOrPauseButton.setOnClickListener(new ItemOnClick());
 
 		playImageView = (ImageView) mMainView.findViewById(R.id.play);
@@ -339,8 +331,7 @@ public class LockMenuFragment extends Fragment implements Observer {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		ViewGroup viewGroup = (ViewGroup) mMainView.getParent();
 		if (viewGroup != null) {
 			viewGroup.removeAllViewsInLayout();
@@ -396,8 +387,7 @@ public class LockMenuFragment extends Fragment implements Observer {
 	public void update(Observable observable, Object data) {
 		if (data instanceof SongMessage) {
 			SongMessage songMessage = (SongMessage) data;
-			if (songMessage.getType() == SongMessage.INIT
-					|| songMessage.getType() == SongMessage.PLAYING
+			if (songMessage.getType() == SongMessage.INIT || songMessage.getType() == SongMessage.PLAYING
 					|| songMessage.getType() == SongMessage.STOPING
 					|| songMessage.getType() == SongMessage.LASTPLAYFINISH
 					|| songMessage.getType() == SongMessage.PLAY) {

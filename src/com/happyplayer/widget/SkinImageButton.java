@@ -60,26 +60,22 @@ public class SkinImageButton extends ImageButton implements Observer {
 		if (isParentTouch) {
 			baseBitmap = bitmaps.get("isParentTouch");
 			if (baseBitmap == null) {
-				baseBitmap = BitmapFactory.decodeResource(getResources(),
-						R.drawable.fx_slide_menu_change_bg);
+				baseBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.fx_slide_menu_change_bg);
 				bitmaps.put("isParentTouch", baseBitmap);
 			}
 			setBackgroundDrawable(new BitmapDrawable(baseBitmap));
 		} else if (isTouch) {
 			pressedBitmap = bitmaps.get("isTouchIsTrue");
 			if (pressedBitmap == null) {
-				pressedBitmap = BitmapFactory.decodeResource(getResources(),
-						R.drawable.fx_slide_menu_change_bg);
+				pressedBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.fx_slide_menu_change_bg);
 				bitmaps.put("isTouchIsTrue", pressedBitmap);
 			}
 			setBackgroundDrawable(new BitmapDrawable(pressedBitmap));
 		} else {
 			defBitmap = bitmaps.get("isTouchIsFalse");
 			if (defBitmap == null) {
-				baseBitmap = BitmapFactory.decodeResource(getResources(),
-						R.drawable.fx_slide_menu_change_bg);
-				defBitmap = Bitmap.createBitmap(baseBitmap.getWidth(),
-						baseBitmap.getHeight(), baseBitmap.getConfig());
+				baseBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.fx_slide_menu_change_bg);
+				defBitmap = Bitmap.createBitmap(baseBitmap.getWidth(), baseBitmap.getHeight(), baseBitmap.getConfig());
 				pCanvas = new Canvas(defBitmap);
 
 				int color = Constants.BLACK_GROUND[Constants.DEF_COLOR_INDEX];
@@ -89,9 +85,8 @@ public class SkinImageButton extends ImageButton implements Observer {
 				float progressA = Color.alpha(color) / 255f;
 
 				// 根据SeekBar定义RGBA的矩阵
-				float[] src = new float[] { progressR, 0, 0, 0, 0, 0,
-						progressG, 0, 0, 0, 0, 0, progressB, 0, 0, 0, 0, 0,
-						progressA, 0 };
+				float[] src = new float[] { progressR, 0, 0, 0, 0, 0, progressG, 0, 0, 0, 0, 0, progressB, 0, 0, 0, 0,
+						0, progressA, 0 };
 				// 定义ColorMatrix，并指定RGBA矩阵
 				ColorMatrix colorMatrix = new ColorMatrix();
 				colorMatrix.set(src);

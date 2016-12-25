@@ -48,8 +48,7 @@ public class LockService extends Service implements Observer {
 		lockIntent = new Intent(LockService.this, ShowLockActivity.class);
 		lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		mKeyguardManager = (KeyguardManager) context
-				.getSystemService(Context.KEYGUARD_SERVICE);
+		mKeyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
 
 		// 屏蔽手机内置的锁屏
 		mKeyguardLock = mKeyguardManager.newKeyguardLock("");
@@ -67,8 +66,7 @@ public class LockService extends Service implements Observer {
 		IntentFilter mScreenOnOrOffFilter = new IntentFilter();
 		mScreenOnOrOffFilter.addAction("android.intent.action.SCREEN_ON");
 		mScreenOnOrOffFilter.addAction("android.intent.action.SCREEN_OFF");
-		LockService.this.registerReceiver(mScreenOnOrOffReceiver,
-				mScreenOnOrOffFilter);
+		LockService.this.registerReceiver(mScreenOnOrOffReceiver, mScreenOnOrOffFilter);
 	}
 
 	@Override
@@ -119,8 +117,7 @@ public class LockService extends Service implements Observer {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			if (action.equals("android.intent.action.SCREEN_OFF")
-					|| action.equals("android.intent.action.SCREEN_ON")) {
+			if (action.equals("android.intent.action.SCREEN_OFF") || action.equals("android.intent.action.SCREEN_ON")) {
 				// if (!ShowLockActivity.active)
 				// startActivity(lockIntent);
 			}

@@ -148,8 +148,7 @@ public class FloatLrcService extends Service implements Observer {
 
 		context = FloatLrcService.this.getBaseContext();
 
-		stateHeight = Math
-				.ceil(25 * context.getResources().getDisplayMetrics().density);
+		stateHeight = Math.ceil(25 * context.getResources().getDisplayMetrics().density);
 
 		// 获取WindowManager
 		wm = (WindowManager) getApplicationContext().getSystemService("window");
@@ -164,8 +163,7 @@ public class FloatLrcService extends Service implements Observer {
 					| WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
 		} else {
 			floatViewParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-					| WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-					| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+					| WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
 		}
 
 		floatViewParams.gravity = Gravity.LEFT | Gravity.TOP;// 调整悬浮窗口至左上角
@@ -176,16 +174,13 @@ public class FloatLrcService extends Service implements Observer {
 		// 设置悬浮窗口长宽数据
 		floatViewParams.width = wm.getDefaultDisplay().getWidth();
 
-		floatView = LayoutInflater.from(context).inflate(R.layout.des_view,
-				null);
+		floatView = LayoutInflater.from(context).inflate(R.layout.des_view, null);
 
-		floatLyricRelativeLayout = (FloatLyricRelativeLayout) floatView
-				.findViewById(R.id.floatLyricRelativeLayout);
+		floatLyricRelativeLayout = (FloatLyricRelativeLayout) floatView.findViewById(R.id.floatLyricRelativeLayout);
 
 		floatLyricRelativeLayout.getBackground().setAlpha(0);
 
-		floatLyricsView = (FloatLyricsView) floatView
-				.findViewById(R.id.floatLyricsView);
+		floatLyricsView = (FloatLyricsView) floatView.findViewById(R.id.floatLyricsView);
 
 		floatViewParams.height = 140;
 
@@ -294,11 +289,9 @@ public class FloatLrcService extends Service implements Observer {
 		lrcColorViewParams.width = WindowManager.LayoutParams.MATCH_PARENT;
 		lrcColorViewParams.height = 110;
 
-		lrcColorView = LayoutInflater.from(context).inflate(
-				R.layout.des_lrc_item_view, null);
+		lrcColorView = LayoutInflater.from(context).inflate(R.layout.des_lrc_item_view, null);
 
-		ImageButton lycicLock = (ImageButton) lrcColorView
-				.findViewById(R.id.lycic_lock);
+		ImageButton lycicLock = (ImageButton) lrcColorView.findViewById(R.id.lycic_lock);
 		lycicLock.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -317,8 +310,7 @@ public class FloatLrcService extends Service implements Observer {
 
 					@Override
 					protected void onPostExecute(Object result) {
-						Toast.makeText(context, "桌面歌词已锁", Toast.LENGTH_SHORT)
-								.show();
+						Toast.makeText(context, "桌面歌词已锁", Toast.LENGTH_SHORT).show();
 						SongMessage songMessage = new SongMessage();
 						songMessage.setType(SongMessage.DESLRCMOVEED);
 						ObserverManage.getObserver().setMessage(songMessage);
@@ -326,16 +318,14 @@ public class FloatLrcService extends Service implements Observer {
 
 					protected Object doInBackground() throws Exception {
 
-						DataUtil.save(context, Constants.DESLRCMOVE_KEY,
-								Constants.DESLRCMOVE);
+						DataUtil.save(context, Constants.DESLRCMOVE_KEY, Constants.DESLRCMOVE);
 						return null;
 					}
 				}.execute();
 			}
 		});
 
-		ImageButton lyricShrink = (ImageButton) lrcColorView
-				.findViewById(R.id.lyric_shrink);
+		ImageButton lyricShrink = (ImageButton) lrcColorView.findViewById(R.id.lyric_shrink);
 		lyricShrink.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -351,16 +341,13 @@ public class FloatLrcService extends Service implements Observer {
 
 					@Override
 					public void run() {
-						DataUtil.save(context,
-								Constants.DESLRCFONTSIZEINDEX_KEY,
-								Constants.DESLRCFONTSIZEINDEX);
+						DataUtil.save(context, Constants.DESLRCFONTSIZEINDEX_KEY, Constants.DESLRCFONTSIZEINDEX);
 					}
 
 				}.start();
 			}
 		});
-		ImageButton lyricScale = (ImageButton) lrcColorView
-				.findViewById(R.id.lyric_scale);
+		ImageButton lyricScale = (ImageButton) lrcColorView.findViewById(R.id.lyric_scale);
 		lyricScale.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -375,9 +362,7 @@ public class FloatLrcService extends Service implements Observer {
 
 					@Override
 					public void run() {
-						DataUtil.save(context,
-								Constants.DESLRCFONTSIZEINDEX_KEY,
-								Constants.DESLRCFONTSIZEINDEX);
+						DataUtil.save(context, Constants.DESLRCFONTSIZEINDEX_KEY, Constants.DESLRCFONTSIZEINDEX);
 					}
 
 				}.start();
@@ -411,32 +396,27 @@ public class FloatLrcService extends Service implements Observer {
 
 		int i = 0;
 		imageviews[i] = (ImageView) lrcColorView.findViewById(R.id.colorpanel0);
-		flagimageviews[i] = (ImageView) lrcColorView
-				.findViewById(R.id.select_flag0);
+		flagimageviews[i] = (ImageView) lrcColorView.findViewById(R.id.select_flag0);
 		flagimageviews[i].setVisibility(View.INVISIBLE);
 		imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		imageviews[i].setBackgroundColor(Constants.DESLRCCOLORS[i++]);
 		imageviews[i] = (ImageView) lrcColorView.findViewById(R.id.colorpanel1);
-		flagimageviews[i] = (ImageView) lrcColorView
-				.findViewById(R.id.select_flag1);
+		flagimageviews[i] = (ImageView) lrcColorView.findViewById(R.id.select_flag1);
 		flagimageviews[i].setVisibility(View.INVISIBLE);
 		imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		imageviews[i].setBackgroundColor(Constants.DESLRCCOLORS[i++]);
 		imageviews[i] = (ImageView) lrcColorView.findViewById(R.id.colorpanel2);
-		flagimageviews[i] = (ImageView) lrcColorView
-				.findViewById(R.id.select_flag2);
+		flagimageviews[i] = (ImageView) lrcColorView.findViewById(R.id.select_flag2);
 		flagimageviews[i].setVisibility(View.INVISIBLE);
 		imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		imageviews[i].setBackgroundColor(Constants.DESLRCCOLORS[i++]);
 		imageviews[i] = (ImageView) lrcColorView.findViewById(R.id.colorpanel3);
-		flagimageviews[i] = (ImageView) lrcColorView
-				.findViewById(R.id.select_flag3);
+		flagimageviews[i] = (ImageView) lrcColorView.findViewById(R.id.select_flag3);
 		flagimageviews[i].setVisibility(View.INVISIBLE);
 		imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		imageviews[i].setBackgroundColor(Constants.DESLRCCOLORS[i++]);
 		imageviews[i] = (ImageView) lrcColorView.findViewById(R.id.colorpanel4);
-		flagimageviews[i] = (ImageView) lrcColorView
-				.findViewById(R.id.select_flag4);
+		flagimageviews[i] = (ImageView) lrcColorView.findViewById(R.id.select_flag4);
 		flagimageviews[i].setVisibility(View.INVISIBLE);
 		imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		imageviews[i].setBackgroundColor(Constants.DESLRCCOLORS[i++]);
@@ -448,8 +428,7 @@ public class FloatLrcService extends Service implements Observer {
 		// imageviews[i].setOnClickListener(new MyImageViewOnClickListener());
 		// imageviews[i].setBackgroundColor(Constants.DESLRCREADEDCOLOR[i++]);
 
-		flagimageviews[Constants.DEF_DES_COLOR_INDEX]
-				.setVisibility(View.VISIBLE);
+		flagimageviews[Constants.DEF_DES_COLOR_INDEX].setVisibility(View.VISIBLE);
 
 	}
 
@@ -495,8 +474,7 @@ public class FloatLrcService extends Service implements Observer {
 
 				@Override
 				public void run() {
-					DataUtil.save(context, Constants.DEF_DES_COLOR_INDEX_KEY,
-							Constants.DEF_DES_COLOR_INDEX);
+					DataUtil.save(context, Constants.DEF_DES_COLOR_INDEX_KEY, Constants.DEF_DES_COLOR_INDEX);
 				}
 
 			}.start();
@@ -519,16 +497,13 @@ public class FloatLrcService extends Service implements Observer {
 
 			lrcColorViewParams.x = location[0];
 
-			int heigth = (int) (wm.getDefaultDisplay().getHeight()
-					- location[1] - floatViewParams.height);
+			int heigth = (int) (wm.getDefaultDisplay().getHeight() - location[1] - floatViewParams.height);
 			// System.out.println("heigth:------->"+heigth);
 			// System.out.println("lrcColorViewParams.height:------->"+lrcColorViewParams.height);
 			if (heigth >= lrcColorViewParams.height) {
-				lrcColorViewParams.y = (int) (location[1]
-						+ floatViewParams.height - stateHeight);
+				lrcColorViewParams.y = (int) (location[1] + floatViewParams.height - stateHeight);
 			} else {
-				lrcColorViewParams.y = (int) (location[1]
-						- lrcColorViewParams.height - stateHeight);
+				lrcColorViewParams.y = (int) (location[1] - lrcColorViewParams.height - stateHeight);
 			}
 			floatLyricRelativeLayout.getBackground().setAlpha(100);
 			wm.addView(lrcColorView, lrcColorViewParams);
@@ -602,8 +577,7 @@ public class FloatLrcService extends Service implements Observer {
 					floatLyricRelativeLayout.getBackground().setAlpha(0);
 					floatLyricsView.setOnTouchListener(mOnTouchListener);
 					floatLyricsView.setOnClickListener(null);
-					SongInfo songInfo = MediaManage.getMediaManage(context)
-							.getPlaySongInfo();
+					SongInfo songInfo = MediaManage.getMediaManage(context).getPlaySongInfo();
 					if (songInfo != null) {
 						loadFloatLyricsData(songInfo);
 					}
@@ -697,8 +671,7 @@ public class FloatLrcService extends Service implements Observer {
 			protected Object doInBackground() throws Exception {
 
 				if (songInfo != null) {
-					return KscLyricsManamge.getKscLyricsParser(songInfo
-							.getDisplayName());
+					return KscLyricsManamge.getKscLyricsParser(songInfo.getDisplayName());
 				}
 				return null;
 			}
@@ -726,10 +699,8 @@ public class FloatLrcService extends Service implements Observer {
 	// return false;
 	// }
 	public static boolean isBackground(Context context) {
-		ActivityManager activityManager = (ActivityManager) context
-				.getSystemService(Context.ACTIVITY_SERVICE);
-		List<RunningAppProcessInfo> appProcesses = activityManager
-				.getRunningAppProcesses();
+		ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+		List<RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
 		for (RunningAppProcessInfo appProcess : appProcesses) {
 			if (appProcess.processName.equals(context.getPackageName())) {
 				/*
@@ -758,17 +729,14 @@ public class FloatLrcService extends Service implements Observer {
 	public void update(Observable arg0, Object data) {
 		if (data instanceof SongMessage) {
 			SongMessage songMessage = (SongMessage) data;
-			if (songMessage.getType() == SongMessage.INIT
-					|| songMessage.getType() == SongMessage.PLAYING
-					|| songMessage.getType() == SongMessage.STOPING
-					|| songMessage.getType() == SongMessage.ERROR
+			if (songMessage.getType() == SongMessage.INIT || songMessage.getType() == SongMessage.PLAYING
+					|| songMessage.getType() == SongMessage.STOPING || songMessage.getType() == SongMessage.ERROR
 					|| songMessage.getType() == SongMessage.LASTPLAYFINISH) {
 				Message msg = new Message();
 				msg.obj = songMessage;
 				songHandler.sendMessage(msg);
 			} else if (songMessage.getType() == SongMessage.DESLRCMOVE) {
-				System.out.println("Constants.DESLRCMOVE:--->"
-						+ Constants.DESLRCMOVE);
+				System.out.println("Constants.DESLRCMOVE:--->" + Constants.DESLRCMOVE);
 				if (Constants.DESLRCMOVE) {
 					floatViewParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
 							| WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;

@@ -96,8 +96,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 			@Override
 			public void run() {
 				Looper.prepare();
-				Toast.makeText(mContext, "程序出现异常,即将退出", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(mContext, "程序出现异常,即将退出", Toast.LENGTH_SHORT).show();
 				Looper.loop();
 			}
 		}.start();
@@ -115,11 +114,9 @@ public class CrashHandler implements UncaughtExceptionHandler {
 		// 获取当前程序的版本号. 版本的id
 		try {
 			PackageManager pm = ctx.getPackageManager();
-			PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(),
-					PackageManager.GET_ACTIVITIES);
+			PackageInfo pi = pm.getPackageInfo(ctx.getPackageName(), PackageManager.GET_ACTIVITIES);
 			if (pi != null) {
-				String versionName = pi.versionName == null ? "null"
-						: pi.versionName;
+				String versionName = pi.versionName == null ? "null" : pi.versionName;
 				String versionCode = pi.versionCode + "";
 				infos.put("versionName", versionName);
 				infos.put("versionCode", versionCode);

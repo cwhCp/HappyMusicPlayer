@@ -226,8 +226,7 @@ public class ScanMusicActivity extends Activity {
 	 * @param IsIterative
 	 *            是否进入子文件夹
 	 */
-	public void scannerLocalMP3File(String Path, String Extension,
-			boolean IsIterative) {
+	public void scannerLocalMP3File(String Path, String Extension, boolean IsIterative) {
 		File[] files = new File(Path).listFiles();
 		if (files != null) {
 			for (int i = 0; i < files.length; i++) {
@@ -246,19 +245,16 @@ public class ScanMusicActivity extends Activity {
 						// 文件名
 						String displayName = f.getName();
 						if (displayName.endsWith(Extension)) {
-							String[] displayNameArr = displayName
-									.split(Extension);
+							String[] displayNameArr = displayName.split(Extension);
 							displayName = displayNameArr[0].trim();
 						}
 
-						boolean isExists = SongDB.getSongInfoDB(this)
-								.songIsExists(displayName);
+						boolean isExists = SongDB.getSongInfoDB(this).songIsExists(displayName);
 						if (isExists) {
 							continue;
 						}
 						// 将扫描到的数据保存到播放列表
-						Mp3Info mp3Info = MediaUtils.getMp3InfoByFile(f
-								.getPath());
+						Mp3Info mp3Info = MediaUtils.getMp3InfoByFile(f.getPath());
 						if (mp3Info != null) {
 							addMusicList(mp3Info);
 							size++;
@@ -310,8 +306,7 @@ public class ScanMusicActivity extends Activity {
 				continue;
 			}
 
-			boolean isExists = SongDB.getSongInfoDB(this).songIsExists(
-					mp3Info.getDisplayName());
+			boolean isExists = SongDB.getSongInfoDB(this).songIsExists(mp3Info.getDisplayName());
 			if (isExists) {
 				continue;
 			}

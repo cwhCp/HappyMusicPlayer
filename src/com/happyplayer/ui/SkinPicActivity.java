@@ -70,8 +70,7 @@ public class SkinPicActivity extends Activity {
 
 			@Override
 			protected void onPostExecute(Object result) {
-				GridViewAdapter adapter = new GridViewAdapter(
-						SkinPicActivity.this, gridView);
+				GridViewAdapter adapter = new GridViewAdapter(SkinPicActivity.this, gridView);
 				gridView.setAdapter(adapter);
 
 				handler.sendEmptyMessage(1);
