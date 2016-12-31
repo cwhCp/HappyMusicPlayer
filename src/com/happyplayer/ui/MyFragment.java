@@ -31,44 +31,24 @@ import com.happyplayer.widget.NavPlayImageButton;
 @SuppressLint("ValidFragment")
 public class MyFragment extends Fragment implements Observer {
 	private View mMainView;
-
 	private ListViewRelativeLayout local;
-	/**
-	 * 歌曲个数
-	 */
+	/** * 歌曲个数 */
 	private TextView numTextView;
-
 	private NavPlayImageButton navPlayImageButton;
-
 	private ListViewRelativeLayout scanmusic;
-	// private ListViewRelativeLayout mylove;
-	// private ListViewRelativeLayout mydownload;
-	// private ListViewRelativeLayout setting;
-
 	private ListViewRelativeLayout showdesLrc;
 	private CheckBox showcheckboxCheckBox;
-
 	private ListViewRelativeLayout showEasyTouch;
 	private CheckBox showEasyTouchCheckBox;
-
 	private ListViewRelativeLayout showLock;
 	private CheckBox showlockCheckBox;
-
 	private ListViewRelativeLayout skinsetting;
-
-	/**
-	 * 初始时歌曲个数
-	 */
+	/** * 初始时歌曲个数 */
 	private final int COUNT = 0;
-	/**
-	 * 更新歌曲个数
-	 */
+	/** * 更新歌曲个数 */
 	private final int UPDATE = 1;
-
 	private int mCOUNT = 0;
-
 	private Handler handler = new Handler() {
-
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
@@ -77,20 +57,16 @@ public class MyFragment extends Fragment implements Observer {
 				numTextView.setText(count + "首");
 				break;
 			case UPDATE:
-
 				int updateCount = (Integer) msg.obj;
 				mCOUNT = mCOUNT + updateCount;
 				numTextView.setText(mCOUNT + "首");
 				break;
 			}
 		}
-
 	};
 
 	private PageAction action;
-
 	public MyFragment() {
-
 	}
 
 	public MyFragment(PageAction action) {
@@ -108,18 +84,11 @@ public class MyFragment extends Fragment implements Observer {
 	private void initComponent() {
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		mMainView = inflater.inflate(R.layout.fragment_my, null, false);
-
 		local = (ListViewRelativeLayout) mMainView.findViewById(R.id.local);
 		local.setOnClickListener(new ItemOnClick());
-
 		numTextView = (TextView) mMainView.findViewById(R.id.num);
-
 		scanmusic = (ListViewRelativeLayout) mMainView.findViewById(R.id.scanmusic);
 		scanmusic.setOnClickListener(new ItemOnClick());
-
-		// mylove = (ListViewRelativeLayout)
-		// mMainView.findViewById(R.id.mylove);
-		// mylove.setOnClickListener(new ItemOnClick());
 
 		showLock = (ListViewRelativeLayout) mMainView.findViewById(R.id.showLock);
 		showLock.setOnClickListener(new ItemOnClick());
@@ -140,38 +109,23 @@ public class MyFragment extends Fragment implements Observer {
 		skinsetting = (ListViewRelativeLayout) mMainView.findViewById(R.id.skinsetting);
 		skinsetting.setOnClickListener(new ItemOnClick());
 
-		// mydownload = (ListViewRelativeLayout) mMainView
-		// .findViewById(R.id.mydownload);
-		// mydownload.setOnClickListener(new ItemOnClick());
-
-		// setting = (ListViewRelativeLayout)
-		// mMainView.findViewById(R.id.setting);
-		// setting.setOnClickListener(new ItemOnClick());
-
 		navPlayImageButton = (NavPlayImageButton) mMainView.findViewById(R.id.navPlayImageButton);
 		navPlayImageButton.setOnClickListener(new ItemOnClick());
 	}
 
 	private void loadData() {
 		new AsyncTaskHandler() {
-
 			@Override
 			protected void onPostExecute(Object result) {
-
 				Message msg = new Message();
 				msg.what = COUNT;
 				msg.obj = mCOUNT;
-
 				handler.sendMessage(msg);
 			}
-
 			@Override
 			protected Object doInBackground() throws Exception {
-
 				Thread.sleep(50);
-
 				mCOUNT = MediaManage.getMediaManage(MyFragment.this.getActivity()).getCount();
-
 				return null;
 			}
 		}.execute();
@@ -187,7 +141,6 @@ public class MyFragment extends Fragment implements Observer {
 	}
 
 	class ItemOnClick implements OnClickListener {
-
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
@@ -239,17 +192,14 @@ public class MyFragment extends Fragment implements Observer {
 		if (showEasyTouchCheckBox.isChecked()) {
 			showEasyTouchCheckBox.setChecked(false);
 			Constants.SHOWEASYTOUCH = false;
-
 			Intent easytouchServiceIntent = new Intent(getActivity(), EasytouchService.class);
 			getActivity().stopService(easytouchServiceIntent);
 
 		} else {
 			Constants.SHOWEASYTOUCH = true;
 			showEasyTouchCheckBox.setChecked(true);
-
 			Intent easytouchServiceIntent = new Intent(getActivity(), EasytouchService.class);
 			getActivity().startService(easytouchServiceIntent);
-
 		}
 
 		DataUtil.save(getActivity(), Constants.SHOWEASYTOUCH_KEY, Constants.SHOWEASYTOUCH);
@@ -263,45 +213,33 @@ public class MyFragment extends Fragment implements Observer {
 			Constants.SHOWLOCK = true;
 			showlockCheckBox.setChecked(true);
 		}
-
 		DataUtil.save(getActivity(), Constants.SHOWLOCK_KEY, Constants.SHOWLOCK);
 	}
 
 	public void showdesLrc() {
-
 		if (showcheckboxCheckBox.isChecked()) {
 			showcheckboxCheckBox.setChecked(false);
 			Constants.SHOWDESLRC = false;
-
 			Intent floatLrcServiceIntent = new Intent(getActivity(), FloatLrcService.class);
 			getActivity().stopService(floatLrcServiceIntent);
-
 		} else {
 			Constants.SHOWDESLRC = true;
 			showcheckboxCheckBox.setChecked(true);
-
 			Intent floatLrcServiceIntent = new Intent(getActivity(), FloatLrcService.class);
 			getActivity().startService(floatLrcServiceIntent);
 		}
-
 		new AsyncTaskHandler() {
-
 			@Override
 			protected void onPostExecute(Object result) {
-
 			}
-
 			protected Object doInBackground() throws Exception {
-
 				DataUtil.save(getActivity(), Constants.SHOWDESLRC_KEY, Constants.SHOWDESLRC);
 				return null;
 			}
 		}.execute();
-
 		SongMessage songMessage = new SongMessage();
 		songMessage.setType(SongMessage.DES_LRC);
 		ObserverManage.getObserver().setMessage(songMessage);
-
 	}
 
 	/**
@@ -348,7 +286,6 @@ public class MyFragment extends Fragment implements Observer {
 	 * 播放
 	 */
 	private void navPlayImageButton() {
-
 		SongMessage songMessage = new SongMessage();
 		songMessage.setType(SongMessage.NEXTMUSIC);
 		ObserverManage.getObserver().setMessage(songMessage);
@@ -363,17 +300,13 @@ public class MyFragment extends Fragment implements Observer {
 				Message msg = new Message();
 				msg.what = UPDATE;
 				msg.obj = songMessage.getNum();
-
 				handler.sendMessage(msg);
-			} else if (songMessage.getType() == SongMessage.DEL_NUM
-					|| songMessage.getType() == SongMessage.DELALLMUSICED) {
+			} else if (songMessage.getType() == SongMessage.DEL_NUM || songMessage.getType() == SongMessage.DELALLMUSICED) {
 				Message msg = new Message();
 				msg.what = UPDATE;
 				msg.obj = songMessage.getNum();
-
 				handler.sendMessage(msg);
 			}
 		}
 	}
-
 }

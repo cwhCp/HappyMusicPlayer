@@ -51,13 +51,9 @@ public class FloatLrcService extends Service implements Observer {
 	private FloatLyricRelativeLayout floatLyricRelativeLayout;
 
 	private FloatLyricsView floatLyricsView;
-	/**
-	 * 歌词解析
-	 */
+	/** * 歌词解析 */
 	private KscLyricsParser kscLyricsParser;
-	/**
-	 * 歌词
-	 */
+	/** * 歌词 */
 	private TreeMap<Integer, KscLyricsLineInfo> lyricsLineTreeMap;
 	private float mTouchStartX;
 	private float mTouchStartY;
@@ -65,36 +61,24 @@ public class FloatLrcService extends Service implements Observer {
 	private float y;
 
 	private float startRawX = 0, startRawY = 0;
-
 	private WindowManager.LayoutParams lrcColorViewParams = null;
-
 	private View lrcColorView = null;
-
-	/**
-	 * 显示面板倒计时
-	 */
+	/** * 显示面板倒计时 */
 	public int EndTime = -1;
-
 	// 状态栏高度
 	private double stateHeight;
 
 	private Handler songHandler = new Handler() {
-
 		@Override
 		public void handleMessage(Message msg) {
-
 			SongMessage songMessage = (SongMessage) msg.obj;
 			final SongInfo songInfo = songMessage.getSongInfo();
 			switch (songMessage.getType()) {
 			case SongMessage.INIT:
-
 				loadFloatLyricsData(songInfo);
-
 				break;
 			case SongMessage.LASTPLAYFINISH:
-
 				loadFloatLyricsData(songInfo);
-
 				break;
 			case SongMessage.PLAYING:
 				if (floatLyricsView.getParent() != null) {
@@ -145,52 +129,35 @@ public class FloatLrcService extends Service implements Observer {
 	}
 
 	private void init() {
-
 		context = FloatLrcService.this.getBaseContext();
-
 		stateHeight = Math.ceil(25 * context.getResources().getDisplayMetrics().density);
-
 		// 获取WindowManager
 		wm = (WindowManager) getApplicationContext().getSystemService("window");
 		// 设置LayoutParams(全局变量）相关参数
 		floatViewParams = new WindowManager.LayoutParams();
-		floatViewParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
-				| WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
+		floatViewParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT | WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
 		floatViewParams.format = 1;
-
 		if (Constants.DESLRCMOVE) {
-			floatViewParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-					| WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+			floatViewParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
 		} else {
-			floatViewParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-					| WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+			floatViewParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
 		}
-
 		floatViewParams.gravity = Gravity.LEFT | Gravity.TOP;// 调整悬浮窗口至左上角
 		// 以屏幕左上角为原点，设置x、y初始值
 		floatViewParams.x = Constants.LRCX;
 		floatViewParams.y = Constants.LRCY;
-
 		// 设置悬浮窗口长宽数据
 		floatViewParams.width = wm.getDefaultDisplay().getWidth();
-
 		floatView = LayoutInflater.from(context).inflate(R.layout.des_view, null);
-
 		floatLyricRelativeLayout = (FloatLyricRelativeLayout) floatView.findViewById(R.id.floatLyricRelativeLayout);
-
 		floatLyricRelativeLayout.getBackground().setAlpha(0);
-
 		floatLyricsView = (FloatLyricsView) floatView.findViewById(R.id.floatLyricsView);
-
 		floatViewParams.height = 140;
-
 		floatLyricsView.setOnTouchListener(mOnTouchListener);
-
 		initLrcColorView();
 	}
 
 	private OnClickListener mOnClickListener = new OnClickListener() {
-
 		@Override
 		public void onClick(View arg0) {
 			if (lrcColorView.getParent() != null) {
@@ -204,30 +171,23 @@ public class FloatLrcService extends Service implements Observer {
 	};
 
 	private OnTouchListener mOnTouchListener = new OnTouchListener() {
-
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
-
 			if (!Constants.DESLRCMOVE)
 				return false;
-
 			// 获取相对屏幕的坐标，即以屏幕左上角为原点
 			x = event.getRawX();
 			y = (float) (event.getRawY() - stateHeight);
-
 			int sumX = (int) (event.getRawX() - startRawX);
 			int sumY = (int) (event.getRawY() - startRawY);
-
 			switch (event.getAction()) {
 			// 手指按下时
 			case MotionEvent.ACTION_DOWN:
 				// 获取相对View的坐标，即以此View左上角为原点
 				mTouchStartX = event.getX();
 				mTouchStartY = event.getY();
-
 				startRawX = event.getRawX();
 				startRawY = event.getRawY();
-
 				break;
 			// 手指移动时
 			case MotionEvent.ACTION_MOVE:
@@ -244,14 +204,12 @@ public class FloatLrcService extends Service implements Observer {
 					// 更新视图
 					updateViewPosition();
 				}
-
 				break;
 			// 手指松开时
 			case MotionEvent.ACTION_UP:
 				if (sumX > -5 && sumX < 5 && sumY > -5 && sumY < 5) {
 					addDesLrcColorView();
 					return false;
-
 				}
 				mTouchStartX = mTouchStartY = 0;
 
@@ -275,12 +233,10 @@ public class FloatLrcService extends Service implements Observer {
 
 	private void initLrcColorView() {
 		lrcColorViewParams = new WindowManager.LayoutParams();
-		lrcColorViewParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
-				| WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
+		lrcColorViewParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT | WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
 		lrcColorViewParams.format = 1;
 		lrcColorViewParams.alpha = 1f;
-		lrcColorViewParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-				| WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+		lrcColorViewParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
 		lrcColorViewParams.gravity = Gravity.LEFT | Gravity.TOP;// 调整悬浮窗口至左上角
 
 		lrcColorViewParams.x = 0;
@@ -293,7 +249,6 @@ public class FloatLrcService extends Service implements Observer {
 
 		ImageButton lycicLock = (ImageButton) lrcColorView.findViewById(R.id.lycic_lock);
 		lycicLock.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
 				if (Constants.DESLRCMOVE) {
@@ -301,13 +256,10 @@ public class FloatLrcService extends Service implements Observer {
 				} else {
 					Constants.DESLRCMOVE = true;
 				}
-
 				SongMessage songMessage = new SongMessage();
 				songMessage.setType(SongMessage.DESLRCMOVE);
 				ObserverManage.getObserver().setMessage(songMessage);
-
 				new AsyncTaskHandler() {
-
 					@Override
 					protected void onPostExecute(Object result) {
 						Toast.makeText(context, "桌面歌词已锁", Toast.LENGTH_SHORT).show();
@@ -315,9 +267,7 @@ public class FloatLrcService extends Service implements Observer {
 						songMessage.setType(SongMessage.DESLRCMOVEED);
 						ObserverManage.getObserver().setMessage(songMessage);
 					}
-
 					protected Object doInBackground() throws Exception {
-
 						DataUtil.save(context, Constants.DESLRCMOVE_KEY, Constants.DESLRCMOVE);
 						return null;
 					}
@@ -327,7 +277,6 @@ public class FloatLrcService extends Service implements Observer {
 
 		ImageButton lyricShrink = (ImageButton) lrcColorView.findViewById(R.id.lyric_shrink);
 		lyricShrink.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
 				EndTime = 4000;
@@ -336,9 +285,7 @@ public class FloatLrcService extends Service implements Observer {
 					Constants.DESLRCFONTSIZEINDEX = 0;
 				}
 				floatLyricsView.invalidate();
-
 				new Thread() {
-
 					@Override
 					public void run() {
 						DataUtil.save(context, Constants.DESLRCFONTSIZEINDEX_KEY, Constants.DESLRCFONTSIZEINDEX);
@@ -349,7 +296,6 @@ public class FloatLrcService extends Service implements Observer {
 		});
 		ImageButton lyricScale = (ImageButton) lrcColorView.findViewById(R.id.lyric_scale);
 		lyricScale.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
 				EndTime = 4000;
@@ -359,12 +305,10 @@ public class FloatLrcService extends Service implements Observer {
 				}
 				floatLyricsView.invalidate();
 				new Thread() {
-
 					@Override
 					public void run() {
 						DataUtil.save(context, Constants.DESLRCFONTSIZEINDEX_KEY, Constants.DESLRCFONTSIZEINDEX);
 					}
-
 				}.start();
 			}
 		});
@@ -454,9 +398,6 @@ public class FloatLrcService extends Service implements Observer {
 			case R.id.colorpanel4:
 				index = 4;
 				break;
-			// case R.id.colorpanel5:
-			// index = 5;
-			// break;
 			default:
 				break;
 			}
@@ -467,18 +408,13 @@ public class FloatLrcService extends Service implements Observer {
 				else
 					flagimageviews[i].setVisibility(View.INVISIBLE);
 			}
-
 			floatLyricsView.invalidate();
-
 			new Thread() {
-
 				@Override
 				public void run() {
 					DataUtil.save(context, Constants.DEF_DES_COLOR_INDEX_KEY, Constants.DEF_DES_COLOR_INDEX);
 				}
-
 			}.start();
-
 		}
 	}
 
@@ -486,17 +422,12 @@ public class FloatLrcService extends Service implements Observer {
 	 * 改变歌词颜色
 	 */
 	protected void addDesLrcColorView() {
-
 		floatLyricsView.setOnTouchListener(null);
 		floatLyricsView.setOnClickListener(mOnClickListener);
-
 		if (lrcColorView.getParent() == null) {
-
 			int[] location = new int[2];
 			floatLyricsView.getLocationOnScreen(location);
-
 			lrcColorViewParams.x = location[0];
-
 			int heigth = (int) (wm.getDefaultDisplay().getHeight() - location[1] - floatViewParams.height);
 			// System.out.println("heigth:------->"+heigth);
 			// System.out.println("lrcColorViewParams.height:------->"+lrcColorViewParams.height);
@@ -533,22 +464,17 @@ public class FloatLrcService extends Service implements Observer {
 					floatLyricsView.setOnClickListener(null);
 				}
 			}
-
 		}
 	};
 
 	private void updateViewPosition() {
-
 		// 更新浮动窗口位置参数
 		floatViewParams.x = (int) (x - mTouchStartX);
 		floatViewParams.y = (int) (y - mTouchStartY);
 		wm.updateViewLayout(floatView, floatViewParams);
-
 		new AsyncTaskHandler() {
-
 			@Override
 			protected void onPostExecute(Object result) {
-
 			}
 
 			protected Object doInBackground() throws Exception {
@@ -563,7 +489,6 @@ public class FloatLrcService extends Service implements Observer {
 	}
 
 	private Handler floatViewHandler = new Handler() {
-
 		@Override
 		public void handleMessage(Message msg) {
 			if (!Constants.SHOWDESLRC || !isServiceRunning)
@@ -597,7 +522,6 @@ public class FloatLrcService extends Service implements Observer {
 				}
 				break;
 			}
-
 		}
 	};
 

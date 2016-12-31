@@ -21,16 +21,12 @@ import com.happyplayer.ui.ShowLockActivity;
 public class LockService extends Service implements Observer {
 
 	private Context context;
-
 	private Intent lockIntent = null;
-
 	public static Boolean isServiceRunning = false;
 	private MyLogger logger = MyLogger.getLogger(Constants.USERNAME);
-
 	private KeyguardManager mKeyguardManager = null;
-
 	private KeyguardLock mKeyguardLock = null;
-
+	
 	@Override
 	public IBinder onBind(Intent arg0) {
 		return null;
@@ -52,16 +48,13 @@ public class LockService extends Service implements Observer {
 
 		// 屏蔽手机内置的锁屏
 		mKeyguardLock = mKeyguardManager.newKeyguardLock("");
-
 		// 屏蔽手机内置的锁屏
 		mKeyguardLock.disableKeyguard();
-
 		/* 注册广播 */
 		// IntentFilter mScreenOnFilter = new IntentFilter(
 		// "android.intent.action.SCREEN_ON");
 		// LockService.this.registerReceiver(mScreenOnReceiver,
 		// mScreenOnFilter);
-
 		/* 注册广播 */
 		IntentFilter mScreenOnOrOffFilter = new IntentFilter();
 		mScreenOnOrOffFilter.addAction("android.intent.action.SCREEN_ON");
