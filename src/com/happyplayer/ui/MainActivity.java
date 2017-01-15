@@ -105,61 +105,33 @@ public class MainActivity extends FragmentActivity implements Observer {
 	private MainPageAction action;
 
 	private int TAB_INDEX = 0;
-	/**
-	 * 歌手图片和专辑图片
-	 */
+	/** * 歌手图片和专辑图片 */
 	private ImageView singerPicImageView;
-	/**
-	 * 歌名
-	 */
+	/** * 歌名 */
 	private TextView songNameTextView;
-	/**
-	 * 歌手
-	 */
+	/** * 歌手 */
 	private TextView singerNameTextView;
-	/**
-	 * 播放列表弹出窗口
-	 */
+	/** * 播放列表弹出窗口 */
 	private PopupWindow mPopupWindow;
-	/**
-	 * 弹出窗口播放列表
-	 */
+	/** * 弹出窗口播放列表 */
 	private ListView popPlayListView;
-
 	private TextView popPlaysumTextTextView;
-	/**
-	 * 播放按钮
-	 */
+	/** * 播放按钮 */
 	private ImageButton playImageButton;
-	/**
-	 * 暂停按钮
-	 */
+	/** * 暂停按钮 */
 	private ImageButton pauseImageButton;
-	/**
-	 * 下一首按钮
-	 */
+	/** * 下一首按钮 */
 	private ImageButton nextImageButton;
-	/**
-	 * 播放列表按钮
-	 */
+	/** * 播放列表按钮 */
 	private ImageButton listImageButton;
-
 	private BaseSeekBar seekBar;
-	/**
-	 * 判断其是否是正在拖动
-	 */
+	/** * 判断其是否是正在拖动 */
 	private boolean isStartTrackingTouch = false;
-	/**
-	 * 歌词解析
-	 */
+	/** * 歌词解析 */
 	private KscLyricsParser kscLyricsParser;
-	/**
-	 * 歌词
-	 */
+	/** * 歌词 */
 	private TreeMap<Integer, KscLyricsLineInfo> lyricsLineTreeMap;
-	/**
-	 * 歌词视图
-	 */
+	/** * 歌词视图 */
 	private KscTwoLineLyricsView kscTwoLineLyricsView;
 
 	private PopupPlayListAdapter adapter;
@@ -169,13 +141,9 @@ public class MainActivity extends FragmentActivity implements Observer {
 	private RemoteViews mRemoteViews;
 	private Notification mLrcNotification;
 	private RemoteViews notifyLrcView;
-	/**
-	 * 来电监听
-	 */
+	/** * 来电监听 */
 	private MobliePhoneStateListener mPhoneStateListener = null;
-
 	private PopupWindow volumePopupWindow = null;
-
 	BroadcastReceiver onClickReceiver = new BroadcastReceiver() {
 		public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equals("play")) {
@@ -240,30 +208,25 @@ public class MainActivity extends FragmentActivity implements Observer {
 				}
 
 				Intent buttoncloseIntent = new Intent("close");
-				PendingIntent pendcloseButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0,
-						buttoncloseIntent, 0);
+				PendingIntent pendcloseButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0, buttoncloseIntent, 0);
 
 				mRemoteViews.setOnClickPendingIntent(R.id.close, pendcloseButtonIntent);
 
 				Intent buttonplayIntent = new Intent("play");
-				PendingIntent pendplayButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0, buttonplayIntent,
-						0);
+				PendingIntent pendplayButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0, buttonplayIntent, 0);
 
 				mRemoteViews.setOnClickPendingIntent(R.id.play, pendplayButtonIntent);
 
 				Intent buttonpauseIntent = new Intent("pause");
-				PendingIntent pendpauseButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0,
-						buttonpauseIntent, 0);
+				PendingIntent pendpauseButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0, buttonpauseIntent, 0);
 
 				Intent buttonnextIntent = new Intent("next");
-				PendingIntent pendnextButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0, buttonnextIntent,
-						0);
+				PendingIntent pendnextButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0, buttonnextIntent, 0);
 
 				mRemoteViews.setOnClickPendingIntent(R.id.next, pendnextButtonIntent);
 
 				Intent buttonprewtIntent = new Intent("prew");
-				PendingIntent pendprewButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0, buttonprewtIntent,
-						0);
+				PendingIntent pendprewButtonIntent = PendingIntent.getBroadcast(MainActivity.this, 0, buttonprewtIntent, 0);
 
 				mRemoteViews.setOnClickPendingIntent(R.id.prew, pendprewButtonIntent);
 
@@ -279,20 +242,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 						mRemoteViews.setImageViewResource(R.id.play, R.drawable.statusbar_btn_play);
 						mRemoteViews.setOnClickPendingIntent(R.id.play, pendplayButtonIntent);
 
-						// // 本地歌曲
-						// if (songInfo.getType() == SongInfo.LOCAL) {
-						// Bitmap bm = ImageUtil.getFirstArtwork(
-						// songInfo.getPath(), songInfo.getSid());
-						// if (bm != null) {
-						// mRemoteViews.setImageViewBitmap(R.id.icon_pic,
-						// bm);// 显示专辑封面图片
-						// } else {
-						// mRemoteViews.setImageViewResource(
-						// R.id.icon_pic, R.drawable.ic_launcher);// 显示专辑封面图片
-						// }
-						// } else {
-						// // 网上下载歌曲
-						// }
 						Bitmap bm = ImageUtil.getAlbum(MainActivity.this, songInfo.getPath(), songInfo.getSid(),
 								songInfo.getDownUrl(), "");
 						if (bm != null) {
@@ -333,9 +282,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 				mNotification.contentView = mRemoteViews;
 
-				// mRemoteViews.setOnClickPendingIntent(R.id.play,
-				// playPendingIntent());
-
 				notificationManager.notify(0, mNotification);
 				break;
 			case 1:
@@ -361,7 +307,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 				notificationManager.notify(1, mLrcNotification);
 				break;
-
 			}
 
 		}
@@ -378,44 +323,8 @@ public class MainActivity extends FragmentActivity implements Observer {
 			final SongInfo songInfo = songMessage.getSongInfo();
 			switch (songMessage.getType()) {
 			case SongMessage.INIT:
-				// // 本地歌曲
-				// if (songInfo.getType() == SongInfo.LOCAL) {
-				// new AsyncTaskHandler() {
-				//
-				// @Override
-				// protected void onPostExecute(Object result) {
-				// Bitmap bm = (Bitmap) result;
-				// if (bm != null) {
-				// singerPicImageView
-				// .setBackgroundDrawable(new BitmapDrawable(
-				// bm));
-				// // 显示专辑封面图片
-				// } else {
-				// bm = MediaUtils.getDefaultArtwork(
-				// MainActivity.this, false);
-				// singerPicImageView
-				// .setBackgroundDrawable(new BitmapDrawable(
-				// bm));// 显示专辑封面图片
-				// }
-				// }
-				//
-				// @Override
-				// protected Object doInBackground() throws Exception {
-				// return ImageUtil.getFirstArtwork(
-				// songInfo.getPath(), songInfo.getSid());
-				// }
-				// }.execute();
-				//
-				// } else {
-				// // 网上下载歌曲
-				// }
-
 				ImageUtil.loadAlbum(MainActivity.this, singerPicImageView, R.drawable.playing_bar_default_avatar,
 						songInfo.getPath(), songInfo.getSid(), songInfo.getDownUrl());
-
-				// pauseImageButton.setVisibility(View.INVISIBLE);
-				// playImageButton.setVisibility(View.VISIBLE);
-
 				songNameTextView.setText(songInfo.getDisplayName());
 				singerNameTextView.setText(songInfo.getArtist());
 				seekBar.setEnabled(true);
@@ -425,7 +334,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 				initKscLyrics(songInfo);
 				initArtistAlbum(songInfo, true);
-
 				break;
 			case SongMessage.LASTPLAYFINISH:
 
@@ -478,9 +386,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 				reshLrcView((int) songInfo.getPlayProgress());
 				break;
 			case SongMessage.ERROR:
-				// pauseImageButton.setVisibility(View.INVISIBLE);
-				// playImageButton.setVisibility(View.VISIBLE);
-
 				String errorMessage = songMessage.getErrorMessage();
 				Toast.makeText(MainActivity.this, errorMessage, 100).show();
 				break;
@@ -661,13 +566,8 @@ public class MainActivity extends FragmentActivity implements Observer {
 		this.unregisterReceiver(onClickReceiver);
 		this.unregisterReceiver(mSystemReceiver);
 
-		// this.unregisterReceiver(phoneReceiver);
 		ComponentName name = new ComponentName(this.getPackageName(), PhoneReceiver.class.getName());
 		mAudioManager.unregisterMediaButtonEventReceiver(name);
-
-		// TelephonyManager tmgr = (TelephonyManager)
-		// getSystemService(Context.TELEPHONY_SERVICE);
-		// tmgr.listen(mPhoneStateListener, 0);
 
 		notificationManager.cancel(0);
 		notificationManager.cancel(1);
@@ -717,12 +617,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 			startService(floatLrcServiceIntent);
 		}
 
-		// if (Constants.SHOWLOCK) {
-		// Intent lockServiceIntent = new Intent(MainActivity.this,
-		// LockService.class);
-		// startService(lockServiceIntent);
-		// }
-
 		startService(new Intent(MainActivity.this, MediaPlayerService.class));
 
 		ObserverManage.getObserver().addObserver(this);
@@ -740,12 +634,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 		// 短信
 		mSystemFilter.addAction("android.provider.Telephony.SMS_RECEIVED");
 		this.registerReceiver(mSystemReceiver, mSystemFilter);
-
-		// // 耳机事件
-		// IntentFilter phoneFilter = new
-		// IntentFilter("android.intent.action.MEDIA_BUTTON");
-		// phoneFilter.setPriority(2147483647);
-		// this.registerReceiver(phoneReceiver, phoneFilter);
 
 		ComponentName name = new ComponentName(this.getPackageName(), PhoneReceiver.class.getName());
 		mAudioManager.registerMediaButtonEventReceiver(name);
@@ -1103,19 +991,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 		CharSequence tickerText = "乐乐音乐，传播好的音乐";
 		long when = System.currentTimeMillis();
 		mNotification = new Notification(icon, tickerText, when);
-		// FLAG_AUTO_CANCEL 该通知能被状态栏的清除按钮给清除掉
-		// FLAG_NO_CLEAR 该通知不能被状态栏的清除按钮给清除掉
-		// FLAG_ONGOING_EVENT 通知放置在正在运行
-		// FLAG_INSISTENT 是否一直进行，比如音乐一直播放，知道用户响应
 		mNotification.flags |= Notification.FLAG_ONGOING_EVENT;
-		// mNotification.flags |= Notification.FLAG_NO_CLEAR;
-
-		// DEFAULT_ALL 使用所有默认值，比如声音，震动，闪屏等等
-		// DEFAULT_LIGHTS 使用默认闪光提示
-		// DEFAULT_SOUND 使用默认提示声音
-		// DEFAULT_VIBRATE 使用默认手机震动，需加上<uses-permission
-		// android:name="android.permission.VIBRATE" />权限
-		// mNotification.defaults = Notification.DEFAULT_SOUND;
 
 		Intent intent = new Intent(Intent.ACTION_MAIN);
 		intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -1155,23 +1031,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 					stopService(new Intent(MainActivity.this, EasytouchService.class));
 				}
 
-				// if (LockService.isServiceRunning) {
-				// Intent lockServiceIntent = new Intent(MainActivity.this,
-				// LockService.class);
-				// stopService(lockServiceIntent);
-				// }
-
-				//
-				// if (!LockService.isServiceRunning) {
-				// Intent lockServiceIntent = new Intent(MainActivity.this,
-				// LockService.class);
-				// startService(lockServiceIntent);
-				// }
-
-				// KeyguardManager km = (KeyguardManager) context
-				// .getSystemService(Context.KEYGUARD_SERVICE);
-				// if (km.inKeyguardRestrictedInputMode()) {
-
 				int status = MediaManage.getMediaManage(context).getPlayStatus();
 
 				if (!ShowLockActivity.active && status == MediaManage.PLAYING && Constants.SHOWLOCK) {
@@ -1180,7 +1039,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 					startActivity(lockIntent);
 				}
-				// }
 			} else if (action.equals("android.intent.action.SCREEN_ON")) {
 				logger.i("SCREEN_ON");
 				SCREEN_OFF = false;
@@ -1191,9 +1049,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 					startService(new Intent(MainActivity.this, EasytouchService.class));
 				}
 
-				// KeyguardManager km = (KeyguardManager) context
-				// .getSystemService(Context.KEYGUARD_SERVICE);
-				// if (km.inKeyguardRestrictedInputMode()) {
 				int status = MediaManage.getMediaManage(context).getPlayStatus();
 
 				if (!ShowLockActivity.active && status == MediaManage.PLAYING && Constants.SHOWLOCK) {
@@ -1202,32 +1057,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 
 					startActivity(lockIntent);
 				}
-				// }
-			}
-			// else if (intent.getAction().equals(Intent.ACTION_HEADSET_PLUG)) {
-			// /**
-			// * 因为当拔出有线耳机时，播放器不会马上暂停，要等上一秒钟，才会收到Android的系统广播，
-			// */
-			// int state = intent.getIntExtra("state", -1);
-			// // state --- 0代表拔出，1代表插入
-			// switch (state) {
-			// case 0:
-			// logger.i("耳机拔出-->");
-			//
-			// SongMessage songMessage = new SongMessage();
-			// songMessage.setType(SongMessage.STOPPLAY);
-			// ObserverManage.getObserver().setMessage(songMessage);
-			//
-			// break;
-			// case 1:
-			// logger.i("耳机插入-->");
-			// break;
-			// default:
-			// break;
-			// }
-			//
-			// }
-			else if (action.equals("android.media.AUDIO_BECOMING_NOISY")) {
+			} else if (action.equals("android.media.AUDIO_BECOMING_NOISY")) {
 				logger.i("耳机拔出-->");
 				/**
 				 * 从硬件层面来看，直接监听耳机拔出事件不难，耳机的拔出和插入，会引起手机电平的变化，然后触发什么什么中断，
@@ -1249,41 +1079,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 		}
 	};
 
-	// private BroadcastReceiver phoneReceiver = new BroadcastReceiver() {
-	//
-	// @Override
-	// public void onReceive(Context context, Intent intent) {
-	// if (action.equals("android.intent.action.MEDIA_BUTTON")) {
-	// // 耳机事件 Intent 附加值为(Extra)点击MEDIA_BUTTON的按键码
-	//
-	// KeyEvent event = (KeyEvent) intent
-	// .getParcelableExtra(Intent.EXTRA_KEY_EVENT);
-	// if (event == null)
-	// return;
-	//
-	// boolean isActionUp = (event.getAction() == KeyEvent.ACTION_UP);
-	// if (!isActionUp)
-	// return;
-	//
-	// int keyCode = event.getKeyCode();
-	// long eventTime = event.getEventTime() - event.getDownTime();// 按键按下到松开的时长
-	// Message msg = Message.obtain();
-	// msg.what = 100;
-	// Bundle data = new Bundle();
-	// data.putInt("key_code", keyCode);
-	// data.putLong("event_time", eventTime);
-	// msg.setData(data);
-	// phoneHandler.sendMessage(msg);
-	//
-	// // 终止广播(不让别的程序收到此广播，免受干扰)
-	// // abortBroadcast();
-	// // 改发有序广播
-	// // sendOrderedBroadcast(intent, null);
-	// }
-	// }
-	//
-	// };
-
 	/**
 	 * 耳机处理
 	 */
@@ -1301,13 +1096,11 @@ public class MainActivity extends FragmentActivity implements Observer {
 				long eventTime = data.getLong("event_time");
 				// 设置超过10毫秒，就触发长按事件
 				boolean isLongPress = (eventTime > 10);
-
 				switch (keyCode) {
 				case KeyEvent.KEYCODE_HEADSETHOOK:// 播放或暂停
 				case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:// 播放或暂停
 					playOrPause();
 					break;
-
 				// 短按=播放下一首音乐，长按=当前音乐快进
 				case KeyEvent.KEYCODE_MEDIA_NEXT:
 					if (isLongPress) {
@@ -1316,7 +1109,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 						playNext();// 自定义
 					}
 					break;
-
 				// 短按=播放上一首音乐，长按=当前音乐快退
 				case KeyEvent.KEYCODE_MEDIA_PREVIOUS:
 					if (isLongPress) {
@@ -1326,7 +1118,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 					}
 					break;
 				}
-
 				break;
 			// 快进
 			case KeyEvent.KEYCODE_MEDIA_FAST_FORWARD:
@@ -1337,11 +1128,9 @@ public class MainActivity extends FragmentActivity implements Observer {
 				fastPrevious(10000);// 自定义
 				break;
 			case KeyEvent.KEYCODE_MEDIA_STOP:
-
 				SongMessage songMessage = new SongMessage();
 				songMessage.setType(SongMessage.STOPPLAY);
 				ObserverManage.getObserver().setMessage(songMessage);
-
 				break;
 			default:// 其他消息-则扔回上层处理
 				super.handleMessage(msg);
@@ -1362,7 +1151,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 				songMessage.setProgress((int) progress);
 				ObserverManage.getObserver().setMessage(songMessage);
 			}
-
 		}
 
 		private void fastNext(int dProgress) {
@@ -1398,7 +1186,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 			songMessage.setType(SongMessage.PLAYORSTOPMUSIC);
 			ObserverManage.getObserver().setMessage(songMessage);
 		}
-
 	};
 
 	/**
@@ -1439,20 +1226,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 		CharSequence tickerText = "";
 		long when = System.currentTimeMillis();
 		mLrcNotification = new Notification(icon, tickerText, when);
-		// FLAG_AUTO_CANCEL 该通知能被状态栏的清除按钮给清除掉
-		// FLAG_NO_CLEAR 该通知不能被状态栏的清除按钮给清除掉
-		// FLAG_ONGOING_EVENT 通知放置在正在运行
-		// FLAG_INSISTENT 是否一直进行，比如音乐一直播放，知道用户响应
 		mLrcNotification.flags |= Notification.FLAG_ONGOING_EVENT;
-		// mNotification.flags |= Notification.FLAG_NO_CLEAR;
-
-		// DEFAULT_ALL 使用所有默认值，比如声音，震动，闪屏等等
-		// DEFAULT_LIGHTS 使用默认闪光提示
-		// DEFAULT_SOUND 使用默认提示声音
-		// DEFAULT_VIBRATE 使用默认手机震动，需加上<uses-permission
-		// android:name="android.permission.VIBRATE" />权限
-		// mNotification.defaults = Notification.DEFAULT_SOUND;
-
 		SongMessage songMessage = new SongMessage();
 		songMessage.setSongInfo(null);
 		Message msg = new Message();
@@ -1472,19 +1246,15 @@ public class MainActivity extends FragmentActivity implements Observer {
 	private class TabOnPageChangeListener implements OnPageChangeListener {
 
 		public void onPageScrollStateChanged(int arg0) {
-
 		}
 
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
-
 		}
 
 		public void onPageSelected(int arg0) {
 			TAB_INDEX = arg0;
 			if (TAB_INDEX == 0 && fragmentList.size() == 2) {
-				// tabFragmentPagerAdapter.removeFragment(fragmentList.get(1));
 				fragmentList.remove(1);
-				// tabFragmentPagerAdapter.notifyDataSetChanged();
 				tabFragmentPagerAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
 				viewPager.setAdapter(tabFragmentPagerAdapter);
 			}
@@ -1496,7 +1266,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 	 * @author Administrator Fragment滑动事件
 	 */
 	public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
-
 		public TabFragmentPagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
@@ -1511,69 +1280,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 			return fragmentList.size();
 		}
 	}
-
-	// /**
-	// * 得到按键的消息，不显示音量对话框。 // * KEYCODE_VOLUME_MUTE 扬声器静音键 164 KEYCODE_VOLUME_UP
-	// * 音量增加键 24 // * KEYCODE_VOLUME_DOWN 音量减小键 25
-	// */
-	// @Override
-	// public boolean dispatchKeyEvent(KeyEvent event) {
-	// if (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN) {
-	//
-	// int currentVolume = mAudioManager
-	// .getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
-	// currentVolume = currentVolume - 10;
-	// if (currentVolume <= 0) {
-	// currentVolume = 0;
-	// }
-	// mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-	// currentVolume, 0);
-	// getVolumePopupWindowInstance();
-	//
-	// return true;
-	// } else if (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP) {
-	//
-	// // 音乐音量
-	// int max = mAudioManager
-	// .getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-	// int currentVolume = mAudioManager
-	// .getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
-	// currentVolume = currentVolume + 10;
-	// if (currentVolume >= max) {
-	// currentVolume = max;
-	// }
-	//
-	// mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-	// currentVolume, 0);
-	//
-	// getVolumePopupWindowInstance();
-	//
-	// return true;
-	// } else if (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_MUTE) {
-	// mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
-	// getVolumePopupWindowInstance();
-	// return true;
-	// }
-	// return super.dispatchKeyEvent(event);
-	// }
-
-	// @Override
-	// public boolean onKeyDown(int keyCode, KeyEvent event) {
-	// if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-	// if (TAB_INDEX == 0) {
-	// if ((System.currentTimeMillis() - mExitTime) > 2000) {
-	// Toast.makeText(this, R.string.exit_tip, Toast.LENGTH_SHORT)
-	// .show();
-	// mExitTime = System.currentTimeMillis();
-	// } else {
-	// close();
-	// }
-	// } else {
-	// viewPager.setCurrentItem(0);
-	// }
-	// }
-	// return false;
-	// }
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -1594,56 +1300,14 @@ public class MainActivity extends FragmentActivity implements Observer {
 		 * KEYCODE_VOLUME_MUTE 扬声器静音键 164 KEYCODE_VOLUME_UP 音量增加键 24
 		 * KEYCODE_VOLUME_DOWN 音量减小键 25
 		 */
-
 		else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-
-			// Toast.makeText(this, "KEYCODE_VOLUME_DOWN", Toast.LENGTH_SHORT)
-			// .show();
-			// // 降低音量
-			// // mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
-			// // AudioManager.ADJUST_LOWER,
-			// // AudioManager.FX_FOCUS_NAVIGATION_UP);
-			//
-			// int currentVolume = mAudioManager
-			// .getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
-			// currentVolume = currentVolume - 10;
-			// if (currentVolume <= 0) {
-			// currentVolume = 0;
-			// }
-			//
-			// mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-			// currentVolume, 0);
-
 			getVolumePopupWindowInstance();
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-			// Toast.makeText(this, "KEYCODE_VOLUME_UP", Toast.LENGTH_SHORT)
-			// .show();
-			// 增加音量
-			// mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
-			// AudioManager.ADJUST_RAISE,
-			// AudioManager.FX_FOCUS_NAVIGATION_UP);
-
-			// // 音乐音量
-			// int max = mAudioManager
-			// .getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-			// int currentVolume = mAudioManager
-			// .getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
-			// currentVolume = currentVolume + 10;
-			// if (currentVolume >= max) {
-			// currentVolume = max;
-			// }
-			//
-			// mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-			// currentVolume, 0);
-
 			getVolumePopupWindowInstance();
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_VOLUME_MUTE) {
-			// mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
 			getVolumePopupWindowInstance();
-			// Toast.makeText(this, "KEYCODE_VOLUME_MUTE", Toast.LENGTH_SHORT)
-			// .show();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
@@ -1668,9 +1332,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 				mMenu.getLocationOnScreen(location);
 				volumePopupWindow.showAtLocation(mMenu, Gravity.NO_GRAVITY, location[0],
 						location[1] - mMenu.getHeight());
-
 				mVolumeHandler.sendEmptyMessage(0);
-
 				if (volumeEndTime < 0) {
 					volumeEndTime = 2000;
 					mVolumeHandler.post(upDateVol);
@@ -1682,17 +1344,14 @@ public class MainActivity extends FragmentActivity implements Observer {
 	}
 
 	private Handler mVolumeHandler = new Handler() {
-
 		@Override
 		public void handleMessage(Message msg) {
 			int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
 			volumeSizeSeekBar.setProgress(currentVolume);
 		}
-
 	};
 
 	Runnable upDateVol = new Runnable() {
-
 		@Override
 		public void run() {
 			if (volumeEndTime >= 0) {
@@ -1703,65 +1362,42 @@ public class MainActivity extends FragmentActivity implements Observer {
 					volumePopupWindow.dismiss();
 				}
 			}
-
 		}
 	};
 
 	private void initVolumePopupWindow() {
 		LayoutInflater layoutInflater = LayoutInflater.from(this);
 		View popupWindow = layoutInflater.inflate(R.layout.volume_menu, null);
-
 		popupWindow.setFocusableInTouchMode(true);
-
 		popupWindow.setOnKeyListener(new OnKeyListener() {
-
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
-
 				if (keyCode == KeyEvent.KEYCODE_VOLUME_MUTE) {
-					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_MUTE",
-					// Toast.LENGTH_SHORT).show();
-
 					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
 					getVolumePopupWindowInstance();
 					return true;
-
 				} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_DOWN",
-					// Toast.LENGTH_SHORT).show();
-
 					int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
 					currentVolume = currentVolume - 1;
 					if (currentVolume <= 0) {
 						currentVolume = 0;
 					}
-
 					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
-
 					getVolumePopupWindowInstance();
-
 					return true;
-
 				} else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-					// Toast.makeText(MainActivity.this, "KEYCODE_VOLUME_UP",
-					// Toast.LENGTH_SHORT).show();
 					int max = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC) / 3 * 2;
 					int currentVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); // 获取当前值
 					currentVolume = currentVolume + 1;
 					if (currentVolume >= max) {
 						currentVolume = max;
 					}
-
 					mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
-
 					getVolumePopupWindowInstance();
 					return true;
-
 				}
-
 				return false;
 			}
-
 		});
 
 		volumeSizeSeekBar = (HBaseSeekBar) popupWindow.findViewById(R.id.volumeSizeSeekBar);
@@ -1831,10 +1467,6 @@ public class MainActivity extends FragmentActivity implements Observer {
 				}
 				fragmentList.add(fragment);
 				tabFragmentPagerAdapter.notifyDataSetChanged();
-				// tabFragmentPagerAdapter.setFragments(fragmentList);
-				// tabFragmentPagerAdapter = new TabFragmentPagerAdapter(
-				// getSupportFragmentManager());
-				// viewPager.setAdapter(tabFragmentPagerAdapter);
 			}
 			viewPager.setCurrentItem(fragmentList.size());
 		}
@@ -1891,9 +1523,7 @@ public class MainActivity extends FragmentActivity implements Observer {
 		}
 	}
 
-	//
 	private Handler popHandler = new Handler() {
-
 		@Override
 		public void handleMessage(Message msg) {
 			if (null != mPopupWindow) {
